@@ -1,0 +1,29 @@
+@primary-color: #056321;
+@hover-text-color: #ffffff;
+@default-text-color: #d3d3d3;
+@active-text-color: #00ff00;
+
+.ant-layout-sider {
+  background-color: @primary-color;
+
+  .ant-menu-inline {
+    height: 100%;
+    border-right: 0;
+    background-color: @primary-color;
+
+    .ant-menu-item {
+      color: @default-text-color;
+  
+      :hover {
+        color: @hover-text-color;
+        background-color: unset;
+      }
+    }
+  }
+
+
+  .ant-menu-item-active {
+    color: @active-text-color;
+    background-color: unset;
+  }
+}

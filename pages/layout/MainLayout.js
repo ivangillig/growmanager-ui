@@ -48,7 +48,6 @@ export default function MainLayout({ children }) {
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <Menu
           mode="inline"
-          style={{ height: '100%', borderRight: 0 }}
           items={menuItems}
           defaultSelectedKeys={[router.pathname.slice(1) || 'dashboard']}
         />

@@ -2,13 +2,11 @@
 import axios from "axios";
 import getConfig from "next/config";
 const { publicRuntimeConfig } = getConfig();
-
 const { BASE_URL } = publicRuntimeConfig;
-
 
 export const getUserInfoApi = async () => {
   try {
-    const response = await axios.get(`${BASE_URL}/auth/getUserInfo`, {
+    const response = await axios.get(`${BASE_URL}/api/auth/getUserInfo`, {
       withCredentials: true,
     });
     return response.data;
@@ -32,7 +30,7 @@ export const signOutRequest = async () => {
 
 export const signIn = async (credentials) => {
   try {
-    const response = await axios.post(`${BASE_URL}/auth/login`, credentials, {
+    const response = await axios.post(`${BASE_URL}/api/auth/login`, credentials, {
       withCredentials: true,
     });
     return response.data;

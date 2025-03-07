@@ -9,7 +9,10 @@ function* loginSaga(payload) {
   try {
     const response = yield call(signIn, credentials)
     const { token, user } = response
-    
+
+    localStorage.setItem('token', token)
+    localStorage.setItem('user', JSON.stringify(user))
+
     yield put(loginSuccess({ token, user }))
   } catch (error) {
     // error handler

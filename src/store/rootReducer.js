@@ -1,12 +1,12 @@
 import { combineReducers } from '@reduxjs/toolkit'
 import authReducer from '../features/auth/authReducer'
-import productReducer from '../features/products/productReducer'
+import seedReducer from '../features/seed/seedReducer'
 import notificationReducer from '../features/notifications/notificationReducer'
 
 const rootReducer = combineReducers({
-    auth: authReducer,
-    product: productReducer,
-    notification: notificationReducer
+  auth: authReducer,
+  seed: seedReducer,
+  notification: notificationReducer,
 })
 
 export default rootReducer

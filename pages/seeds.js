@@ -2,23 +2,20 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Breadcrumb, Button, Input, Layout, Menu, List, Card } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
-import {
-  getProducts,
-  addProduct,
-} from '../../src/features/products/productActions'
+import { getSeeds, addSeed } from '../src/features/seed/seedActions'
 
 const { Header, Content } = Layout
 
-export default function ProductsPage() {
+export default function SeedsPage() {
   const dispatch = useDispatch()
-  const products = useSelector((state) => state.products.items)
+  const seeds = useSelector((state) => state.seed.seeds || [])
 
   useEffect(() => {
-    dispatch(getProducts())
+    dispatch(getSeeds())
   }, [dispatch])
 
-  const handleAddProduct = () => {
-    dispatch(addProduct({ name: 'New Product' }))
+  const handleAddSeed = () => {
+    dispatch(addSeed({ name: 'New Seed' }))
   }
 
   const handleSearch = (value) => {}
@@ -30,33 +27,30 @@ export default function ProductsPage() {
           <Menu.Item key="breadcrumb">
             <Breadcrumb>
               <Breadcrumb.Item>Home</Breadcrumb.Item>
-              <Breadcrumb.Item>Products</Breadcrumb.Item>
+              <Breadcrumb.Item>Seeds</Breadcrumb.Item>
             </Breadcrumb>
           </Menu.Item>
           <Menu.Item key="add">
             <Button
               type="primary"
               icon={<PlusOutlined />}
-              onClick={handleAddProduct}
+              onClick={handleAddSeed}
             >
               Agregar Cepa
             </Button>
           </Menu.Item>
           <Menu.Item key="search">
-            <Input.Search
-              placeholder="Buscar productos"
-              onSearch={handleSearch}
-            />
+            <Input.Search placeholder="Buscar cepas" onSearch={handleSearch} />
           </Menu.Item>
         </Menu>
       </Header>
       <Content style={{ padding: '0 50px' }}>
         <List
           grid={{ gutter: 16, column: 4 }}
-          dataSource={products}
-          renderItem={(item) => (
+          dataSource={seeds}
+          renderItem={(seed) => (
             <List.Item>
-              <Card title={item.name}>{item.description}</Card>
+              <Card title={seed.genetic}>{seed.genetic}</Card>
             </List.Item>
           )}
         />

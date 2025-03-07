@@ -1,40 +1,40 @@
 import {
-  GET_PRODUCTS_REQUEST,
-  GET_PRODUCTS_SUCCESS,
-  GET_PRODUCTS_ERROR,
-  ADD_PRODUCT_REQUEST,
-  ADD_PRODUCT_SUCCESS,
-  ADD_PRODUCT_ERROR,
-} from './productActions'
+  GET_SEEDS_REQUEST,
+  GET_SEEDS_SUCCESS,
+  GET_SEEDS_ERROR,
+  ADD_SEED_REQUEST,
+  ADD_SEED_SUCCESS,
+  ADD_SEED_ERROR,
+} from '../../constants/ActionsTypes'
 
 const initialState = {
-  items: [],
+  seeds: [],
   loading: false,
   error: null,
 }
 
-export default function productReducer(state = initialState, action) {
+export default function seedReducer(state = initialState, action) {
   switch (action.type) {
-    case GET_PRODUCTS_REQUEST:
-    case ADD_PRODUCT_REQUEST:
+    case GET_SEEDS_REQUEST:
+    case ADD_SEED_REQUEST:
       return {
         ...state,
         loading: true,
       }
-    case GET_PRODUCTS_SUCCESS:
+    case GET_SEEDS_SUCCESS:
       return {
         ...state,
         loading: false,
-        items: action.payload,
+        seeds: action.payload,
       }
-    case ADD_PRODUCT_SUCCESS:
+    case ADD_SEED_SUCCESS:
       return {
         ...state,
         loading: false,
         items: [...state.items, action.payload],
       }
-    case GET_PRODUCTS_ERROR:
-    case ADD_PRODUCT_ERROR:
+    case GET_SEEDS_ERROR:
+    case ADD_SEED_ERROR:
       return {
         ...state,
         loading: false,

@@ -1,29 +1,29 @@
-import { Form, Input, Button, Typography } from "antd";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import { useDispatch, useSelector } from "react-redux";
-import styles from "../styles/Login.module.css";
-import Image from "next/image";
-import { useEffect } from "react";
-import { useRouter } from "next/router";
-import { loginRequest } from "../actions";
+import { Form, Input, Button, Typography } from 'antd'
+import { UserOutlined, LockOutlined } from '@ant-design/icons'
+import { useDispatch, useSelector } from 'react-redux'
+import styles from '../styles/Login.module.css'
+import Image from 'next/image'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
+import { loginRequest } from '../actions'
 
-const { Title } = Typography;
+const { Title } = Typography
 
 export default function Login() {
-  const dispatch = useDispatch();
-  const router = useRouter();
-  const loginSuccess = useSelector((state) => state.auth.loginSuccess);
+  const dispatch = useDispatch()
+  const router = useRouter()
+  const loginSuccess = useSelector((state) => state.auth.loginSuccess)
 
   useEffect(() => {
+    console.log(loginSuccess)
     if (loginSuccess) {
-      router.push("/dashboard");
+      router.push('/dashboard')
     }
-  }, [loginSuccess, router]);
+  }, [loginSuccess, router])
 
   const handleSubmit = (values) => {
-    console.log('submit')
-    dispatch(loginRequest(values));
-  };
+    dispatch(loginRequest(values))
+  }
 
   return (
     <div className={styles.container}>
@@ -47,13 +47,13 @@ export default function Login() {
         >
           <Form.Item
             name="username"
-            rules={[{ required: true, message: "Please input your username!" }]}
+            rules={[{ required: true, message: 'Please input your username!' }]}
           >
             <Input prefix={<UserOutlined />} placeholder="Username" />
           </Form.Item>
           <Form.Item
             name="password"
-            rules={[{ required: true, message: "Please input your password!" }]}
+            rules={[{ required: true, message: 'Please input your password!' }]}
           >
             <Input.Password prefix={<LockOutlined />} placeholder="Password" />
           </Form.Item>
@@ -73,5 +73,5 @@ export default function Login() {
         </div>
       </div>
     </div>
-  );
+  )
 }

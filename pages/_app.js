@@ -1,11 +1,11 @@
-import { Provider } from "react-redux";
-import { wrapper } from "../store";
-import { ConfigProvider } from "antd";
-import "antd/dist/reset.css";
-import "../styles/globals.css";
+import { Provider } from 'react-redux'
+import { wrapper } from '../store'
+import { ConfigProvider } from 'antd'
+import 'antd/dist/reset.css'
+import '../styles/globals.css'
 
 function MyApp({ Component, ...rest }) {
-  const { store, props } = wrapper.useWrappedStore(rest);
+  const { store, props } = wrapper.useWrappedStore(rest)
 
   return (
     <Provider store={store}>
@@ -13,7 +13,7 @@ function MyApp({ Component, ...rest }) {
         <Component {...props.pageProps} />
       </ConfigProvider>
     </Provider>
-  );
+  )
 }
 
-export default MyApp;
+export default MyApp

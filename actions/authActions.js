@@ -6,7 +6,7 @@ import {
 
 export const loginRequest = (credentials) => ({
   type: LOGIN_REQUEST,
-  payload: credentials,
+  credentials: credentials,
 });
 
 export const loginSuccess = (data) => ({

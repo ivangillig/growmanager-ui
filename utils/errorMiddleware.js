@@ -1,5 +1,5 @@
-import { showMessage } from "../actions/notificationActions";
-import { logoutRequest } from "../actions/authActions";
+import { showMessage } from "../src/features/notifications/notificationActions";
+import { logoutRequest } from "../src/features/auth/authActions";
 
 export const handleApiErrors = (error, store) => {
   if (error.response) {

@@ -5,7 +5,7 @@ import styles from '../styles/Login.module.css'
 import Image from 'next/image'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { loginRequest } from '../actions'
+import { loginRequest } from '../src/features/auth/authActions'
 
 const { Title } = Typography
 

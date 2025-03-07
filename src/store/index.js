@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { createWrapper } from 'next-redux-wrapper'
 import createSagaMiddleware from 'redux-saga'
-import rootReducer from '../reducers'
-import rootSaga from '../sagas'
-import configureAxios from '../utils/axiosConfig'
+import rootReducer from './rootReducer'
+import rootSaga from './rootSagas'
+import configureAxios from '../../utils/axiosConfig'
 
 const sagaMiddleware = createSagaMiddleware()
 

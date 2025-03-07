@@ -1,5 +1,5 @@
 // reducers/notificationReducer.js
-import { SHOW_MESSAGE, CLEAR_MESSAGES } from "../constants/ActionsTypes";
+import { SHOW_MESSAGE, CLEAR_MESSAGES } from "../../constants/ActionsTypes";
 
 const initialState = [];
 

@@ -1,8 +1,8 @@
 import { takeLatest, put, call, all, fork } from 'redux-saga/effects'
-import { LOGIN_REQUEST } from '../constants/ActionsTypes'
-import { loginSuccess, loginFailure } from '../actions'
+import { LOGIN_REQUEST } from '../../constants/ActionsTypes'
+import { loginSuccess, loginFailure } from './authActions'
 
-import { signIn } from '../api'
+import { signIn } from './authApi'
 
 function* loginSaga(payload) {
   const { credentials } = payload

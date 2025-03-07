@@ -29,7 +29,7 @@ const Login = (props) => {
         <div className={'logo'}>
           <Image
             src="/images/logo.png"
-            alt="GreenTrack Logo"
+            alt="GrowManager Logo"
             width={124}
             height={124}
           />

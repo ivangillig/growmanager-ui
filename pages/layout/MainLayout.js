@@ -18,7 +18,7 @@ export default function MainLayout({ children }) {
           <CustomContent>{children}</CustomContent>
         </Layout>
       </Layout>
-      <Footer style={{ textAlign: 'center' }}>GreenTrack ©2023</Footer>
+      <Footer style={{ textAlign: 'center' }}>GrowManager ©2023</Footer>
     </Layout>
   )
 }

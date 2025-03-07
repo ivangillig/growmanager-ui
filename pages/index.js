@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <>
       <Title level={2}>Home</Title>
-      <p>Welcome to the GreenTrack application!</p>
+      <p>Welcome to the GrowManager application!</p>
     </>
   )
 }

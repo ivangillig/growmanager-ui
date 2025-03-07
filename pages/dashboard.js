@@ -7,7 +7,7 @@ export default function Dashboard() {
   return (
     <MainLayout>
       <Title level={2}>Dashboard</Title>
-      <p>Welcome to your GreenTrack dashboard!</p>
+      <p>Welcome to your GrowManager dashboard!</p>
     </MainLayout>
   );
 }

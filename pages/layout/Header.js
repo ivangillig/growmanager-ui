@@ -11,11 +11,11 @@ export default function CustomHeader() {
       <div className="logo">
         <Image
           src="/images/logo.png"
-          alt="GreenTrack Logo"
+          alt="GrowManager Logo"
           width={32}
           height={32}
         />
-        <span style={{ marginLeft: '12px', color: 'white' }}>GreenTrack</span>
+        <span style={{ marginLeft: '12px', color: 'white' }}>GrowManager</span>
       </div>
     </Header>
   )

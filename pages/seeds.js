@@ -48,7 +48,7 @@ export default function SeedsPage() {
       <Row className="list" gutter={[16, 16]}>
         <Col span={24}>
           <List
-            grid={{ gutter: 16, column: 4 }}
+            grid={{ gutter: 16, column: 6 }}
             dataSource={seeds}
             renderItem={(seed) => (
               <List.Item>

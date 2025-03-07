@@ -31,7 +31,7 @@ export default function seedReducer(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        items: [...state.items, action.payload],
+        seeds: [...state.items, action.payload],
       }
     case GET_SEEDS_ERROR:
     case ADD_SEED_ERROR:

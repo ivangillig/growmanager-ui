@@ -16,7 +16,7 @@ export const addSeedApi = async (seed) => {
   try {
     const response = await axios.post(`${BASE_URL}/api/seeds`, seed, {
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'multipart/form-data',
       },
     })
     return response.data

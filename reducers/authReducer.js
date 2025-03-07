@@ -3,7 +3,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   LOGOUT,
-} from "../actions/authActions";
+} from "../constants/ActionsTypes";
 
 const initialState = {
   user: {
@@ -21,7 +21,6 @@ const authReducer = (state = initialState, action) => {
     case LOGIN_REQUEST:
       return { ...state, loading: true, error: null };
     case LOGIN_SUCCESS:
-      console.log("asd");
       return {
         ...state,
         loading: false,

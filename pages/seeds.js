@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Breadcrumb, Button, Input, List } from 'antd'
+import { Breadcrumb, Button, Input, List, Row, Col } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 import { getSeeds, addSeed } from '../src/features/seed/seedActions'
 import SeedCard from '../components/SeedCard'
@@ -21,23 +21,37 @@ export default function SeedsPage() {
 
   return (
     <>
-      <Breadcrumb>
-        <Breadcrumb.Item>Home</Breadcrumb.Item>
-        <Breadcrumb.Item>Seeds</Breadcrumb.Item>
-      </Breadcrumb>
-      <Button type="primary" icon={<PlusOutlined />} onClick={handleAddSeed}>
-        Add Seed
-      </Button>
-      <Input.Search placeholder="Buscar cepas" onSearch={handleSearch} />
-      <List
-        grid={{ gutter: 16, column: 4 }}
-        dataSource={seeds}
-        renderItem={(seed) => (
-          <List.Item>
-            <SeedCard seed={seed} />
-          </List.Item>
-        )}
-      />
+      <Row className="header" gutter={[16, 16]}>
+        <Col xs={24} sm={12}>
+          <Breadcrumb>
+            <Breadcrumb.Item>Home</Breadcrumb.Item>
+            <Breadcrumb.Item>Seeds</Breadcrumb.Item>
+          </Breadcrumb>
+        </Col>
+        <Col xs={24} sm={12} className="actions">
+          <Input.Search placeholder="Buscar cepas" onSearch={handleSearch} />
+          <Button
+            type="primary"
+            icon={<PlusOutlined />}
+            onClick={handleAddSeed}
+          >
+            Add Seed
+          </Button>
+        </Col>
+      </Row>
+      <Row className="list" gutter={[16, 16]}>
+        <Col span={24}>
+          <List
+            grid={{ gutter: 16, column: 4 }}
+            dataSource={seeds}
+            renderItem={(seed) => (
+              <List.Item>
+                <SeedCard seed={seed} />
+              </List.Item>
+            )}
+          />
+        </Col>
+      </Row>
     </>
   )
 }

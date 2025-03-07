@@ -17,3 +17,7 @@ export const UPDATE_BATCH = "UPDATE_BATCH";
 // Patient types
 export const FETCH_PATIENTS = "FETCH_PATIENTS";
 export const ADD_ORDER = "ADD_ORDER";
+
+// Common
+export const SHOW_MESSAGE = 'SHOW_MESSAGE'
+export const CLEAR_MESSAGES = 'CLEAR_MESSAGES'

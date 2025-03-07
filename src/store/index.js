@@ -1,14 +1,26 @@
-import { createStore, applyMiddleware, combineReducers } from "redux";
+import { configureStore } from "@reduxjs/toolkit";
+import { createWrapper } from "next-redux-wrapper";
 import createSagaMiddleware from "redux-saga";
-import authReducer from "./reducers/authReducer";
-import rootSaga from "./sagas";
+import rootReducer from "../reducers";
+import rootSaga from "../sagas";
+import configureAxios from "../utils/axiosConfig";
 
 const sagaMiddleware = createSagaMiddleware();
 
-const rootReducer = combineReducers({
-  auth: authReducer,
-});
+const makeStore = () => {
+  const store = configureStore({
+    reducer: rootReducer,
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        thunk: false,
+      }).concat(sagaMiddleware),
+  });
 
-export const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
+  configureAxios(store); // Configure Axios on the store
 
-sagaMiddleware.run(rootSaga);
+  sagaMiddleware.run(rootSaga);
+
+  return store;
+};
+
+export const wrapper = createWrapper(makeStore, { debug: false });

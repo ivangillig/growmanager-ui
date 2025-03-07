@@ -3,13 +3,17 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   LOGOUT,
-} from "../../actions";
+} from "../actions";
 
 const initialState = {
-  user: null,
+  user: {
+    id: null,
+    email: null,
+  },
   token: null,
   loading: false,
   error: null,
+  loginSuccess: false,
 };
 
 const authReducer = (state = initialState, action) => {
@@ -17,11 +21,16 @@ const authReducer = (state = initialState, action) => {
     case LOGIN_REQUEST:
       return { ...state, loading: true, error: null };
     case LOGIN_SUCCESS:
+      console.log('asd')
       return {
         ...state,
         loading: false,
-        user: action.payload.user,
+        user: {
+          id: action.payload.user.id,
+          email: action.payload.user.email,
+        },
         token: action.payload.token,
+        loginSuccess: true,
       };
     case LOGIN_FAILURE:
       return { ...state, loading: false, error: action.payload };

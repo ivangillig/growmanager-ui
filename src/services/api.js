@@ -1,4 +1,4 @@
-import axiosInstance from "../libs/axiosConfig";
+import axiosInstance from "../utils/axiosConfig";
 import axios from "axios";
 import Cookies from "js-cookie";
 

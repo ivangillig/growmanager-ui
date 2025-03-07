@@ -2,7 +2,7 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
-} from "../constants/actions";
+} from "../constants/ActionsTypes";
 
 export const loginRequest = (credentials) => ({
   type: LOGIN_REQUEST,

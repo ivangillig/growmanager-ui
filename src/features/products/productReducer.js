@@ -1,10 +1,10 @@
 import {
-  FETCH_PRODUCTS_REQUEST,
-  FETCH_PRODUCTS_SUCCESS,
-  FETCH_PRODUCTS_FAILURE,
+  GET_PRODUCTS_REQUEST,
+  GET_PRODUCTS_SUCCESS,
+  GET_PRODUCTS_ERROR,
   ADD_PRODUCT_REQUEST,
   ADD_PRODUCT_SUCCESS,
-  ADD_PRODUCT_FAILURE,
+  ADD_PRODUCT_ERROR,
 } from './productActions'
 
 const initialState = {
@@ -15,13 +15,13 @@ const initialState = {
 
 export default function productReducer(state = initialState, action) {
   switch (action.type) {
-    case FETCH_PRODUCTS_REQUEST:
+    case GET_PRODUCTS_REQUEST:
     case ADD_PRODUCT_REQUEST:
       return {
         ...state,
         loading: true,
       }
-    case FETCH_PRODUCTS_SUCCESS:
+    case GET_PRODUCTS_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -33,8 +33,8 @@ export default function productReducer(state = initialState, action) {
         loading: false,
         items: [...state.items, action.payload],
       }
-    case FETCH_PRODUCTS_FAILURE:
-    case ADD_PRODUCT_FAILURE:
+    case GET_PRODUCTS_ERROR:
+    case ADD_PRODUCT_ERROR:
       return {
         ...state,
         loading: false,

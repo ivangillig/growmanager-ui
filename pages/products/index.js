@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Breadcrumb, Button, Input, Layout, Menu, List, Card } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 import {
-  fetchProducts,
+  getProducts,
   addProduct,
 } from '../../src/features/products/productActions'
 
@@ -14,7 +14,7 @@ export default function ProductsPage() {
   const products = useSelector((state) => state.products.items)
 
   useEffect(() => {
-    dispatch(fetchProducts())
+    dispatch(getProducts())
   }, [dispatch])
 
   const handleAddProduct = () => {

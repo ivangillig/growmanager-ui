@@ -3,7 +3,7 @@ import getConfig from 'next/config'
 const { publicRuntimeConfig } = getConfig()
 const { BASE_URL } = publicRuntimeConfig
 
-export const fetchProductsApi = async () => {
+export const getProductsApi = async () => {
   try {
     const response = await axios.get(`${BASE_URL}/api/products`)
     return response.data

@@ -1,23 +1,23 @@
 import {
-  FETCH_PRODUCTS_REQUEST,
-  FETCH_PRODUCTS_SUCCESS,
-  FETCH_PRODUCTS_FAILURE,
+  GET_PRODUCTS_REQUEST,
+  GET_PRODUCTS_SUCCESS,
+  GET_PRODUCTS_ERROR,
   ADD_PRODUCT_REQUEST,
   ADD_PRODUCT_SUCCESS,
-  ADD_PRODUCT_FAILURE,
+  ADD_PRODUCT_ERROR,
 } from '@/src/constants/ActionsTypes'
 
-export const fetchProducts = () => ({
-  type: FETCH_PRODUCTS_REQUEST,
+export const getProducts = () => ({
+  type: GET_PRODUCTS_REQUEST,
 })
 
-export const fetchProductsSuccess = (products) => ({
-  type: FETCH_PRODUCTS_SUCCESS,
+export const getProductsSuccess = (products) => ({
+  type: GET_PRODUCTS_SUCCESS,
   payload: products,
 })
 
-export const fetchProductsFailure = (error) => ({
-  type: FETCH_PRODUCTS_FAILURE,
+export const getProductsError = (error) => ({
+  type: GET_PRODUCTS_ERROR,
   payload: error,
 })
 
@@ -31,7 +31,7 @@ export const addProductSuccess = (product) => ({
   payload: product,
 })
 
-export const addProductFailure = (error) => ({
-  type: ADD_PRODUCT_FAILURE,
+export const addProductError = (error) => ({
+  type: ADD_PRODUCT_ERROR,
   payload: error,
 })

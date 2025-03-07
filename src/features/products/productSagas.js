@@ -1,12 +1,14 @@
-import { call, put, takeLatest } from 'redux-saga/effects'
+import { call, put, takeLatest, all, fork } from 'redux-saga/effects'
 import {
-  FETCH_PRODUCTS_REQUEST,
   fetchProductsSuccess,
   fetchProductsFailure,
-  ADD_PRODUCT_REQUEST,
   addProductSuccess,
   addProductFailure,
 } from './productActions'
+import {
+  FETCH_PRODUCTS_REQUEST,
+  ADD_PRODUCT_REQUEST,
+} from '@/src/constants/ActionsTypes'
 import { fetchProductsApi, addProductApi } from './productsApi'
 
 function* fetchProductsSaga() {
@@ -27,7 +29,14 @@ function* addProductSaga(action) {
   }
 }
 
-export default function* productSagas() {
+export function* watchFetchProductsSaga() {
   yield takeLatest(FETCH_PRODUCTS_REQUEST, fetchProductsSaga)
+}
+
+export function* watchAddProductSaga() {
   yield takeLatest(ADD_PRODUCT_REQUEST, addProductSaga)
+}
+
+export default function* rootSaga() {
+  yield all([fork(watchFetchProductsSaga), fork(watchAddProductSaga)])
 }

@@ -1,21 +1,26 @@
+import axios from 'axios'
+import getConfig from 'next/config'
+const { publicRuntimeConfig } = getConfig()
+const { BASE_URL } = publicRuntimeConfig
+
 export const fetchProductsApi = async () => {
-  const response = await fetch('/api/products')
-  if (!response.ok) {
+  try {
+    const response = await axios.get(`${BASE_URL}/api/products`)
+    return response.data
+  } catch (error) {
     throw new Error('Failed to fetch products')
   }
-  return response.json()
 }
 
 export const addProductApi = async (product) => {
-  const response = await fetch('/api/products', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(product),
-  })
-  if (!response.ok) {
+  try {
+    const response = await axios.post(`${BASE_URL}/api/products`, product, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    return response.data
+  } catch (error) {
     throw new Error('Failed to add product')
   }
-  return response.json()
 }

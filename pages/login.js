@@ -21,6 +21,7 @@ export default function Login() {
   }, [loginSuccess, router]);
 
   const handleSubmit = (values) => {
+    console.log('submit')
     dispatch(loginRequest(values));
   };
 

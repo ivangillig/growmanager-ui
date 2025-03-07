@@ -15,7 +15,7 @@ api.interceptors.request.use((config) => {
 });
 
 export const authAPI = {
-  login: (credentials) => axiosInstance.post("/auth/login", credentials),
+  // login: (credentials) => axiosInstance.post("/auth/login", credentials),
   logout: () => axiosInstance.post("/auth/logout"),
 };
 

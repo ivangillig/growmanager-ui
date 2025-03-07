@@ -17,6 +17,9 @@ export default function SeedsPage() {
 
   const handleAddSeed = (seedData) => {
     dispatch(addSeed(seedData))
+      .then(() => {
+        dispatch(getSeeds())
+      })
     setIsModalVisible(false)
   }
 

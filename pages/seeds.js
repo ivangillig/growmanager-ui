@@ -1,8 +1,9 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Breadcrumb, Button, Input, Layout, Menu, List, Card } from 'antd'
+import { Breadcrumb, Button, Input, Layout, Menu, List } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 import { getSeeds, addSeed } from '../src/features/seed/seedActions'
+import SeedCard from '../components/SeedCard'
 
 const { Header, Content } = Layout
 
@@ -50,7 +51,7 @@ export default function SeedsPage() {
           dataSource={seeds}
           renderItem={(seed) => (
             <List.Item>
-              <Card title={seed.genetic}>{seed.genetic}</Card>
+              <SeedCard seed={seed} />
             </List.Item>
           )}
         />

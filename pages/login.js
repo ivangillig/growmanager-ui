@@ -1,7 +1,6 @@
 import { Form, Input, Button, Typography } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { useDispatch, useSelector } from 'react-redux'
-import styles from '../styles/Login.module.css'
 import Image from 'next/image'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
@@ -25,9 +24,9 @@ const Login = (props) => {
   }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.loginBox}>
-        <div className={styles.logo}>
+    <div className={'container'}>
+      <div className={'loginBox'}>
+        <div className={'logo'}>
           <Image
             src="/images/logo.png"
             alt="GreenTrack Logo"
@@ -35,7 +34,7 @@ const Login = (props) => {
             height={124}
           />
         </div>
-        <Title level={2} className={styles.appTitle}>
+        <Title level={2} className={'appTitle'}>
           {process.env.NEXT_PUBLIC_APP_TITLE}
         </Title>
         <Form
@@ -62,7 +61,7 @@ const Login = (props) => {
             </Button>
           </Form.Item>
         </Form>
-        <div className={styles.links}>
+        <div className={'links'}>
           <Button type="link" href="/register">
             Create account
           </Button>

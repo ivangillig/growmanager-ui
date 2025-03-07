@@ -20,10 +20,10 @@ export default function CustomSider() {
       onClick: () => router.push('/dashboard'),
     },
     {
-      key: 'products',
+      key: 'seeds',
       icon: <ShoppingOutlined />,
-      label: 'Products',
-      onClick: () => router.push('/products'),
+      label: 'seeds',
+      onClick: () => router.push('/seeds'),
     },
     {
       key: 'profile',

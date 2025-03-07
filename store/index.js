@@ -1,11 +1,11 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { createWrapper } from "next-redux-wrapper";
-import createSagaMiddleware from "redux-saga";
-import rootReducer from "../reducers";
-import rootSaga from "../sagas";
-import configureAxios from "../utils/axiosConfig";
+import { configureStore } from '@reduxjs/toolkit'
+import { createWrapper } from 'next-redux-wrapper'
+import createSagaMiddleware from 'redux-saga'
+import rootReducer from '../reducers'
+import rootSaga from '../sagas'
+import configureAxios from '../utils/axiosConfig'
 
-const sagaMiddleware = createSagaMiddleware();
+const sagaMiddleware = createSagaMiddleware()
 
 const makeStore = () => {
   const store = configureStore({
@@ -13,14 +13,21 @@ const makeStore = () => {
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
         thunk: false,
+        serializableCheck: false,
       }).concat(sagaMiddleware),
-  });
+    devTools: process.env.NODE_ENV !== 'production',
+  })
 
-  configureAxios(store); // Configure Axios on the store
+  if (!store.__SAGA_RUN__) {
+    store.__SAGA_RUN__ = true
+    sagaMiddleware.run(rootSaga)
+  }
 
-  sagaMiddleware.run(rootSaga);
+  configureAxios(store)
 
-  return store;
-};
+  return store
+}
 
-export const wrapper = createWrapper(makeStore, { debug: false });
+export const wrapper = createWrapper(makeStore, {
+  debug: process.env.NODE_ENV !== 'production',
+})

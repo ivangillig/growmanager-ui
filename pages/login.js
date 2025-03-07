@@ -9,13 +9,12 @@ import { loginRequest } from '../actions'
 
 const { Title } = Typography
 
-export default function Login() {
+const Login = (props) => {
   const dispatch = useDispatch()
   const router = useRouter()
   const loginSuccess = useSelector((state) => state.auth.loginSuccess)
 
   useEffect(() => {
-    console.log(loginSuccess)
     if (loginSuccess) {
       router.push('/dashboard')
     }
@@ -75,3 +74,5 @@ export default function Login() {
     </div>
   )
 }
+
+export default Login

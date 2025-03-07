@@ -1,6 +1,7 @@
 import { Provider } from 'react-redux'
 import { wrapper } from '../src/store'
 import { ConfigProvider } from 'antd'
+import MainLayout from './layout/MainLayout'
 import 'antd/dist/reset.css'
 import '../styles/index.less'
 
@@ -10,7 +11,9 @@ function MyApp({ Component, pageProps, ...rest }) {
   return (
     <Provider store={store}>
       <ConfigProvider>
-        <Component {...props.pageProps} />
+        <MainLayout>
+          <Component {...props.pageProps} />
+        </MainLayout>
       </ConfigProvider>
     </Provider>
   )

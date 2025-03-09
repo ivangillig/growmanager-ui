@@ -29,3 +29,23 @@
     }
   }
 }
+
+.ant-menu-inline-collapsed {
+  background-color: @primary-color;
+
+  .ant-menu-light,
+  .ant-menu-item-selected {
+    background-color: unset;
+
+    .ant-menu-item-icon {
+      color: #ffffff;
+      font-size: 1.4em;
+    }
+  }
+  .ant-menu-item-active {
+    color: @hover-text-color !important;
+  }
+  .ant-menu-item {
+    color: @default-text-color;
+  }
+}

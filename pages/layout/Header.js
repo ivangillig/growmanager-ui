@@ -11,24 +11,26 @@ const { Header } = Layout
 export default function CustomHeader({ collapsed, setCollapsed }) {
   return (
     <Header className="custom-header">
-      <Button
-        type="text"
-        icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-        onClick={() => setCollapsed(!collapsed)}
-        style={{
-          fontSize: '16px',
-          width: 64,
-          height: 64,
-        }}
-      />
-      <div className="logo">
-        <Image
-          src="/images/logo.png"
-          alt="GrowManager Logo"
-          width={40}
-          height={40}
+      <div className="header-left">
+        <Button
+          type="text"
+          icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+          onClick={() => setCollapsed(!collapsed)}
+          style={{
+            fontSize: '20px',
+            width: 64,
+            height: 64,
+          }}
         />
-        <span className="logo-text">GrowManager</span>
+        <div className="header-logo">
+          <Image
+            src="/images/logo.png"
+            alt="GrowManager Logo"
+            width={40}
+            height={40}
+          />
+          <span className="logo-text">GrowManager</span>
+        </div>
       </div>
       <Button
         type="primary"

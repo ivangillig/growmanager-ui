@@ -1,7 +1,6 @@
-@primary-color: #056321;
+@primary-color: #108634;
 @hover-text-color: #ffffff;
 @default-text-color: #d3d3d3;
-@active-text-color: #00ff00;
 
 .ant-layout-sider {
   background-color: @primary-color;
@@ -13,17 +12,20 @@
 
     .ant-menu-item {
       color: @default-text-color;
-  
-      :hover {
-        color: @hover-text-color;
-        background-color: unset;
+    }
+
+    .ant-menu-item-active {
+      color: @hover-text-color !important;
+    }
+
+    .ant-menu-item-selected {
+      background-color: unset;
+
+      .ant-menu-title-content,
+      .ant-menu-item-icon {
+        color: #ffffff;
+        font-weight: bolder;
       }
     }
-  }
-
-
-  .ant-menu-item-active {
-    color: @active-text-color;
-    background-color: unset;
   }
 }

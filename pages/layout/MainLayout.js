@@ -2,7 +2,7 @@ import { Layout, Menu } from 'antd'
 import { useRouter } from 'next/router'
 import CustomHeader from './Header'
 import CustomContent from './Content'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   UserOutlined,
   DashboardOutlined,
@@ -15,6 +15,11 @@ const { Footer, Sider } = Layout
 export default function MainLayout({ children }) {
   const router = useRouter()
   const [collapsed, setCollapsed] = useState(false)
+  const [currentYear, setCurrentYear] = useState(new Date().getFullYear())
+
+  useEffect(() => {
+    setCurrentYear(new Date().getFullYear())
+  }, [])
 
   const menuItems = [
     {
@@ -55,7 +60,7 @@ export default function MainLayout({ children }) {
       <Layout>
         <CustomHeader collapsed={collapsed} setCollapsed={setCollapsed} />
         <CustomContent>{children}</CustomContent>
-        <Footer style={{ textAlign: 'center' }}>GrowManager ©2023</Footer>
+        <Footer style={{ textAlign: 'center' }}>GrowManager ©{currentYear}</Footer>
       </Layout>
     </Layout>
   )

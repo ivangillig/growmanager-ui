@@ -29,6 +29,12 @@ export default function MainLayout({ children }) {
       onClick: () => router.push('/dashboard'),
     },
     {
+      key: 'production',
+      icon: <ShoppingOutlined />,
+      label: 'Productions',
+      onClick: () => router.push('/production'),
+    },
+    {
       key: 'seeds',
       icon: <ShoppingOutlined />,
       label: 'Seeds',

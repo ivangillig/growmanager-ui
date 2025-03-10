@@ -1,0 +1,9 @@
+{
+  "home": "Home",
+  "production": "Production",
+  "addBatch": "Add Batch",
+  "searchBatches": "Search batches",
+  "batchAdded": "Batch added successfully",
+  "batchDeleted": "Batch deleted successfully",
+  "confirmDelete": "Are you sure you want to delete this batch?"
+}

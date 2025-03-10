@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { batch, useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   Breadcrumb,
   Button,
@@ -14,6 +14,7 @@ import {
 } from 'antd'
 import { PlusOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import dayjs from 'dayjs'
+import { useTranslation } from 'next-i18next'
 import {
   fetchBatches,
   addBatch,
@@ -23,6 +24,7 @@ import {
 import BatchModal from '../components/BatchModal'
 
 export default function ProductionPage() {
+  const { t } = useTranslation('common')
   const dispatch = useDispatch()
   const batches = useSelector((state) => state.batch?.batches || [])
   const [isModalVisible, setIsModalVisible] = useState(false)
@@ -38,7 +40,7 @@ export default function ProductionPage() {
       production_date: dayjs(batchData.production_date).format('YYYY-MM-DD'),
     }
     dispatch(addBatch(formattedBatchData)).then(() => {
-      notification.success({ message: 'Batch added successfully' })
+      notification.success({ message: t('batchAdded') })
     })
     setIsModalVisible(false)
   }
@@ -55,11 +57,11 @@ export default function ProductionPage() {
 
   const handleDeleteBatch = (batchId) => {
     Modal.confirm({
-      title: 'Are you sure you want to delete this batch?',
+      title: t('confirmDelete'),
       onOk: () => {
         dispatch(deleteBatch(batchId)).then(() => {
           dispatch(fetchBatches())
-          notification.success({ message: 'Batch deleted successfully' })
+          notification.success({ message: t('batchDeleted') })
         })
       },
     })
@@ -71,25 +73,25 @@ export default function ProductionPage() {
   }
 
   const buildColumns = () => [
-    { title: 'BatchCode', dataIndex: 'batchCode', key: 'batchCode' },
+    { title: t('BatchCode'), dataIndex: 'batchCode', key: 'batchCode' },
     {
-      title: 'Production Date',
+      title: t('Production Date'),
       dataIndex: 'production_date',
       key: 'production_date',
       render: (date) => dayjs(date).format('DD-MM-YYYY'),
     },
-    { title: 'Genetic', dataIndex: ['seedId', 'genetic'], key: 'genetic' },
-    { title: 'THC (%)', dataIndex: 'thc', key: 'thc' },
-    { title: 'CBD (%)', dataIndex: 'cbd', key: 'cbd' },
-    { title: 'Drying Time', dataIndex: 'drying_time', key: 'drying_time' },
+    { title: t('Genetic'), dataIndex: ['seedId', 'genetic'], key: 'genetic' },
+    { title: t('THC (%)'), dataIndex: 'thc', key: 'thc' },
+    { title: t('CBD (%)'), dataIndex: 'cbd', key: 'cbd' },
+    { title: t('Drying Time'), dataIndex: 'drying_time', key: 'drying_time' },
     {
-      title: 'Quantity Produced (g)',
+      title: t('Quantity Produced (g)'),
       dataIndex: 'quantity_produced',
       key: 'quantity_produced',
     },
-    { title: 'RAV', dataIndex: 'rav', key: 'rav' },
+    { title: t('RAV'), dataIndex: 'rav', key: 'rav' },
     {
-      title: 'Action',
+      title: t('action'),
       key: 'action',
       render: (_, record) => (
         <Space>
@@ -113,16 +115,18 @@ export default function ProductionPage() {
     <>
       <Row className="header" gutter={[16, 16]}>
         <Col xs={24} sm={12}>
-          <Breadcrumb items={[{ title: 'Home' }, { title: 'Production' }]} />
+          <Breadcrumb
+            items={[{ title: t('home') }, { title: t('production') }]}
+          />
         </Col>
         <Col xs={24} sm={12} className="actions">
-          <Input.Search placeholder="Search batches" />
+          <Input.Search placeholder={t('searchBatches')} />
           <Button
             type="primary"
             icon={<PlusOutlined />}
             onClick={() => setIsModalVisible(true)}
           >
-            Add Batch
+            {t('addBatch')}
           </Button>
         </Col>
       </Row>
@@ -132,7 +136,9 @@ export default function ProductionPage() {
             columns={buildColumns()}
             dataSource={batches}
             rowKey="id"
-            locale={{ emptyText: <Empty description="No batches found" /> }}
+            locale={{
+              emptyText: <Empty description={t('No batches found')} />,
+            }}
           />
         </Col>
       </Row>

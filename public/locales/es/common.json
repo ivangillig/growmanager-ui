@@ -1,0 +1,10 @@
+{
+  "home": "Inicio",
+  "production": "Producción",
+  "addBatch": "Agregar Lote",
+  "searchBatches": "Buscar lotes",
+  "batchAdded": "Lote agregado exitosamente",
+  "batchDeleted": "Lote eliminado exitosamente",
+  "confirmDelete": "¿Estás seguro de que deseas eliminar este lote?",
+  "Genetic": "Genética"
+}

@@ -21,6 +21,7 @@ import {
   updateBatchApi,
   deleteBatchApi,
 } from './batchApi'
+import { notification } from 'antd'
 
 function* fetchBatchesSaga() {
   try {
@@ -31,10 +32,11 @@ function* fetchBatchesSaga() {
   }
 }
 
-function* addBatchSaga({payload}) {
+function* addBatchSaga({ payload }) {
   try {
     const data = yield call(addBatchApi, payload)
     yield put(addBatchSuccess(data))
+    notification.success({ message: 'Batch added successfully' })
   } catch (error) {
     yield put(addBatchError(error))
   }
@@ -44,6 +46,7 @@ function* updateBatchSaga(action) {
   try {
     const batch = yield call(updateBatchApi, action.payload)
     yield put(updateBatchSuccess(batch))
+    notification.success({ message: 'Batch updated successfully' })
   } catch (error) {
     yield put(updateBatchError(error))
   }
@@ -53,6 +56,7 @@ function* deleteBatchSaga(action) {
   try {
     yield call(deleteBatchApi, action.payload)
     yield put(deleteBatchSuccess(action.payload))
+    notification.success({ message: 'Batch deleted successfully' })
   } catch (error) {
     yield put(deleteBatchError(error))
   }

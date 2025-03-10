@@ -10,6 +10,7 @@ import {
   Modal,
   Empty,
   Space,
+  notification,
 } from 'antd'
 import { PlusOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import dayjs from 'dayjs'
@@ -17,13 +18,15 @@ import {
   fetchBatches,
   addBatch,
   deleteBatch,
+  updateBatch,
 } from '../src/features/batch/batchActions'
-import AddBatchModal from '../components/AddBatchModal'
+import BatchModal from '../components/BatchModal'
 
 export default function ProductionPage() {
   const dispatch = useDispatch()
   const batches = useSelector((state) => state.batch?.batches || [])
   const [isModalVisible, setIsModalVisible] = useState(false)
+  const [editingBatch, setEditingBatch] = useState(null)
 
   useEffect(() => {
     dispatch(fetchBatches())
@@ -34,8 +37,20 @@ export default function ProductionPage() {
       ...batchData,
       production_date: dayjs(batchData.production_date).format('YYYY-MM-DD'),
     }
-    dispatch(addBatch(formattedBatchData))
+    dispatch(addBatch(formattedBatchData)).then(() => {
+      notification.success({ message: 'Batch added successfully' })
+    })
     setIsModalVisible(false)
+  }
+
+  const handleEditBatch = (batchData) => {
+    const formattedBatchData = {
+      ...batchData,
+      production_date: dayjs(batchData.production_date).format('YYYY-MM-DD'),
+    }
+    dispatch(updateBatch(formattedBatchData))
+    setIsModalVisible(false)
+    setEditingBatch(null)
   }
 
   const handleDeleteBatch = (batchId) => {
@@ -44,13 +59,15 @@ export default function ProductionPage() {
       onOk: () => {
         dispatch(deleteBatch(batchId)).then(() => {
           dispatch(fetchBatches())
+          notification.success({ message: 'Batch deleted successfully' })
         })
       },
     })
   }
 
-  const handleEditBatch = (batchId) => {
-    // Implement edit functionality here
+  const handleEditButtonClick = (batch) => {
+    setEditingBatch(batch)
+    setIsModalVisible(true)
   }
 
   const buildColumns = () => [
@@ -79,7 +96,7 @@ export default function ProductionPage() {
           <Button
             type="primary"
             icon={<EditOutlined />}
-            onClick={() => handleEditBatch(record.id)}
+            onClick={() => handleEditButtonClick(record)}
           />
           <Button
             type="primary"
@@ -119,10 +136,15 @@ export default function ProductionPage() {
           />
         </Col>
       </Row>
-      <AddBatchModal
+      <BatchModal
         visible={isModalVisible}
-        onCancel={() => setIsModalVisible(false)}
+        onCancel={() => {
+          setIsModalVisible(false)
+          setEditingBatch(null)
+        }}
         onAddBatch={handleAddBatch}
+        onEditBatch={handleEditBatch}
+        batch={editingBatch}
       />
     </>
   )

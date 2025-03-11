@@ -23,7 +23,7 @@
   "Sign In": "Iniciar sesión",
   "Create account": "Crear cuenta",
   "Forgot password?": "¿Olvidaste tu contraseña?",
-  "Edit Batch": "Editar Lote",
+  "Edit batch": "Editar lote",
   "Production Date": "Fecha de Producción",
   "THC (%)": "THC (%)",
   "CBD (%)": "CBD (%)",
@@ -35,11 +35,12 @@
   "No batches found": "No se encontraron lotes",
   "Dashboard": "Dashboard",
   "Welcome to your GrowManager dashboard!": "¡Bienvenido a tu tablero de GrowManager!",
+  "Production": "Producción",
   "Productions": "Producciones",
   "Profile": "Perfil",
   "Settings": "Configuraciones",
   "GrowManager": "GrowManager",
   "Logout": "Cerrar sesión",
   "Edit": "Edit",
-  "Delete": "Delete"
+  "Delete": "Eliminar"
 }

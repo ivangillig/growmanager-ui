@@ -8,7 +8,7 @@ import { useTranslation } from 'next-i18next'
 const { Option } = Select
 
 const BatchModal = ({ visible, onCancel, onAddBatch, onEditBatch, batch }) => {
-  const { t } = useTranslation('common')
+  const { t } = useTranslation()
   const [form] = Form.useForm()
   const dispatch = useDispatch()
   const seeds = useSelector((state) => state.seed.seeds || [])

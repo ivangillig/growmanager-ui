@@ -3,13 +3,10 @@ import { useRouter } from 'next/router'
 import CustomHeader from './Header'
 import CustomContent from './Content'
 import { useState, useEffect } from 'react'
-import {
-  UserOutlined,
-  DashboardOutlined,
-  SettingOutlined,
-  ShoppingOutlined,
-} from '@ant-design/icons'
 import { useTranslation } from 'next-i18next'
+import { FaSeedling, FaUser } from 'react-icons/fa'
+import { MdAgriculture, MdDashboard } from 'react-icons/md'
+import { IoSettingsSharp } from 'react-icons/io5'
 
 const { Footer, Sider } = Layout
 
@@ -26,31 +23,31 @@ export default function MainLayout({ children }) {
   const menuItems = [
     {
       key: 'dashboard',
-      icon: <DashboardOutlined />,
+      icon: <MdDashboard />,
       label: t('Dashboard'),
       onClick: () => router.push('/dashboard'),
     },
     {
       key: 'production',
-      icon: <ShoppingOutlined />,
-      label: t('Productions'),
+      icon: <MdAgriculture />,
+      label: t('Production'),
       onClick: () => router.push('/production'),
     },
     {
       key: 'seeds',
-      icon: <ShoppingOutlined />,
+      icon: <FaSeedling />,
       label: t('Seeds'),
       onClick: () => router.push('/seeds'),
     },
     {
       key: 'profile',
-      icon: <UserOutlined />,
+      icon: <FaUser />,
       label: t('Profile'),
       onClick: () => router.push('/profile'),
     },
     {
       key: 'settings',
-      icon: <SettingOutlined />,
+      icon: <IoSettingsSharp />,
       label: t('Settings'),
       onClick: () => router.push('/settings'),
     },

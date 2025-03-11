@@ -10,9 +10,8 @@ import {
   Modal,
   Empty,
   Space,
-  notification,
+  Tooltip,
 } from 'antd'
-import { PlusOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import dayjs from 'dayjs'
 import { useTranslation } from 'next-i18next'
 import {
@@ -22,6 +21,7 @@ import {
   updateBatch,
 } from '../src/features/batch/batchActions'
 import BatchModal from '../components/BatchModal'
+import { MdDelete, MdEdit, MdLibraryAdd } from 'react-icons/md'
 
 export default function ProductionPage() {
   const { t } = useTranslation()
@@ -90,17 +90,21 @@ export default function ProductionPage() {
       key: 'action',
       render: (_, record) => (
         <Space>
-          <Button
-            type="primary"
-            icon={<EditOutlined />}
-            onClick={() => handleEditButtonClick(record)}
-          />
-          <Button
-            type="primary"
-            danger
-            icon={<DeleteOutlined />}
-            onClick={() => handleDeleteBatch(record.id)}
-          />
+          <Tooltip title={t('Edit batch')}>
+            <Button
+              type="primary"
+              icon={<MdEdit />}
+              onClick={() => handleEditButtonClick(record)}
+            />
+          </Tooltip>
+          <Tooltip title={t('Delete')}>
+            <Button
+              type="primary"
+              danger
+              icon={<MdDelete />}
+              onClick={() => handleDeleteBatch(record.id)}
+            />
+          </Tooltip>
         </Space>
       ),
     },
@@ -118,7 +122,7 @@ export default function ProductionPage() {
           <Input.Search placeholder={t('searchBatches')} />
           <Button
             type="primary"
-            icon={<PlusOutlined />}
+            icon={<MdLibraryAdd />}
             onClick={() => setIsModalVisible(true)}
           >
             {t('addBatch')}

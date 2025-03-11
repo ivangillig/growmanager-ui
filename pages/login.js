@@ -1,11 +1,12 @@
 import { Form, Input, Button, Typography } from 'antd'
-import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { useDispatch, useSelector } from 'react-redux'
 import Image from 'next/image'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { loginRequest } from '../src/features/auth/authActions'
 import { useTranslation } from 'next-i18next'
+import { FaRegUserCircle } from 'react-icons/fa'
+import { RiLockPasswordLine } from 'react-icons/ri'
 
 const { Title } = Typography
 
@@ -51,7 +52,7 @@ const Login = (props) => {
               { required: true, message: t('Please input your username!') },
             ]}
           >
-            <Input prefix={<UserOutlined />} placeholder={t('Username')} />
+            <Input prefix={<FaRegUserCircle />} placeholder={t('Username')} />
           </Form.Item>
           <Form.Item
             name="password"
@@ -60,7 +61,7 @@ const Login = (props) => {
             ]}
           >
             <Input.Password
-              prefix={<LockOutlined />}
+              prefix={<RiLockPasswordLine />}
               placeholder={t('Password')}
             />
           </Form.Item>

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Modal, Form, Input, Select, Upload, Button } from 'antd'
-import { UploadOutlined } from '@ant-design/icons'
 import { useTranslation } from 'next-i18next'
+import { LuCloudUpload } from "react-icons/lu";
 
 const { Option } = Select
 
@@ -72,7 +72,7 @@ export default function AddSeedModal({ visible, onCancel, onAddSeed }) {
             onChange={handleUploadChange}
             beforeUpload={() => false}
           >
-            <Button icon={<UploadOutlined />}>{t('Upload')}</Button>
+            <Button icon={<LuCloudUpload />}>{t('Upload')}</Button>
           </Upload>
         </Form.Item>
       </Form>

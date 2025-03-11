@@ -7,7 +7,7 @@ import { useTranslation } from 'next-i18next'
 const { Option } = Select
 
 const AddBatchModal = ({ visible, onCancel, onAddBatch }) => {
-  const { t } = useTranslation('common')
+  const { t } = useTranslation()
   const [form] = Form.useForm()
   const dispatch = useDispatch()
   const seeds = useSelector((state) => state.seed.seeds || [])
@@ -31,6 +31,8 @@ const AddBatchModal = ({ visible, onCancel, onAddBatch }) => {
       open={visible}
       onCancel={onCancel}
       onOk={handleOk}
+      okText={t('Add batch')}
+      cancelText={t('Cancel')}
     >
       <Form form={form} layout="vertical">
         <Form.Item

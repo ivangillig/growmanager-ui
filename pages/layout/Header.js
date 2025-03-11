@@ -1,11 +1,11 @@
 import { Layout, Button } from 'antd'
-import {
-  LogoutOutlined,
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-} from '@ant-design/icons'
 import Image from 'next/image'
 import { useTranslation } from 'next-i18next'
+import {
+  RiMenuFold3Fill,
+  RiMenuFold4Fill,
+  RiLogoutBoxRLine,
+} from 'react-icons/ri'
 
 const { Header } = Layout
 
@@ -17,7 +17,7 @@ export default function CustomHeader({ collapsed, setCollapsed }) {
       <div className="header-left">
         <Button
           type="text"
-          icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+          icon={collapsed ? <RiMenuFold4Fill /> : <RiMenuFold3Fill />}
           onClick={() => setCollapsed(!collapsed)}
           style={{
             fontSize: '20px',
@@ -38,7 +38,7 @@ export default function CustomHeader({ collapsed, setCollapsed }) {
       <Button
         type="primary"
         className="logout-button"
-        icon={<LogoutOutlined />}
+        icon={<RiLogoutBoxRLine />}
       >
         {t('Logout')}
       </Button>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Breadcrumb, Button, Input, List, Row, Col } from 'antd'
-import { PlusOutlined } from '@ant-design/icons'
+import { MdLibraryAdd } from 'react-icons/md'
 import { getSeeds, addSeed } from '../src/features/seed/seedActions'
 import SeedCard from '../components/SeedCard'
 import AddSeedModal from '../components/AddSeedModal'
@@ -40,7 +40,7 @@ export default function SeedsPage() {
           />
           <Button
             type="primary"
-            icon={<PlusOutlined />}
+            icon={<MdLibraryAdd />}
             onClick={() => setIsModalVisible(true)}
           >
             {t('Add Strain')}

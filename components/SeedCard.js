@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Tooltip } from 'antd'
+import { Card, Flex, Tag, Tooltip } from 'antd'
 import { getFullImageUrl } from '../utils/commonUtils'
 import { useTranslation } from 'next-i18next'
 import { FaEye, FaEdit, FaTrash } from 'react-icons/fa'
@@ -36,6 +36,11 @@ const SeedCard = ({ seed, onViewDetails, onEdit, onDelete }) => {
             <p className="seed-card-description">
               {t('Chemo Type')}: {seed.chemoType}
             </p>
+            <Flex gap="4px 0" wrap>
+              {seed.cannabinoids.map((cannabinoid, index) => (
+                <Tag bordered={false} color={'green'} key={index}>{cannabinoid}</Tag>
+              ))}
+            </Flex>
           </>
         }
       />

@@ -17,7 +17,7 @@ const AddSeedModal = ({ visible, onCancel, onAddSeed }) => {
       formData.append('genetic', values.genetic)
       formData.append('seedBank', values.seedBank)
       formData.append('chemoType', values.chemoType)
-      formData.append('cannabinoids', values.cannabinoids)
+      formData.append('cannabinoids', JSON.stringify(values.cannabinoids))
       if (fileList.length > 0) {
         formData.append('image', fileList[0].originFileObj)
       }

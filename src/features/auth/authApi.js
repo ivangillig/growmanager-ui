@@ -18,7 +18,7 @@ export const getUserInfoApi = async () => {
 export const signOutRequest = async () => {
   try {
     const response = await axios.post(
-      `${BASE_URL}/auth/logout`,
+      `${BASE_URL}/api/auth/logout`,
       {},
       { withCredentials: true }
     );

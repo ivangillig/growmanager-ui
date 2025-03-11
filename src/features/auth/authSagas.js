@@ -1,8 +1,8 @@
 import { takeLatest, put, call, all, fork } from 'redux-saga/effects'
-import { LOGIN_REQUEST } from '../../constants/ActionsTypes'
-import { loginSuccess, loginFailure } from './authActions'
-
-import { signIn } from './authApi'
+import { LOGIN_REQUEST, LOGOUT_REQUEST } from '../../constants/ActionsTypes'
+import { loginSuccess, logoutSuccess } from './authActions'
+import { signIn, signOutRequest } from './authApi'
+import Router from 'next/router'
 
 function* loginSaga(payload) {
   const { credentials } = payload
@@ -19,10 +19,29 @@ function* loginSaga(payload) {
   }
 }
 
+function* logoutSaga() {
+  try {
+    yield call(signOutRequest)
+    localStorage.removeItem('token')
+    localStorage.removeItem('user')
+    yield put(logoutSuccess())
+    Router.push('/login')
+  } catch (error) {
+    // error handler
+  }
+}
+
 export function* watchLoginSaga() {
   yield takeLatest(LOGIN_REQUEST, loginSaga)
 }
 
+export function* watchLogoutSaga() {
+  yield takeLatest(LOGOUT_REQUEST, logoutSaga)
+}
+
 export default function* rootSaga() {
-  yield all([fork(watchLoginSaga)])
+  yield all([
+    fork(watchLoginSaga),
+    fork(watchLogoutSaga),
+  ])
 }

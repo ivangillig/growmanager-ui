@@ -2,7 +2,7 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
-  LOGOUT,
+  LOGOUT_SUCCESS,
 } from "../../constants/ActionsTypes";
 
 const initialState = {
@@ -29,11 +29,12 @@ const authReducer = (state = initialState, action) => {
           email: action.payload.user.email,
         },
         token: action.payload.token,
+        role: action.payload.user.role,
         loginSuccess: true,
       };
     case LOGIN_FAILURE:
       return { ...state, loading: false, error: action.payload };
-    case LOGOUT:
+    case LOGOUT_SUCCESS:
       return initialState;
     default:
       return state;

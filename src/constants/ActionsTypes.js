@@ -2,7 +2,8 @@
 export const LOGIN_REQUEST = 'LOGIN_REQUEST'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_FAILURE = 'LOGIN_FAILURE'
-export const LOGOUT = 'LOGOUT'
+export const LOGOUT_REQUEST = 'LOGOUT_REQUEST'
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
 
 // Seeds types
 export const GET_SEEDS_REQUEST = 'GET_SEEDS_REQUEST'

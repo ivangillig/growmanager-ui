@@ -1,5 +1,5 @@
 import { showMessage } from "../src/features/notifications/notificationActions";
-import { logoutRequest } from "../src/features/auth/authActions";
+import { logout } from "../src/features/auth/authActions";
 
 export const handleApiErrors = (error, store) => {
   if (error.response) {
@@ -18,7 +18,7 @@ export const handleApiErrors = (error, store) => {
               detail: message,
             })
           );
-          store.dispatch(logoutRequest());
+          store.dispatch(logout());
         }
         break;
       case 403:

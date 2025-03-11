@@ -1,16 +1,23 @@
 import { Layout, Button } from 'antd'
 import Image from 'next/image'
 import { useTranslation } from 'next-i18next'
+import { useDispatch } from 'react-redux'
 import {
   RiMenuFold3Fill,
   RiMenuFold4Fill,
   RiLogoutBoxRLine,
 } from 'react-icons/ri'
+import { logout } from '../../src/features/auth/authActions'
 
 const { Header } = Layout
 
 export default function CustomHeader({ collapsed, setCollapsed }) {
   const { t } = useTranslation()
+  const dispatch = useDispatch()
+
+  const handleLogout = () => {
+    dispatch(logout())
+  }
 
   return (
     <Header className="custom-header">
@@ -39,6 +46,7 @@ export default function CustomHeader({ collapsed, setCollapsed }) {
         type="primary"
         className="logout-button"
         icon={<RiLogoutBoxRLine />}
+        onClick={handleLogout}
       >
         {t('Logout')}
       </Button>

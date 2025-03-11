@@ -7,16 +7,24 @@ import 'antd/dist/reset.css'
 import '../styles/index.less'
 import { i18n } from '../src/i18n'
 import '../src/i18n'
+import { useRouter } from 'next/router'
 
 function MyApp({ Component, pageProps, ...rest }) {
   const { store, props } = wrapper.useWrappedStore(rest)
+  const router = useRouter()
+
+  const isLoginPage = router.pathname === '/login'
 
   return (
     <Provider store={store}>
       <ConfigProvider>
-        <MainLayout>
-          <Component {...props.pageProps} />
-        </MainLayout>
+          {isLoginPage ? (
+            <Component {...props.pageProps} />
+          ) : (
+            <MainLayout>
+              <Component {...props.pageProps} />
+            </MainLayout>
+          )}
       </ConfigProvider>
     </Provider>
   )

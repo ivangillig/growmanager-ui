@@ -102,7 +102,7 @@ export default function ProductionPage() {
               type="primary"
               danger
               icon={<MdDelete />}
-              onClick={() => handleDeleteBatch(record.id)}
+              onClick={() => handleDeleteBatch(record._id)}
             />
           </Tooltip>
         </Space>

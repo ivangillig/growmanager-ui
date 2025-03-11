@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { Modal, Form, Input, Select, Upload, Button } from 'antd'
 import { UploadOutlined } from '@ant-design/icons'
+import { useTranslation } from 'next-i18next'
 
 const { Option } = Select
 
 export default function AddSeedModal({ visible, onCancel, onAddSeed }) {
+  const { t } = useTranslation()
   const [form] = Form.useForm()
   const [fileList, setFileList] = useState([])
 
@@ -28,30 +30,34 @@ export default function AddSeedModal({ visible, onCancel, onAddSeed }) {
   return (
     <Modal
       open={visible}
-      title="Add New Seed"
+      title={t('Add New Seed')}
       onCancel={onCancel}
       onOk={handleOk}
-      okText="Add Seed"
+      okText={t('Add Strain')}
     >
       <Form form={form} layout="vertical">
         <Form.Item
           name="genetic"
-          label="Genetic"
-          rules={[{ required: true, message: 'Please input the genetic!' }]}
+          label={t('Genetic name')}
+          rules={[{ required: true, message: t('Please input the genetic!') }]}
         >
           <Input />
         </Form.Item>
         <Form.Item
           name="seedBank"
-          label="Seed Bank"
-          rules={[{ required: true, message: 'Please input the seed bank!' }]}
+          label={t('Seed Bank')}
+          rules={[
+            { required: true, message: t('Please input the seed bank!') },
+          ]}
         >
           <Input />
         </Form.Item>
         <Form.Item
           name="chemoType"
-          label="Chemo Type"
-          rules={[{ required: true, message: 'Please select the chemo type!' }]}
+          label={t('Chemo Type')}
+          rules={[
+            { required: true, message: t('Please select the chemo type!') },
+          ]}
         >
           <Select>
             <Option value="1">1</Option>
@@ -59,14 +65,14 @@ export default function AddSeedModal({ visible, onCancel, onAddSeed }) {
             <Option value="3">3</Option>
           </Select>
         </Form.Item>
-        <Form.Item name="image" label="Image">
+        <Form.Item name="image" label={t('Image')}>
           <Upload
             listType="picture"
             fileList={fileList}
             onChange={handleUploadChange}
             beforeUpload={() => false}
           >
-            <Button icon={<UploadOutlined />}>Upload</Button>
+            <Button icon={<UploadOutlined />}>{t('Upload')}</Button>
           </Upload>
         </Form.Item>
       </Form>

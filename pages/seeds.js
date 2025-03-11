@@ -5,8 +5,10 @@ import { PlusOutlined } from '@ant-design/icons'
 import { getSeeds, addSeed } from '../src/features/seed/seedActions'
 import SeedCard from '../components/SeedCard'
 import AddSeedModal from '../components/AddSeedModal'
+import { useTranslation } from 'next-i18next'
 
 export default function SeedsPage() {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const seeds = useSelector((state) => state.seed.seeds || [])
   const [isModalVisible, setIsModalVisible] = useState(false)
@@ -17,9 +19,6 @@ export default function SeedsPage() {
 
   const handleAddSeed = (seedData) => {
     dispatch(addSeed(seedData))
-      .then(() => {
-        dispatch(getSeeds())
-      })
     setIsModalVisible(false)
   }
 
@@ -30,18 +29,21 @@ export default function SeedsPage() {
       <Row className="header" gutter={[16, 16]}>
         <Col xs={24} sm={12}>
           <Breadcrumb>
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>Seeds</Breadcrumb.Item>
+            <Breadcrumb.Item>{t('Home')}</Breadcrumb.Item>
+            <Breadcrumb.Item>{t('Seeds')}</Breadcrumb.Item>
           </Breadcrumb>
         </Col>
         <Col xs={24} sm={12} className="actions">
-          <Input.Search placeholder="Buscar cepas" onSearch={handleSearch} />
+          <Input.Search
+            placeholder={t('Search strains')}
+            onSearch={handleSearch}
+          />
           <Button
             type="primary"
             icon={<PlusOutlined />}
             onClick={() => setIsModalVisible(true)}
           >
-            Add Seed
+            {t('Add Strain')}
           </Button>
         </Col>
       </Row>

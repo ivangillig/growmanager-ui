@@ -5,10 +5,13 @@ import {
   MenuFoldOutlined,
 } from '@ant-design/icons'
 import Image from 'next/image'
+import { useTranslation } from 'next-i18next'
 
 const { Header } = Layout
 
 export default function CustomHeader({ collapsed, setCollapsed }) {
+  const { t } = useTranslation()
+
   return (
     <Header className="custom-header">
       <div className="header-left">
@@ -37,7 +40,7 @@ export default function CustomHeader({ collapsed, setCollapsed }) {
         className="logout-button"
         icon={<LogoutOutlined />}
       >
-        Logout
+        {t('Logout')}
       </Button>
     </Header>
   )

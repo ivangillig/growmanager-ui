@@ -5,10 +5,12 @@ import Image from 'next/image'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { loginRequest } from '../src/features/auth/authActions'
+import { useTranslation } from 'next-i18next'
 
 const { Title } = Typography
 
 const Login = (props) => {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const router = useRouter()
   const loginSuccess = useSelector((state) => state.auth.loginSuccess)
@@ -45,28 +47,35 @@ const Login = (props) => {
         >
           <Form.Item
             name="username"
-            rules={[{ required: true, message: 'Please input your username!' }]}
+            rules={[
+              { required: true, message: t('Please input your username!') },
+            ]}
           >
-            <Input prefix={<UserOutlined />} placeholder="Username" />
+            <Input prefix={<UserOutlined />} placeholder={t('Username')} />
           </Form.Item>
           <Form.Item
             name="password"
-            rules={[{ required: true, message: 'Please input your password!' }]}
+            rules={[
+              { required: true, message: t('Please input your password!') },
+            ]}
           >
-            <Input.Password prefix={<LockOutlined />} placeholder="Password" />
+            <Input.Password
+              prefix={<LockOutlined />}
+              placeholder={t('Password')}
+            />
           </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit" block>
-              Sign In
+              {t('Sign In')}
             </Button>
           </Form.Item>
         </Form>
         <div className={'links'}>
           <Button type="link" href="/register">
-            Create account
+            {t('Create account')}
           </Button>
           <Button type="link" href="/forgot-password">
-            Forgot password?
+            {t('Forgot password?')}
           </Button>
         </div>
       </div>

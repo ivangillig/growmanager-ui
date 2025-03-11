@@ -24,7 +24,7 @@ import {
 import BatchModal from '../components/BatchModal'
 
 export default function ProductionPage() {
-  const { t } = useTranslation('common')
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const batches = useSelector((state) => state.batch?.batches || [])
   const [isModalVisible, setIsModalVisible] = useState(false)
@@ -39,9 +39,7 @@ export default function ProductionPage() {
       ...batchData,
       production_date: dayjs(batchData.production_date).format('YYYY-MM-DD'),
     }
-    dispatch(addBatch(formattedBatchData)).then(() => {
-      notification.success({ message: t('batchAdded') })
-    })
+    dispatch(addBatch(formattedBatchData))
     setIsModalVisible(false)
   }
 
@@ -59,10 +57,7 @@ export default function ProductionPage() {
     Modal.confirm({
       title: t('confirmDelete'),
       onOk: () => {
-        dispatch(deleteBatch(batchId)).then(() => {
-          dispatch(fetchBatches())
-          notification.success({ message: t('batchDeleted') })
-        })
+        dispatch(deleteBatch(batchId))
       },
     })
   }
@@ -91,7 +86,7 @@ export default function ProductionPage() {
     },
     { title: t('RAV'), dataIndex: 'rav', key: 'rav' },
     {
-      title: t('action'),
+      title: t('Actions'),
       key: 'action',
       render: (_, record) => (
         <Space>

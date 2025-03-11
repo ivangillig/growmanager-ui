@@ -9,10 +9,12 @@ import {
   SettingOutlined,
   ShoppingOutlined,
 } from '@ant-design/icons'
+import { useTranslation } from 'next-i18next'
 
 const { Footer, Sider } = Layout
 
 export default function MainLayout({ children }) {
+  const { t } = useTranslation()
   const router = useRouter()
   const [collapsed, setCollapsed] = useState(false)
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear())
@@ -25,31 +27,31 @@ export default function MainLayout({ children }) {
     {
       key: 'dashboard',
       icon: <DashboardOutlined />,
-      label: 'Dashboard',
+      label: t('Dashboard'),
       onClick: () => router.push('/dashboard'),
     },
     {
       key: 'production',
       icon: <ShoppingOutlined />,
-      label: 'Productions',
+      label: t('Productions'),
       onClick: () => router.push('/production'),
     },
     {
       key: 'seeds',
       icon: <ShoppingOutlined />,
-      label: 'Seeds',
+      label: t('Seeds'),
       onClick: () => router.push('/seeds'),
     },
     {
       key: 'profile',
       icon: <UserOutlined />,
-      label: 'Profile',
+      label: t('Profile'),
       onClick: () => router.push('/profile'),
     },
     {
       key: 'settings',
       icon: <SettingOutlined />,
-      label: 'Settings',
+      label: t('Settings'),
       onClick: () => router.push('/settings'),
     },
   ]
@@ -66,7 +68,9 @@ export default function MainLayout({ children }) {
       <Layout>
         <CustomHeader collapsed={collapsed} setCollapsed={setCollapsed} />
         <CustomContent>{children}</CustomContent>
-        <Footer style={{ textAlign: 'center' }}>GrowManager ©{currentYear}</Footer>
+        <Footer style={{ textAlign: 'center' }}>
+          {t('GrowManager')} ©{currentYear}
+        </Footer>
       </Layout>
     </Layout>
   )

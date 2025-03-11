@@ -1,11 +1,12 @@
+import React from 'react'
 import { useState } from 'react'
-import { Modal, Form, Input, Select, Upload, Button } from 'antd'
+import { Modal, Form, Input, Select, Upload, Button, Checkbox } from 'antd'
 import { useTranslation } from 'next-i18next'
-import { LuCloudUpload } from "react-icons/lu";
+import { LuCloudUpload } from 'react-icons/lu'
 
 const { Option } = Select
 
-export default function AddSeedModal({ visible, onCancel, onAddSeed }) {
+const AddSeedModal = ({ visible, onCancel, onAddSeed }) => {
   const { t } = useTranslation()
   const [form] = Form.useForm()
   const [fileList, setFileList] = useState([])
@@ -16,6 +17,7 @@ export default function AddSeedModal({ visible, onCancel, onAddSeed }) {
       formData.append('genetic', values.genetic)
       formData.append('seedBank', values.seedBank)
       formData.append('chemoType', values.chemoType)
+      formData.append('cannabinoids', values.cannabinoids)
       if (fileList.length > 0) {
         formData.append('image', fileList[0].originFileObj)
       }
@@ -34,21 +36,20 @@ export default function AddSeedModal({ visible, onCancel, onAddSeed }) {
       onCancel={onCancel}
       onOk={handleOk}
       okText={t('Add Strain')}
+      cancelText={t('Cancel')}
     >
       <Form form={form} layout="vertical">
         <Form.Item
           name="genetic"
           label={t('Genetic name')}
-          rules={[{ required: true, message: t('Please input the genetic!') }]}
+          rules={[{ required: true, message: t('Please input the genetic') }]}
         >
           <Input />
         </Form.Item>
         <Form.Item
           name="seedBank"
           label={t('Seed Bank')}
-          rules={[
-            { required: true, message: t('Please input the seed bank!') },
-          ]}
+          rules={[{ required: true, message: t('Please input the seed bank') }]}
         >
           <Input />
         </Form.Item>
@@ -56,7 +57,7 @@ export default function AddSeedModal({ visible, onCancel, onAddSeed }) {
           name="chemoType"
           label={t('Chemo Type')}
           rules={[
-            { required: true, message: t('Please select the chemo type!') },
+            { required: true, message: t('Please select the chemo type') },
           ]}
         >
           <Select>
@@ -64,6 +65,24 @@ export default function AddSeedModal({ visible, onCancel, onAddSeed }) {
             <Option value="2">2</Option>
             <Option value="3">3</Option>
           </Select>
+        </Form.Item>
+        <Form.Item
+          name="cannabinoids"
+          label={t('Cannabinoids')}
+          rules={[
+            {
+              required: true,
+              message: t('Please select at least one cannabinoid'),
+            },
+          ]}
+        >
+          <Checkbox.Group>
+            <Checkbox value="THC">THC</Checkbox>
+            <Checkbox value="CBD">CBD</Checkbox>
+            <Checkbox value="CBG">CBG</Checkbox>
+            <Checkbox value="CBN">CBN</Checkbox>
+            <Checkbox value="CBC">CBC</Checkbox>
+          </Checkbox.Group>
         </Form.Item>
         <Form.Item name="image" label={t('Image')}>
           <Upload
@@ -79,3 +98,5 @@ export default function AddSeedModal({ visible, onCancel, onAddSeed }) {
     </Modal>
   )
 }
+
+export default AddSeedModal

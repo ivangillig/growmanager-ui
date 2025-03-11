@@ -42,5 +42,16 @@
   "GrowManager": "GrowManager",
   "Logout": "Cerrar sesión",
   "Edit": "Edit",
-  "Delete": "Eliminar"
+  "Delete": "Eliminar",
+  "Cannabinoids": "Cannabinoides",
+  "Please select at least one cannabinoid": "Por favor seleccione al menos un cannabinoide",
+  "Please input the genetic": "Por favor ingrese la genética",
+  "Please input the seed bank": "Por favor ingrese el banco de semillas",
+  "Please select the chemo type": "Por favor seleccione el quimiotipo",
+  "Please select the production date": "Por favor ingrese la fecha de producción",
+  "Please input the THC percentage": "Por favor ingrese el porcentaje de THC",
+  "Please input the CBD percentage": "Por favor ingrese el porcentaje de CBD",
+  "Please input the drying time": "Por favor ingrese el tiempo de secado",
+  "Please input the quantity produced": "Por favor ingrese la cantidad producida",
+  "Please input the RAV": "Por favor ingrese el RAV"
 }

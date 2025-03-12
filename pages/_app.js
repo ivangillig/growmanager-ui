@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps, ...rest }) {
 
   return (
     <Provider store={store}>
-      <ConfigProvider>
+      <ConfigProvider theme={{ hashed: false }}>
           {isLoginPage ? (
             <Component {...props.pageProps} />
           ) : (

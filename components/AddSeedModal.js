@@ -17,6 +17,8 @@ const AddSeedModal = ({ visible, onCancel, onAddSeed }) => {
       formData.append('genetic', values.genetic)
       formData.append('seedBank', values.seedBank)
       formData.append('chemoType', values.chemoType)
+      formData.append('dominance', values.dominance)
+      formData.append('ratio', values.ratio)
       formData.append('cannabinoids', JSON.stringify(values.cannabinoids))
       if (fileList.length > 0) {
         formData.append('image', fileList[0].originFileObj)
@@ -65,6 +67,20 @@ const AddSeedModal = ({ visible, onCancel, onAddSeed }) => {
             <Option value="2">2</Option>
             <Option value="3">3</Option>
           </Select>
+        </Form.Item>
+        <Form.Item
+          name="dominance"
+          label={t('Dominance')}
+          rules={[{ required: true, message: t('Please input the dominance') }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name="ratio"
+          label={t('Ratio')}
+          rules={[{ required: true, message: t('Please input the ratio') }]}
+        >
+          <Input />
         </Form.Item>
         <Form.Item
           name="cannabinoids"

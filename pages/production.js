@@ -20,7 +20,8 @@ import {
   deleteBatch,
   updateBatch,
 } from '../src/features/batch/batchActions'
-import BatchModal from '../components/BatchModal'
+import BatchModal from '../components/CreateBatchModal'
+import UpdateBatchModal from '../components/UpdateBatchModal'
 import { MdDelete, MdEdit, MdLibraryAdd } from 'react-icons/md'
 
 export default function ProductionPage() {
@@ -141,16 +142,23 @@ export default function ProductionPage() {
           />
         </Col>
       </Row>
-      <BatchModal
-        visible={isModalVisible}
-        onCancel={() => {
-          setIsModalVisible(false)
-          setEditingBatch(null)
-        }}
-        onAddBatch={handleAddBatch}
-        onEditBatch={handleEditBatch}
-        batch={editingBatch}
-      />
+      {editingBatch ? (
+        <UpdateBatchModal
+          visible={isModalVisible}
+          onCancel={() => {
+            setIsModalVisible(false)
+            setEditingBatch(null)
+          }}
+          onUpdateBatch={handleEditBatch}
+          batch={editingBatch}
+        />
+      ) : (
+        <BatchModal
+          visible={isModalVisible}
+          onCancel={() => setIsModalVisible(false)}
+          onAddBatch={handleAddBatch}
+        />
+      )}
     </>
   )
 }

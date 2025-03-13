@@ -79,3 +79,12 @@ export const deleteBatchLogApi = async (batchLogId) => {
     // error handler
   }
 }
+
+export const fetchBatchLogsApi = async (batchId) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/api/batchlog/${batchId}`)
+    return response.data
+  } catch (error) {
+    // error handler
+  }
+}

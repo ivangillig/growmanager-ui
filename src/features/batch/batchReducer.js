@@ -20,12 +20,16 @@ import {
   DELETE_BATCH_LOG_REQUEST,
   DELETE_BATCH_LOG_SUCCESS,
   DELETE_BATCH_LOG_ERROR,
+  FETCH_BATCH_LOGS_REQUEST,
+  FETCH_BATCH_LOGS_SUCCESS,
+  FETCH_BATCH_LOGS_ERROR,
 } from '../../constants/ActionsTypes'
 
 const initialState = {
   batches: [],
   loading: false,
   error: null,
+  batchLogs: [],
 }
 
 export default function batchReducer(state = initialState, action) {
@@ -37,6 +41,7 @@ export default function batchReducer(state = initialState, action) {
     case ADD_BATCH_LOG_REQUEST:
     case UPDATE_BATCH_LOG_REQUEST:
     case DELETE_BATCH_LOG_REQUEST:
+    case FETCH_BATCH_LOGS_REQUEST:
       return {
         ...state,
         loading: true,
@@ -101,6 +106,12 @@ export default function batchReducer(state = initialState, action) {
             : batch
         ),
       }
+    case FETCH_BATCH_LOGS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        batchLogs: action.payload,
+      }
     case FETCH_BATCHES_ERROR:
     case ADD_BATCH_ERROR:
     case UPDATE_BATCH_ERROR:
@@ -108,6 +119,7 @@ export default function batchReducer(state = initialState, action) {
     case ADD_BATCH_LOG_ERROR:
     case UPDATE_BATCH_LOG_ERROR:
     case DELETE_BATCH_LOG_ERROR:
+    case FETCH_BATCH_LOGS_ERROR:
       return {
         ...state,
         loading: false,

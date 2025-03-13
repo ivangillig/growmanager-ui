@@ -20,6 +20,9 @@ import {
   DELETE_BATCH_LOG_REQUEST,
   DELETE_BATCH_LOG_SUCCESS,
   DELETE_BATCH_LOG_ERROR,
+  FETCH_BATCH_LOGS_REQUEST,
+  FETCH_BATCH_LOGS_SUCCESS,
+  FETCH_BATCH_LOGS_ERROR,
 } from '@/src/constants/ActionsTypes'
 
 export const fetchBatches = () => ({
@@ -123,5 +126,20 @@ export const deleteBatchLogSuccess = (batchLogId) => ({
 
 export const deleteBatchLogError = (error) => ({
   type: DELETE_BATCH_LOG_ERROR,
+  payload: error,
+})
+
+export const fetchBatchLogs = (batchId) => ({
+  type: FETCH_BATCH_LOGS_REQUEST,
+  payload: batchId,
+})
+
+export const fetchBatchLogsSuccess = (batchLogs) => ({
+  type: FETCH_BATCH_LOGS_SUCCESS,
+  payload: batchLogs,
+})
+
+export const fetchBatchLogsError = (error) => ({
+  type: FETCH_BATCH_LOGS_ERROR,
   payload: error,
 })

@@ -14,6 +14,8 @@ import {
   updateBatchLogError,
   deleteBatchLogSuccess,
   deleteBatchLogError,
+  fetchBatchLogsSuccess,
+  fetchBatchLogsError,
 } from './batchActions'
 import {
   FETCH_BATCHES_REQUEST,
@@ -23,6 +25,7 @@ import {
   ADD_BATCH_LOG_REQUEST,
   UPDATE_BATCH_LOG_REQUEST,
   DELETE_BATCH_LOG_REQUEST,
+  FETCH_BATCH_LOGS_REQUEST,
 } from '@/src/constants/ActionsTypes'
 import {
   fetchBatchesApi,
@@ -32,6 +35,7 @@ import {
   addBatchLogApi,
   updateBatchLogApi,
   deleteBatchLogApi,
+  fetchBatchLogsApi,
 } from './batchApi'
 import { notification } from 'antd'
 
@@ -104,6 +108,15 @@ function* deleteBatchLogSaga(action) {
   }
 }
 
+function* fetchBatchLogsSaga(action) {
+  try {
+    const response = yield call(fetchBatchLogsApi, action.payload)
+    yield put(fetchBatchLogsSuccess(response.data))
+  } catch (error) {
+    yield put(fetchBatchLogsError(error))
+  }
+}
+
 export function* watchFetchBatchesSaga() {
   yield takeLatest(FETCH_BATCHES_REQUEST, fetchBatchesSaga)
 }
@@ -132,6 +145,10 @@ export function* watchDeleteBatchLogSaga() {
   yield takeLatest(DELETE_BATCH_LOG_REQUEST, deleteBatchLogSaga)
 }
 
+export function* watchFetchBatchLogsSaga() {
+  yield takeLatest(FETCH_BATCH_LOGS_REQUEST, fetchBatchLogsSaga)
+}
+
 export default function* rootSaga() {
   yield all([
     fork(watchFetchBatchesSaga),
@@ -141,5 +158,6 @@ export default function* rootSaga() {
     fork(watchAddBatchLogSaga),
     fork(watchUpdateBatchLogSaga),
     fork(watchDeleteBatchLogSaga),
+    fork(watchFetchBatchLogsSaga),
   ])
 }

@@ -119,5 +119,11 @@
   "Please select the pruning type": "Por favor seleccione el tipo de poda",
   "Please select the training technique": "Por favor seleccione la técnica de entrenamiento",
   "Cancel": "Cancelar",
-  "Save": "Guardar"
+  "Save": "Guardar",
+  "Batch Log History": "Historial de Lote",
+  "pruning": "Poda",
+  "pesticides": "Pesticidas",
+  "fertilization": "Fertilización",
+  "training": "Entrenamiento",
+  "defoliation": "Defoliación"
 }

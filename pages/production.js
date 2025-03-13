@@ -7,7 +7,6 @@ import {
   Table,
   Row,
   Col,
-  Modal,
   Empty,
   Space,
   Tooltip,
@@ -19,18 +18,26 @@ import {
   addBatch,
   deleteBatch,
   updateBatch,
+  fetchBatchLogs,
 } from '../src/features/batch/batchActions'
 import BatchModal from '../components/CreateBatchModal'
 import UpdateBatchModal from '../components/UpdateBatchModal'
-import AddRecordDrawer from '../components/AddRecordDrawer'
-import { MdDelete, MdEdit, MdLibraryAdd, MdAdd } from 'react-icons/md'
+import BatchLogTable from '../components/BatchLogTable'
+import {
+  MdDelete,
+  MdEdit,
+  MdLibraryAdd,
+  MdAdd,
+  MdHistory,
+} from 'react-icons/md'
 
 export default function ProductionPage() {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const batches = useSelector((state) => state.batch?.batches || [])
+  const batchLogs = useSelector((state) => state.batch?.batchLogs || [])
   const [isModalVisible, setIsModalVisible] = useState(false)
-  const [isDrawerVisible, setIsDrawerVisible] = useState(false)
+  const [isLogModalVisible, setIsLogModalVisible] = useState(false)
   const [editingBatch, setEditingBatch] = useState(null)
   const [selectedBatchId, setSelectedBatchId] = useState(null)
 
@@ -71,9 +78,10 @@ export default function ProductionPage() {
     setIsModalVisible(true)
   }
 
-  const handleAddRecordClick = (batchId) => {
+  const handleViewHistoryClick = (batchId) => {
     setSelectedBatchId(batchId)
-    setIsDrawerVisible(true)
+    dispatch(fetchBatchLogs(batchId))
+    setIsLogModalVisible(true)
   }
 
   const buildColumns = () => [
@@ -114,11 +122,11 @@ export default function ProductionPage() {
               onClick={() => handleDeleteBatch(record._id)}
             />
           </Tooltip>
-          <Tooltip title={t('Add Record')}>
+          <Tooltip title={t('View History')}>
             <Button
               type="primary"
-              icon={<MdAdd />}
-              onClick={() => handleAddRecordClick(record._id)}
+              icon={<MdHistory />}
+              onClick={() => handleViewHistoryClick(record._id)}
             />
           </Tooltip>
         </Space>
@@ -174,10 +182,11 @@ export default function ProductionPage() {
           onAddBatch={handleAddBatch}
         />
       )}
-      <AddRecordDrawer
-        visible={isDrawerVisible}
-        onClose={() => setIsDrawerVisible(false)}
+      <BatchLogTable
+        batchLogs={batchLogs}
         batchId={selectedBatchId}
+        isVisible={isLogModalVisible}
+        onClose={() => setIsLogModalVisible(false)}
       />
     </>
   )

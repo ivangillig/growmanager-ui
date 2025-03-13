@@ -7,11 +7,10 @@ import {
   Input,
   DatePicker,
   Checkbox,
-  Radio,
   Select,
 } from 'antd'
 import { useTranslation } from 'next-i18next'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const { Option } = Select
 
@@ -22,6 +21,16 @@ const AddRecordDrawer = ({ visible, onClose }) => {
   const [showPesticides, setShowPesticides] = useState(false)
   const [showPruning, setShowPruning] = useState(false)
   const [showTraining, setShowTraining] = useState(false)
+
+  useEffect(() => {
+    if (visible) {
+      form.resetFields()
+      setShowFertilizer(false)
+      setShowPesticides(false)
+      setShowPruning(false)
+      setShowTraining(false)
+    }
+  }, [visible, form])
 
   const handleSave = (values) => {
     console.log('Form values:', values)
@@ -74,73 +83,35 @@ const AddRecordDrawer = ({ visible, onClose }) => {
             </Form.Item>
           </Col>
         </Row>
-        <Row gutter={16}>
-          <Col span={12}>
-            <Form.Item
-              name="plant_height"
-              label={t('Plant Height (cm)')}
-              rules={[
-                {
-                  required: true,
-                  message: t('Please enter the plant height'),
-                },
-              ]}
-            >
-              <Input placeholder={t('Plant Height (cm)')} />
-            </Form.Item>
-          </Col>
-        </Row>
+        <Col span={12}>
+          <Form.Item name="plant_height" label={t('Plant Height (cm)')}>
+            <Input placeholder={t('Plant Height (cm)')} />
+          </Form.Item>
+        </Col>
+        <Row></Row>
         <Row gutter={16}>
           <Col span={12}>
             <Form.Item
               name="relative_humidity"
               label={t('Relative Humidity (%)')}
-              rules={[
-                {
-                  required: true,
-                  message: t('Please enter the relative humidity'),
-                },
-              ]}
             >
               <Input placeholder={t('Relative Humidity (%)')} />
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item
-              name="soil_humidity"
-              label={t('Soil Humidity (%)')}
-              rules={[
-                {
-                  required: true,
-                  message: t('Please enter the soil humidity'),
-                },
-              ]}
-            >
+            <Form.Item name="soil_humidity" label={t('Soil Humidity (%)')}>
               <Input placeholder={t('Soil Humidity (%)')} />
             </Form.Item>
           </Col>
         </Row>
         <Row gutter={16}>
           <Col span={12}>
-            <Form.Item
-              name="temperature"
-              label={t('Ambient Temperature (°C)')}
-              rules={[
-                {
-                  required: true,
-                  message: t('Please enter the ambient temperature'),
-                },
-              ]}
-            >
+            <Form.Item name="temperature" label={t('Ambient Temperature (°C)')}>
               <Input placeholder={t('Ambient Temperature (°C)')} />
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item
-              name="ph"
-              label={t('PH')}
-              rules={[{ required: true, message: t('Please enter the PH') }]}
-            >
+            <Form.Item name="ph" label={t('PH')}>
               <Input placeholder={t('PH')} />
             </Form.Item>
           </Col>
@@ -179,16 +150,7 @@ const AddRecordDrawer = ({ visible, onClose }) => {
         {showFertilizer && (
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item
-                name="fertilizer_type"
-                label={t('Fertilizer Type')}
-                rules={[
-                  {
-                    required: true,
-                    message: t('Please enter the fertilizer type'),
-                  },
-                ]}
-              >
+              <Form.Item name="fertilizer_type" label={t('Fertilizer Type')}>
                 <Input placeholder={t('Fertilizer Type')} />
               </Form.Item>
             </Col>
@@ -196,12 +158,6 @@ const AddRecordDrawer = ({ visible, onClose }) => {
               <Form.Item
                 name="fertilizer_dose"
                 label={t('Fertilizer Dose (ml)')}
-                rules={[
-                  {
-                    required: true,
-                    message: t('Please enter the fertilizer dose'),
-                  },
-                ]}
               >
                 <Input placeholder={t('Fertilizer Dose (ml)')} />
               </Form.Item>
@@ -211,30 +167,12 @@ const AddRecordDrawer = ({ visible, onClose }) => {
         {showPesticides && (
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item
-                name="pesticide_type"
-                label={t('Pesticide Type')}
-                rules={[
-                  {
-                    required: true,
-                    message: t('Please enter the pesticide type'),
-                  },
-                ]}
-              >
+              <Form.Item name="pesticide_type" label={t('Pesticide Type')}>
                 <Input placeholder={t('Pesticide Type')} />
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item
-                name="pesticide_dose"
-                label={t('Pesticide Dose (ml)')}
-                rules={[
-                  {
-                    required: true,
-                    message: t('Please enter the pesticide dose'),
-                  },
-                ]}
-              >
+              <Form.Item name="pesticide_dose" label={t('Pesticide Dose (ml)')}>
                 <Input placeholder={t('Pesticide Dose (ml)')} />
               </Form.Item>
             </Col>
@@ -242,17 +180,8 @@ const AddRecordDrawer = ({ visible, onClose }) => {
         )}
         {showPruning && (
           <Row gutter={16}>
-            <Col span={24}>
-              <Form.Item
-                name="pruning_type"
-                label={t('Pruning Type')}
-                rules={[
-                  {
-                    required: true,
-                    message: t('Please select the pruning type'),
-                  },
-                ]}
-              >
+            <Col span={12}>
+              <Form.Item name="pruning_type" label={t('Pruning Type')}>
                 <Select placeholder={t('Select Pruning Type')}>
                   <Option value="topping">{t('Topping')}</Option>
                   <Option value="fimming">{t('Fimming')}</Option>
@@ -264,23 +193,17 @@ const AddRecordDrawer = ({ visible, onClose }) => {
         )}
         {showTraining && (
           <Row gutter={16}>
-            <Col span={24}>
+            <Col span={12}>
               <Form.Item
                 name="training_technique"
                 label={t('Training Technique')}
-                rules={[
-                  {
-                    required: true,
-                    message: t('Please select the training technique'),
-                  },
-                ]}
               >
-                <Radio.Group>
-                  <Radio value="lst">{t('LST')}</Radio>
-                  <Radio value="hst">{t('HST')}</Radio>
-                  <Radio value="scrog">{t('SCROG')}</Radio>
-                  <Radio value="sog">{t('SOG')}</Radio>
-                </Radio.Group>
+                <Select placeholder={t('Select Training Technique')}>
+                  <Option value="lst">{t('LST')}</Option>
+                  <Option value="hst">{t('HST')}</Option>
+                  <Option value="scrog">{t('SCROG')}</Option>
+                  <Option value="sog">{t('SOG')}</Option>
+                </Select>
               </Form.Item>
             </Col>
           </Row>

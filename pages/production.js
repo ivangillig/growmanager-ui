@@ -32,6 +32,7 @@ export default function ProductionPage() {
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [isDrawerVisible, setIsDrawerVisible] = useState(false)
   const [editingBatch, setEditingBatch] = useState(null)
+  const [selectedBatchId, setSelectedBatchId] = useState(null)
 
   useEffect(() => {
     dispatch(fetchBatches())
@@ -68,6 +69,11 @@ export default function ProductionPage() {
   const handleEditButtonClick = (batch) => {
     setEditingBatch(batch)
     setIsModalVisible(true)
+  }
+
+  const handleAddRecordClick = (batchId) => {
+    setSelectedBatchId(batchId)
+    setIsDrawerVisible(true)
   }
 
   const buildColumns = () => [
@@ -112,7 +118,7 @@ export default function ProductionPage() {
             <Button
               type="primary"
               icon={<MdAdd />}
-              onClick={() => setIsDrawerVisible(true)}
+              onClick={() => handleAddRecordClick(record._id)}
             />
           </Tooltip>
         </Space>
@@ -171,6 +177,7 @@ export default function ProductionPage() {
       <AddRecordDrawer
         visible={isDrawerVisible}
         onClose={() => setIsDrawerVisible(false)}
+        batchId={selectedBatchId}
       />
     </>
   )

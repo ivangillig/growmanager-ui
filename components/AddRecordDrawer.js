@@ -11,10 +11,11 @@ import {
 } from 'antd'
 import { useTranslation } from 'next-i18next'
 import { useState, useEffect } from 'react'
+import dayjs from 'dayjs'
 
 const { Option } = Select
 
-const AddRecordDrawer = ({ visible, onClose }) => {
+const AddRecordDrawer = ({ visible, onClose, batchId }) => {
   const { t } = useTranslation()
   const [form] = Form.useForm()
   const [showFertilizer, setShowFertilizer] = useState(false)
@@ -33,7 +34,12 @@ const AddRecordDrawer = ({ visible, onClose }) => {
   }, [visible, form])
 
   const handleSave = (values) => {
-    console.log('Form values:', values)
+    const formattedValues = {
+      ...values,
+      batchId,
+      interventionDate: dayjs(values.interventionDate).format('YYYY-MM-DD'),
+    }
+    console.log('Form values:', formattedValues)
     onClose()
   }
 
@@ -70,7 +76,7 @@ const AddRecordDrawer = ({ visible, onClose }) => {
         <Row gutter={16}>
           <Col span={12}>
             <Form.Item
-              name="intervention_date"
+              name="interventionDate"
               label={t('Intervention Date')}
               rules={[
                 {
@@ -79,27 +85,26 @@ const AddRecordDrawer = ({ visible, onClose }) => {
                 },
               ]}
             >
-              <DatePicker style={{ width: '100%' }} />
+              <DatePicker style={{ width: '100%' }} format={'DD-MM-YYYY'} />
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item name="plantHeight" label={t('Plant Height (cm)')}>
+              <Input placeholder={t('Plant Height (cm)')} />
             </Form.Item>
           </Col>
         </Row>
-        <Col span={12}>
-          <Form.Item name="plant_height" label={t('Plant Height (cm)')}>
-            <Input placeholder={t('Plant Height (cm)')} />
-          </Form.Item>
-        </Col>
-        <Row></Row>
         <Row gutter={16}>
           <Col span={12}>
             <Form.Item
-              name="relative_humidity"
+              name="relativeHumidity"
               label={t('Relative Humidity (%)')}
             >
               <Input placeholder={t('Relative Humidity (%)')} />
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item name="soil_humidity" label={t('Soil Humidity (%)')}>
+            <Form.Item name="soilHumidity" label={t('Soil Humidity (%)')}>
               <Input placeholder={t('Soil Humidity (%)')} />
             </Form.Item>
           </Col>
@@ -150,13 +155,13 @@ const AddRecordDrawer = ({ visible, onClose }) => {
         {showFertilizer && (
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item name="fertilizer_type" label={t('Fertilizer Type')}>
+              <Form.Item name="fertilizerType" label={t('Fertilizer Type')}>
                 <Input placeholder={t('Fertilizer Type')} />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item
-                name="fertilizer_dose"
+                name="fertilizerDose"
                 label={t('Fertilizer Dose (ml)')}
               >
                 <Input placeholder={t('Fertilizer Dose (ml)')} />
@@ -167,12 +172,12 @@ const AddRecordDrawer = ({ visible, onClose }) => {
         {showPesticides && (
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item name="pesticide_type" label={t('Pesticide Type')}>
+              <Form.Item name="pesticideType" label={t('Pesticide Type')}>
                 <Input placeholder={t('Pesticide Type')} />
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item name="pesticide_dose" label={t('Pesticide Dose (ml)')}>
+              <Form.Item name="pesticideDose" label={t('Pesticide Dose (ml)')}>
                 <Input placeholder={t('Pesticide Dose (ml)')} />
               </Form.Item>
             </Col>
@@ -181,7 +186,7 @@ const AddRecordDrawer = ({ visible, onClose }) => {
         {showPruning && (
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item name="pruning_type" label={t('Pruning Type')}>
+              <Form.Item name="pruningType" label={t('Pruning Type')}>
                 <Select placeholder={t('Select Pruning Type')}>
                   <Option value="topping">{t('Topping')}</Option>
                   <Option value="fimming">{t('Fimming')}</Option>
@@ -195,7 +200,7 @@ const AddRecordDrawer = ({ visible, onClose }) => {
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
-                name="training_technique"
+                name="trainingTechnique"
                 label={t('Training Technique')}
               >
                 <Select placeholder={t('Select Training Technique')}>

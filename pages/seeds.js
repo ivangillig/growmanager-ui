@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Breadcrumb, Button, Input, List, Row, Col } from 'antd'
+import { Breadcrumb, Button, Input, List, Row, Col, Empty } from 'antd'
 import { MdLibraryAdd } from 'react-icons/md'
 import { getSeeds, addSeed } from '../src/features/seed/seedActions'
 import SeedCard from '../components/SeedCard'
@@ -57,6 +57,9 @@ export default function SeedsPage() {
                 <SeedCard seed={seed} />
               </List.Item>
             )}
+            locale={{
+              emptyText: <Empty description={t('No seeds found')} />,
+            }}
           />
         </Col>
       </Row>

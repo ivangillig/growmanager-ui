@@ -49,3 +49,33 @@ export const deleteBatchApi = async (batchId) => {
     // error handler
   }
 }
+
+export const addBatchLogApi = async (batchLog) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/api/batchlog`, batchLog, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    return response.data
+  } catch (error) {
+    // error handler
+  }
+}
+
+export const updateBatchLogApi = async (batchLog) => {
+  try {
+    const response = await axios.put(`${BASE_URL}/api/batchlog`, batchLog)
+    return response.data
+  } catch (error) {
+    // error handler
+  }
+}
+
+export const deleteBatchLogApi = async (batchLogId) => {
+  try {
+    await axios.delete(`${BASE_URL}/api/batchlog/${batchLogId}`)
+  } catch (error) {
+    // error handler
+  }
+}

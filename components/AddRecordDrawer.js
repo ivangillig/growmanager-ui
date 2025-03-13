@@ -12,11 +12,14 @@ import {
 import { useTranslation } from 'next-i18next'
 import { useState, useEffect } from 'react'
 import dayjs from 'dayjs'
+import { useDispatch } from 'react-redux'
+import { addBatchLog } from '@/src/features/batch/batchActions'
 
 const { Option } = Select
 
 const AddRecordDrawer = ({ visible, onClose, batchId }) => {
   const { t } = useTranslation()
+  const dispatch = useDispatch()
   const [form] = Form.useForm()
   const [showFertilizer, setShowFertilizer] = useState(false)
   const [showPesticides, setShowPesticides] = useState(false)
@@ -40,6 +43,7 @@ const AddRecordDrawer = ({ visible, onClose, batchId }) => {
       interventionDate: dayjs(values.interventionDate).format('YYYY-MM-DD'),
     }
     console.log('Form values:', formattedValues)
+    dispatch(addBatchLog(formattedValues))
     onClose()
   }
 

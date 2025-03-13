@@ -11,6 +11,15 @@ import {
   DELETE_BATCH_REQUEST,
   DELETE_BATCH_SUCCESS,
   DELETE_BATCH_ERROR,
+  ADD_BATCH_LOG_REQUEST,
+  ADD_BATCH_LOG_SUCCESS,
+  ADD_BATCH_LOG_ERROR,
+  UPDATE_BATCH_LOG_REQUEST,
+  UPDATE_BATCH_LOG_SUCCESS,
+  UPDATE_BATCH_LOG_ERROR,
+  DELETE_BATCH_LOG_REQUEST,
+  DELETE_BATCH_LOG_SUCCESS,
+  DELETE_BATCH_LOG_ERROR,
 } from '@/src/constants/ActionsTypes'
 
 export const fetchBatches = () => ({
@@ -69,5 +78,50 @@ export const deleteBatchSuccess = (batchId) => ({
 
 export const deleteBatchError = (error) => ({
   type: DELETE_BATCH_ERROR,
+  payload: error,
+})
+
+export const addBatchLog = (batchLog) => ({
+  type: ADD_BATCH_LOG_REQUEST,
+  payload: batchLog,
+})
+
+export const addBatchLogSuccess = (batchLog) => ({
+  type: ADD_BATCH_LOG_SUCCESS,
+  payload: batchLog,
+})
+
+export const addBatchLogError = (error) => ({
+  type: ADD_BATCH_LOG_ERROR,
+  payload: error,
+})
+
+export const updateBatchLog = (batchLog) => ({
+  type: UPDATE_BATCH_LOG_REQUEST,
+  payload: batchLog,
+})
+
+export const updateBatchLogSuccess = (batchLog) => ({
+  type: UPDATE_BATCH_LOG_SUCCESS,
+  payload: batchLog,
+})
+
+export const updateBatchLogError = (error) => ({
+  type: UPDATE_BATCH_LOG_ERROR,
+  payload: error,
+})
+
+export const deleteBatchLog = (batchLogId) => ({
+  type: DELETE_BATCH_LOG_REQUEST,
+  payload: batchLogId,
+})
+
+export const deleteBatchLogSuccess = (batchLogId) => ({
+  type: DELETE_BATCH_LOG_SUCCESS,
+  payload: batchLogId,
+})
+
+export const deleteBatchLogError = (error) => ({
+  type: DELETE_BATCH_LOG_ERROR,
   payload: error,
 })

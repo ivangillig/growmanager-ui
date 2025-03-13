@@ -8,18 +8,30 @@ import {
   updateBatchError,
   deleteBatchSuccess,
   deleteBatchError,
+  addBatchLogSuccess,
+  addBatchLogError,
+  updateBatchLogSuccess,
+  updateBatchLogError,
+  deleteBatchLogSuccess,
+  deleteBatchLogError,
 } from './batchActions'
 import {
   FETCH_BATCHES_REQUEST,
   ADD_BATCH_REQUEST,
   UPDATE_BATCH_REQUEST,
   DELETE_BATCH_REQUEST,
+  ADD_BATCH_LOG_REQUEST,
+  UPDATE_BATCH_LOG_REQUEST,
+  DELETE_BATCH_LOG_REQUEST,
 } from '@/src/constants/ActionsTypes'
 import {
   fetchBatchesApi,
   addBatchApi,
   updateBatchApi,
   deleteBatchApi,
+  addBatchLogApi,
+  updateBatchLogApi,
+  deleteBatchLogApi,
 } from './batchApi'
 import { notification } from 'antd'
 
@@ -62,6 +74,36 @@ function* deleteBatchSaga(action) {
   }
 }
 
+function* addBatchLogSaga({ payload }) {
+  try {
+    const data = yield call(addBatchLogApi, payload)
+    yield put(addBatchLogSuccess(data))
+    notification.success({ message: 'Batch log added successfully' })
+  } catch (error) {
+    yield put(addBatchLogError(error))
+  }
+}
+
+function* updateBatchLogSaga(action) {
+  try {
+    const batchLog = yield call(updateBatchLogApi, action.payload)
+    yield put(updateBatchLogSuccess(batchLog))
+    notification.success({ message: 'Batch log updated successfully' })
+  } catch (error) {
+    yield put(updateBatchLogError(error))
+  }
+}
+
+function* deleteBatchLogSaga(action) {
+  try {
+    yield call(deleteBatchLogApi, action.payload)
+    yield put(deleteBatchLogSuccess(action.payload))
+    notification.success({ message: 'Batch log deleted successfully' })
+  } catch (error) {
+    yield put(deleteBatchLogError(error))
+  }
+}
+
 export function* watchFetchBatchesSaga() {
   yield takeLatest(FETCH_BATCHES_REQUEST, fetchBatchesSaga)
 }
@@ -78,11 +120,26 @@ export function* watchDeleteBatchSaga() {
   yield takeLatest(DELETE_BATCH_REQUEST, deleteBatchSaga)
 }
 
+export function* watchAddBatchLogSaga() {
+  yield takeLatest(ADD_BATCH_LOG_REQUEST, addBatchLogSaga)
+}
+
+export function* watchUpdateBatchLogSaga() {
+  yield takeLatest(UPDATE_BATCH_LOG_REQUEST, updateBatchLogSaga)
+}
+
+export function* watchDeleteBatchLogSaga() {
+  yield takeLatest(DELETE_BATCH_LOG_REQUEST, deleteBatchLogSaga)
+}
+
 export default function* rootSaga() {
   yield all([
     fork(watchFetchBatchesSaga),
     fork(watchAddBatchSaga),
     fork(watchUpdateBatchSaga),
     fork(watchDeleteBatchSaga),
+    fork(watchAddBatchLogSaga),
+    fork(watchUpdateBatchLogSaga),
+    fork(watchDeleteBatchLogSaga),
   ])
 }

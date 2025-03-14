@@ -28,7 +28,6 @@ import {
   MdDelete,
   MdEdit,
   MdLibraryAdd,
-  MdAdd,
   MdHistory,
 } from 'react-icons/md'
 
@@ -44,7 +43,7 @@ export default function ProductionPage() {
 
   useEffect(() => {
     dispatch(fetchBatches())
-  }, [dispatch])
+  }, [dispatch, batches.length])
 
   const handleAddBatch = (batchData) => {
     const formattedBatchData = {
@@ -88,9 +87,9 @@ export default function ProductionPage() {
   const buildColumns = () => [
     { title: t('BatchCode'), dataIndex: 'batchCode', key: 'batchCode' },
     {
-      title: t('Production Date'),
-      dataIndex: 'productionDate',
-      key: 'productionDate',
+      title: t('Germination Date'),
+      dataIndex: 'germinationDate',
+      key: 'germinationDate',
       render: (date) => dayjs(date).format('DD-MM-YYYY'),
     },
     { title: t('Genetic'), dataIndex: ['seedId', 'genetic'], key: 'genetic' },
@@ -123,7 +122,7 @@ export default function ProductionPage() {
               onClick={() => handleDeleteBatch(record._id)}
             />
           </Tooltip>
-          <Tooltip title={t('View History')}>
+          <Tooltip title={t('View history')}>
             <Button
               type="primary"
               icon={<MdHistory />}

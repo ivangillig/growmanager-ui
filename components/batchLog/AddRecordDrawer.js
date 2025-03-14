@@ -88,7 +88,7 @@ const AddRecordDrawer = ({ visible, onClose, batchId }) => {
                 },
               ]}
             >
-              <DatePicker style={{ width: '100%' }} format={'DD-MM-YYYY'} />
+              <DatePicker style={{ width: '100%' }} format={'DD-MM-YYYY'} placeholder={t('Select date')} />
             </Form.Item>
           </Col>
           <Col span={12}>

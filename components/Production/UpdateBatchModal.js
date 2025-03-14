@@ -8,11 +8,14 @@ import {
   Switch,
   Tabs,
   Button,
+  Row,
+  Col,
 } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import dayjs from 'dayjs'
 import { useTranslation } from 'next-i18next'
+import BasicSeedCard from '../Seeds/BasicSeedCard'
 
 const { Option } = Select
 const { TabPane } = Tabs
@@ -25,6 +28,7 @@ const UpdateBatchModal = ({ visible, onCancel, onUpdateBatch, batch }) => {
   const [form4] = Form.useForm()
   const dispatch = useDispatch()
   const seeds = useSelector((state) => state.seed.seeds || [])
+  const [selectedSeed, setSelectedSeed] = useState(null)
 
   useEffect(() => {
     if (seeds.length === 0) {
@@ -34,7 +38,8 @@ const UpdateBatchModal = ({ visible, onCancel, onUpdateBatch, batch }) => {
 
   useEffect(() => {
     if (batch) {
-      const selectedSeed = seeds.find((seed) => seed._id === batch.seedId._id)
+      const seed = seeds.find((seed) => seed._id === batch.seedId._id)
+      setSelectedSeed(seed)
       const initialValues = {
         ...batch,
         germinationDate: batch.germinationDate
@@ -53,7 +58,7 @@ const UpdateBatchModal = ({ visible, onCancel, onUpdateBatch, batch }) => {
         production_end_date: batch.production_end_date
           ? dayjs(batch.production_end_date)
           : null,
-        seedId: selectedSeed ? selectedSeed._id : undefined,
+        seedId: seed ? seed._id : undefined,
       }
       form1.setFieldsValue(initialValues)
       form2.setFieldsValue(initialValues)
@@ -64,6 +69,7 @@ const UpdateBatchModal = ({ visible, onCancel, onUpdateBatch, batch }) => {
       form2.resetFields()
       form3.resetFields()
       form4.resetFields()
+      setSelectedSeed(null)
     }
   }, [batch, form1, form2, form3, form4, seeds])
 
@@ -95,6 +101,11 @@ const UpdateBatchModal = ({ visible, onCancel, onUpdateBatch, batch }) => {
     })
   }
 
+  const handleSeedChange = (value) => {
+    const seed = seeds.find((seed) => seed._id === value)
+    setSelectedSeed(seed)
+  }
+
   return (
     <Modal
       title={t('Update Batch')}
@@ -110,7 +121,7 @@ const UpdateBatchModal = ({ visible, onCancel, onUpdateBatch, batch }) => {
               label={t('Genetic')}
               rules={[{ required: true }]}
             >
-              <Select>
+              <Select onChange={handleSeedChange}>
                 {seeds.map((seed) => (
                   <Option key={seed._id} value={seed._id}>
                     {`${seed.seedBank} - ${seed.genetic}`}
@@ -118,6 +129,7 @@ const UpdateBatchModal = ({ visible, onCancel, onUpdateBatch, batch }) => {
                 ))}
               </Select>
             </Form.Item>
+            {selectedSeed && <BasicSeedCard seed={selectedSeed} />}
             <Form.Item
               name="germinationDate"
               label={t('Germination Date')}
@@ -147,19 +159,31 @@ const UpdateBatchModal = ({ visible, onCancel, onUpdateBatch, batch }) => {
               name="firstTransplateDate"
               label={t('First Transplant Date')}
             >
-              <DatePicker style={{ width: '100%' }} format="DD-MM-YYYY" />
+              <DatePicker
+                style={{ width: '100%' }}
+                format="DD-MM-YYYY"
+                placeholder={t('Select date')}
+              />
             </Form.Item>
             <Form.Item
               name="secondTransplateDate"
               label={t('Second Transplant Date')}
             >
-              <DatePicker style={{ width: '100%' }} format="DD-MM-YYYY" />
+              <DatePicker
+                style={{ width: '100%' }}
+                format="DD-MM-YYYY"
+                placeholder={t('Select date')}
+              />
             </Form.Item>
             <Form.Item
               name="photoperiodChangeDate"
               label={t('Photoperiod Change Date')}
             >
-              <DatePicker style={{ width: '100%' }} format="DD-MM-YYYY" />
+              <DatePicker
+                style={{ width: '100%' }}
+                format="DD-MM-YYYY"
+                placeholder={t('Select date')}
+              />
             </Form.Item>
             <Form.Item style={{ textAlign: 'right' }}>
               <Button type="primary" htmlType="submit">
@@ -171,7 +195,11 @@ const UpdateBatchModal = ({ visible, onCancel, onUpdateBatch, batch }) => {
         <TabPane tab={t('Harvest')} key="3">
           <Form form={form3} layout="vertical" onFinish={handleForm3Submit}>
             <Form.Item name="cuttingDate" label={t('Cutting Date')}>
-              <DatePicker style={{ width: '100%' }} format="DD-MM-YYYY" />
+              <DatePicker
+                style={{ width: '100%' }}
+                format="DD-MM-YYYY"
+                placeholder={t('Select date')}
+              />
             </Form.Item>
             <Form.Item name="drying_time" label={t('Drying Time (days)')}>
               <Input type="number" />
@@ -189,7 +217,11 @@ const UpdateBatchModal = ({ visible, onCancel, onUpdateBatch, batch }) => {
             name="production_end_date"
             label={t('Production End Date')}
           >
-            <DatePicker style={{ width: '100%' }} format="DD-MM-YYYY" />
+            <DatePicker
+              style={{ width: '100%' }}
+              format="DD-MM-YYYY"
+              placeholder={t('Select date')}
+            />
           </Form.Item>
           <Form form={form4} layout="vertical" onFinish={handleForm4Submit}>
             <Form.Item name="curing_time" label={t('Curing Time (days)')}>
@@ -198,15 +230,23 @@ const UpdateBatchModal = ({ visible, onCancel, onUpdateBatch, batch }) => {
             <Form.Item name="qtyProduction" label={t('Quantity Produced (g)')}>
               <Input type="number" />
             </Form.Item>
-            <Form.Item name="thc" label={t('THC (%)')}>
-              <Input />
-            </Form.Item>
-            <Form.Item name="cbd" label={t('CBD (%)')}>
-              <Input />
-            </Form.Item>
-            <Form.Item name="rav" label={t('RAV')}>
-              <Input />
-            </Form.Item>
+            <Row gutter={16}>
+              <Col span={8}>
+                <Form.Item name="thc" label={t('THC (%)')}>
+                  <Input addonAfter="%" />
+                </Form.Item>
+              </Col>
+              <Col span={8}>
+                <Form.Item name="cbd" label={t('CBD (%)')}>
+                  <Input addonAfter="%" />
+                </Form.Item>
+              </Col>
+              <Col span={8}>
+                <Form.Item name="rav" label={t('RAV')}>
+                  <Input />
+                </Form.Item>
+              </Col>
+            </Row>
             <Form.Item style={{ textAlign: 'right' }}>
               <Button type="primary" htmlType="submit">
                 {t('Save changes')}

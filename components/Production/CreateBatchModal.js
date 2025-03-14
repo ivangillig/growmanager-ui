@@ -1,8 +1,9 @@
 import { getSeeds } from '@/src/features/seed/seedActions'
-import { Modal, Form, Input, DatePicker, Select, Switch, Button } from 'antd'
-import React, { useEffect } from 'react'
+import { Modal, Form, DatePicker, Select, Switch, Button } from 'antd'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'next-i18next'
+import BasicSeedCard from '../Seeds/BasicSeedCard'
 
 const { Option } = Select
 
@@ -11,6 +12,7 @@ const BatchModal = ({ visible, onCancel, onAddBatch }) => {
   const [form] = Form.useForm()
   const dispatch = useDispatch()
   const seeds = useSelector((state) => state.seed.seeds || [])
+  const [selectedSeed, setSelectedSeed] = useState(null)
 
   useEffect(() => {
     if (seeds.length === 0) {
@@ -22,7 +24,13 @@ const BatchModal = ({ visible, onCancel, onAddBatch }) => {
     form.validateFields().then((values) => {
       onAddBatch(values)
       form.resetFields()
+      setSelectedSeed(null)
     })
+  }
+
+  const handleSeedChange = (value) => {
+    const seed = seeds.find((seed) => seed._id === value)
+    setSelectedSeed(seed)
   }
 
   return (
@@ -42,7 +50,10 @@ const BatchModal = ({ visible, onCancel, onAddBatch }) => {
           label={t('Genetic')}
           rules={[{ required: true }]}
         >
-          <Select placeholder={t('Select a genetic')}>
+          <Select
+            placeholder={t('Select a genetic')}
+            onChange={handleSeedChange}
+          >
             {seeds.map((seed) => (
               <Option key={seed._id} value={seed._id}>
                 {`${seed.seedBank} - ${seed.genetic}`}
@@ -50,12 +61,16 @@ const BatchModal = ({ visible, onCancel, onAddBatch }) => {
             ))}
           </Select>
         </Form.Item>
+        {selectedSeed && <BasicSeedCard seed={selectedSeed} />}
         <Form.Item
           name="germinationDate"
           label={t('Germination Date')}
           rules={[{ required: true }]}
         >
-          <DatePicker style={{ width: '100%' }} placeholder={t('Select date')}/>
+          <DatePicker
+            style={{ width: '100%' }}
+            placeholder={t('Select date')}
+          />
         </Form.Item>
         <Form.Item
           layout="horizontal"

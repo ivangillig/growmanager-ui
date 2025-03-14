@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Breadcrumb, Button, Input, List, Row, Col, Empty } from 'antd'
 import { MdLibraryAdd } from 'react-icons/md'
 import { getSeeds, addSeed } from '../src/features/seed/seedActions'
-import SeedCard from '../components/SeedCard'
-import AddSeedModal from '../components/AddSeedModal'
+import SeedCard from '../components/Seeds/SeedCard'
+import AddSeedModal from '../components/Seeds/AddSeedModal'
 import { useTranslation } from 'next-i18next'
 
 export default function SeedsPage() {

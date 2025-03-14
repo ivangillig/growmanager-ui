@@ -21,9 +21,9 @@ import {
   updateBatch,
   fetchBatchLogs,
 } from '../src/features/batch/batchActions'
-import BatchModal from '../components/CreateBatchModal'
-import UpdateBatchModal from '../components/UpdateBatchModal'
-import BatchLogTable from '../components/batchLog/BatchLogTable'
+import BatchModal from '../components/Production/CreateBatchModal'
+import UpdateBatchModal from '../components/Production/UpdateBatchModal'
+import BatchLogTable from '../components/BatchLogs/BatchLogTable'
 import { MdDelete, MdEdit, MdLibraryAdd, MdHistory } from 'react-icons/md'
 
 export default function ProductionPage() {

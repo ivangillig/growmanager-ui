@@ -7,6 +7,7 @@ import 'antd/dist/reset.css'
 import '../styles/index.less'
 import '../lib/i18n'
 import { useRouter } from 'next/router'
+import Notifications from '@/components/common/Notifications'
 
 async function getInitialProps({ Component, ctx }) {
   let pageProps = {}
@@ -32,6 +33,7 @@ function MyApp({ Component, pageProps, ...rest }) {
         ) : (
           <MainLayout>
             <Component {...props.pageProps} />
+            <Notifications />
           </MainLayout>
         )}
       </ConfigProvider>

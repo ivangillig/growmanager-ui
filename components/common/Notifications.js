@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { notification } from "antd";
 import { useTranslation } from "react-i18next";
-import { clearMessages } from "../../actions/notificationActions";
+import { clearMessages } from "../../src/features/notifications/notificationActions";
 
 const Notifications = () => {
   const { t } = useTranslation();

@@ -87,5 +87,13 @@
   "Please select the pruning type": "Please select the pruning type",
   "Please select the training technique": "Please select the training technique",
   "Cancel": "Cancel",
-  "Save": "Save"
+  "Save": "Save",
+  "batchesFetched": "Batches fetched successfully",
+  "batchUpdated": "Batch updated successfully",
+  "batchLogAdded": "Batch log added successfully",
+  "batchLogUpdated": "Batch log updated successfully",
+  "batchLogDeleted": "Batch log deleted successfully",
+  "batchLogsFetched": "Batch logs fetched successfully",
+  "seedsFetched": "Seeds fetched successfully",
+  "seedAdded": "Seed added successfully"
 }

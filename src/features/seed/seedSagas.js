@@ -10,6 +10,7 @@ import {
   ADD_SEED_REQUEST,
 } from '@/src/constants/ActionsTypes'
 import { getSeedsApi, addSeedApi } from './seedApi'
+import { showMessage } from '@/src/features/notifications/notificationActions'
 
 function* getSeedsSaga() {
   try {
@@ -17,19 +18,33 @@ function* getSeedsSaga() {
 
     if (seeds) {
       yield put(getSeedsSuccess(seeds))
+      yield put(
+        showMessage([
+          {
+            summary: 'Success',
+            detail: 'Seeds fetched successfully',
+            type: 'success',
+          },
+        ])
+      )
     }
-  } catch (error) {
-    yield put(getSeedsError(error))
-  }
+  } catch (error) {}
 }
 
 function* addSeedSaga(action) {
   try {
     const seed = yield call(addSeedApi, action.payload)
     yield put(addSeedSuccess(seed))
-  } catch (error) {
-    yield put(addSeedError(error))
-  }
+    yield put(
+      showMessage([
+        {
+          summary: 'Success',
+          detail: 'Seed added successfully',
+          type: 'success',
+        },
+      ])
+    )
+  } catch (error) {}
 }
 
 export function* watchGetSeedsSaga() {

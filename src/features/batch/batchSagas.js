@@ -37,7 +37,6 @@ import {
   deleteBatchLogApi,
   fetchBatchLogsApi,
 } from './batchApi'
-import { notification } from 'antd'
 
 function* fetchBatchesSaga() {
   try {
@@ -52,7 +51,6 @@ function* addBatchSaga({ payload }) {
   try {
     const data = yield call(addBatchApi, payload)
     yield put(addBatchSuccess(data))
-    notification.success({ message: 'Batch added successfully' })
   } catch (error) {
     yield put(addBatchError(error))
   }
@@ -62,7 +60,6 @@ function* updateBatchSaga(action) {
   try {
     const batch = yield call(updateBatchApi, action.payload)
     yield put(updateBatchSuccess(batch))
-    notification.success({ message: 'Batch updated successfully' })
   } catch (error) {
     yield put(updateBatchError(error))
   }
@@ -72,7 +69,6 @@ function* deleteBatchSaga(action) {
   try {
     yield call(deleteBatchApi, action.payload)
     yield put(deleteBatchSuccess(action.payload))
-    notification.success({ message: 'Batch deleted successfully' })
   } catch (error) {
     yield put(deleteBatchError(error))
   }
@@ -82,7 +78,6 @@ function* addBatchLogSaga({ payload }) {
   try {
     const data = yield call(addBatchLogApi, payload)
     yield put(addBatchLogSuccess(data.batchLog))
-    notification.success({ message: 'Batch log added successfully' })
   } catch (error) {
     yield put(addBatchLogError(error))
   }
@@ -92,7 +87,6 @@ function* updateBatchLogSaga(action) {
   try {
     const batchLog = yield call(updateBatchLogApi, action.payload)
     yield put(updateBatchLogSuccess(batchLog))
-    notification.success({ message: 'Batch log updated successfully' })
   } catch (error) {
     yield put(updateBatchLogError(error))
   }
@@ -102,7 +96,6 @@ function* deleteBatchLogSaga(action) {
   try {
     yield call(deleteBatchLogApi, action.payload)
     yield put(deleteBatchLogSuccess(action.payload))
-    notification.success({ message: 'Batch log deleted successfully' })
   } catch (error) {
     yield put(deleteBatchLogError(error))
   }

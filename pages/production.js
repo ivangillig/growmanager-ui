@@ -22,7 +22,7 @@ import {
 } from '../src/features/batch/batchActions'
 import BatchModal from '../components/CreateBatchModal'
 import UpdateBatchModal from '../components/UpdateBatchModal'
-import BatchLogTable from '../components/BatchLogTable'
+import BatchLogTable from '../components/batchLog/BatchLogTable'
 import {
   MdDelete,
   MdEdit,
@@ -48,7 +48,7 @@ export default function ProductionPage() {
   const handleAddBatch = (batchData) => {
     const formattedBatchData = {
       ...batchData,
-      production_date: dayjs(batchData.production_date).format('YYYY-MM-DD'),
+      productionDate: dayjs(batchData.productionDate).format('YYYY-MM-DD'),
     }
     dispatch(addBatch(formattedBatchData))
     setIsModalVisible(false)
@@ -57,7 +57,7 @@ export default function ProductionPage() {
   const handleEditBatch = (batchData) => {
     const formattedBatchData = {
       ...batchData,
-      production_date: dayjs(batchData.production_date).format('YYYY-MM-DD'),
+      productionDate: dayjs(batchData.productionDate).format('YYYY-MM-DD'),
     }
     dispatch(updateBatch(formattedBatchData))
     setIsModalVisible(false)
@@ -88,8 +88,8 @@ export default function ProductionPage() {
     { title: t('BatchCode'), dataIndex: 'batchCode', key: 'batchCode' },
     {
       title: t('Production Date'),
-      dataIndex: 'production_date',
-      key: 'production_date',
+      dataIndex: 'productionDate',
+      key: 'productionDate',
       render: (date) => dayjs(date).format('DD-MM-YYYY'),
     },
     { title: t('Genetic'), dataIndex: ['seedId', 'genetic'], key: 'genetic' },
@@ -98,8 +98,8 @@ export default function ProductionPage() {
     { title: t('Drying Time'), dataIndex: 'drying_time', key: 'drying_time' },
     {
       title: t('Quantity Produced (g)'),
-      dataIndex: 'quantity_produced',
-      key: 'quantity_produced',
+      dataIndex: 'quantityProduced',
+      key: 'quantityProduced',
     },
     { title: t('RAV'), dataIndex: 'rav', key: 'rav' },
     {

@@ -36,7 +36,7 @@ const AddBatchModal = ({ visible, onCancel, onAddBatch }) => {
     >
       <Form form={form} layout="vertical">
         <Form.Item
-          name="production_date"
+          name="productionDate"
           label={t('Production Date')}
           rules={[
             {

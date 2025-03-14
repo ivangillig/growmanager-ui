@@ -51,7 +51,7 @@ const BatchModal = ({ visible, onCancel, onAddBatch }) => {
           </Select>
         </Form.Item>
         <Form.Item
-          name="germination_date"
+          name="germinationDate"
           label={t('Germination Date')}
           rules={[{ required: true }]}
         >

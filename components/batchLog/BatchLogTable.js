@@ -1,13 +1,25 @@
 import { Table, Modal, Button, Space, Tooltip, Row, Col } from 'antd'
 import { useTranslation } from 'next-i18next'
 import dayjs from 'dayjs'
-import { useState } from 'react'
+import utc from 'dayjs/plugin/utc'
+dayjs.extend(utc)
+import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import AddRecordDrawer from './AddRecordDrawer'
 import { MdAdd } from 'react-icons/md'
+import { fetchBatchLogs } from '@/src/features/batch/batchActions'
 
 const BatchLogTable = ({ batchLogs, batchId, isVisible, onClose }) => {
   const { t } = useTranslation()
   const [isDrawerVisible, setIsDrawerVisible] = useState(false)
+  const dispatch = useDispatch()
+  const addBatchSuccess = useSelector((state) => state.batch.addBatchSuccess)
+
+  useEffect(() => {
+    if (addBatchSuccess) {
+      dispatch(fetchBatchLogs(batchId))
+    }
+  }, [addBatchSuccess, dispatch, batchId])
 
   const translateInterventions = (interventions) => {
     return interventions.map((intervention) => t(intervention)).join(', ')
@@ -18,7 +30,7 @@ const BatchLogTable = ({ batchLogs, batchId, isVisible, onClose }) => {
       title: t('Intervention Date'),
       dataIndex: 'interventionDate',
       key: 'interventionDate',
-      render: (date) => dayjs(date).format('DD-MM-YYYY'),
+      render: (date) => dayjs.utc(date).format('DD-MM-YYYY'),
     },
     {
       title: t('Plant Height (cm)'),

@@ -125,5 +125,8 @@
   "pesticides": "Pesticidas",
   "fertilization": "Fertilización",
   "training": "Entrenamiento",
-  "defoliation": "Defoliación"
+  "defoliation": "Defoliación",
+  "Batch log added successfully": "Registro de lote agregado exitosamente",
+  "Batch log updated successfully": "Registro de lote actualizado exitosamente",
+  "Batch log deleted successfully": "Registro de lote eliminado exitosamente"
 }

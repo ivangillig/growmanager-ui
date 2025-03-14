@@ -149,7 +149,7 @@ function* deleteBatchLogSaga(action) {
 function* fetchBatchLogsSaga(action) {
   try {
     const response = yield call(fetchBatchLogsApi, action.payload)
-    yield put(fetchBatchLogsSuccess(response.data))
+    yield put(fetchBatchLogsSuccess(response))
   } catch (error) {}
 }
 

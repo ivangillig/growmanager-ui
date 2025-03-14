@@ -129,9 +129,9 @@ export const deleteBatchLogError = (error) => ({
   payload: error,
 })
 
-export const fetchBatchLogs = (batchId) => ({
+export const fetchBatchLogs = (payload) => ({
   type: FETCH_BATCH_LOGS_REQUEST,
-  payload: batchId,
+  payload: payload,
 })
 
 export const fetchBatchLogsSuccess = (batchLogs) => ({

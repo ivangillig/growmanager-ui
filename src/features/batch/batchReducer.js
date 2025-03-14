@@ -30,6 +30,7 @@ const initialState = {
   loading: false,
   error: null,
   batchLogs: [],
+  pagination: {},
   addBatchSuccess: false,
 }
 
@@ -111,7 +112,8 @@ export default function batchReducer(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        batchLogs: action.payload,
+        batchLogs: action.payload.data,
+        pagination: action.payload.pagination,
         addBatchSuccess: false,
       }
     case FETCH_BATCHES_ERROR:

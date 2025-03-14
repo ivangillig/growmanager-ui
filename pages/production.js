@@ -10,7 +10,7 @@ import {
   Empty,
   Space,
   Tooltip,
-  Modal
+  Modal,
 } from 'antd'
 import dayjs from 'dayjs'
 import { useTranslation } from 'next-i18next'
@@ -24,18 +24,12 @@ import {
 import BatchModal from '../components/CreateBatchModal'
 import UpdateBatchModal from '../components/UpdateBatchModal'
 import BatchLogTable from '../components/batchLog/BatchLogTable'
-import {
-  MdDelete,
-  MdEdit,
-  MdLibraryAdd,
-  MdHistory,
-} from 'react-icons/md'
+import { MdDelete, MdEdit, MdLibraryAdd, MdHistory } from 'react-icons/md'
 
 export default function ProductionPage() {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const batches = useSelector((state) => state.batch?.batches || [])
-  const batchLogs = useSelector((state) => state.batch?.batchLogs || [])
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [isLogModalVisible, setIsLogModalVisible] = useState(false)
   const [editingBatch, setEditingBatch] = useState(null)
@@ -79,9 +73,11 @@ export default function ProductionPage() {
   }
 
   const handleViewHistoryClick = (batchId) => {
-    setSelectedBatchId(batchId)
-    dispatch(fetchBatchLogs(batchId))
-    setIsLogModalVisible(true)
+    if (batchId) {
+      setSelectedBatchId(batchId)
+      dispatch(fetchBatchLogs({ batchId }))
+      setIsLogModalVisible(true)
+    }
   }
 
   const buildColumns = () => [
@@ -183,7 +179,6 @@ export default function ProductionPage() {
         />
       )}
       <BatchLogTable
-        batchLogs={batchLogs}
         batchId={selectedBatchId}
         isVisible={isLogModalVisible}
         onClose={() => setIsLogModalVisible(false)}

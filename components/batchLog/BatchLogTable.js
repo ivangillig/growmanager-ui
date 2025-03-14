@@ -9,20 +9,34 @@ import AddRecordDrawer from './AddRecordDrawer'
 import { MdAdd } from 'react-icons/md'
 import { fetchBatchLogs } from '@/src/features/batch/batchActions'
 
-const BatchLogTable = ({ batchLogs, batchId, isVisible, onClose }) => {
+const BatchLogTable = ({ batchId, isVisible, onClose }) => {
   const { t } = useTranslation()
   const [isDrawerVisible, setIsDrawerVisible] = useState(false)
   const dispatch = useDispatch()
   const addBatchSuccess = useSelector((state) => state.batch.addBatchSuccess)
+  const { batchLogs, pagination } = useSelector((state) => state.batch)
+  const [page, setPage] = useState(1)
+  const [limit, setLimit] = useState(10)
 
   useEffect(() => {
-    if (addBatchSuccess) {
-      dispatch(fetchBatchLogs(batchId))
+    if (addBatchSuccess && batchId) {
+      dispatch(fetchBatchLogs(batchId, limit, page))
     }
-  }, [addBatchSuccess, dispatch, batchId])
+  }, [addBatchSuccess, dispatch, batchId, limit, page])
+
+  useEffect(() => {
+    if (batchId) {
+      dispatch(fetchBatchLogs({ batchId, limit, page }))
+    }
+  }, [batchId, limit, page, dispatch])
 
   const translateInterventions = (interventions) => {
     return interventions.map((intervention) => t(intervention)).join(', ')
+  }
+
+  const handleTableChange = (pagination) => {
+    setPage(pagination.current)
+    setLimit(pagination.limit)
   }
 
   const columns = [
@@ -136,6 +150,12 @@ const BatchLogTable = ({ batchLogs, batchId, isVisible, onClose }) => {
           dataSource={batchLogs}
           rowKey="id"
           scroll={{ x: 800 }}
+          pagination={{
+            current: pagination.page,
+            limit: pagination.limit,
+            total: pagination.total,
+          }}
+          onChange={handleTableChange}
         />
       </Modal>
       <AddRecordDrawer

@@ -43,15 +43,6 @@ function* fetchBatchesSaga() {
   try {
     const batches = yield call(fetchBatchesApi)
     yield put(fetchBatchesSuccess(batches))
-    yield put(
-      showMessage([
-        {
-          summary: 'Success',
-          detail: 'Batches fetched successfully',
-          type: 'success',
-        },
-      ])
-    )
   } catch (error) {
     yield put(fetchBatchesError(error))
   }
@@ -159,15 +150,6 @@ function* fetchBatchLogsSaga(action) {
   try {
     const response = yield call(fetchBatchLogsApi, action.payload)
     yield put(fetchBatchLogsSuccess(response.data))
-    yield put(
-      showMessage([
-        {
-          summary: 'Success',
-          detail: 'Batch logs fetched successfully',
-          type: 'success',
-        },
-      ])
-    )
   } catch (error) {}
 }
 

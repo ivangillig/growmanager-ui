@@ -126,7 +126,18 @@
   "fertilization": "Fertilización",
   "training": "Entrenamiento",
   "defoliation": "Defoliación",
+  "Success": "Éxito",
+  "success": "éxito",
+  "Error": "Error",
+  "error": "error",
   "Batch log added successfully": "Registro de lote agregado exitosamente",
   "Batch log updated successfully": "Registro de lote actualizado exitosamente",
-  "Batch log deleted successfully": "Registro de lote eliminado exitosamente"
+  "Batch log deleted successfully": "Registro de lote eliminado exitosamente",
+  "Batch deleted successfully": "Lote eliminado exitosamente",
+  "Batch updated successfully": "Lote actualizado exitosamente",
+  "Batch added successfully": "Lote agregado exitosamente",
+  "Error communicating with server": "Error de comunicación con el servidor",
+  "ERROR_FETCHING_BATCH_LOGS": "Error al obtener los registros de lote",
+  "ERROR_BATCH_NOT_FOUND": "Lote no encontrado"
+
 }

@@ -18,15 +18,6 @@ function* getSeedsSaga() {
 
     if (seeds) {
       yield put(getSeedsSuccess(seeds))
-      yield put(
-        showMessage([
-          {
-            summary: 'Success',
-            detail: 'Seeds fetched successfully',
-            type: 'success',
-          },
-        ])
-      )
     }
   } catch (error) {}
 }

@@ -7,12 +7,15 @@ import { clearMessages } from "../../src/features/notifications/notificationActi
 
 const Notifications = () => {
   const { t } = useTranslation();
-  const messages = useSelector((state) => state.notifications || []);
+  const messages = useSelector((state) => state.notification || []);
   const dispatch = useDispatch();
+
+  console.log(messages)
 
   useEffect(() => {
     if (messages.length > 0) {
       messages.forEach((msg) => {
+        console.log(msg)
         if (msg.summary || msg.detail) {
           notification.open({
             message: t(msg.summary),

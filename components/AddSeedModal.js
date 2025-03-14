@@ -46,7 +46,11 @@ const AddSeedModal = ({ visible, onCancel, onAddSeed }) => {
           label={t('Genetic name')}
           rules={[{ required: true, message: t('Please input the genetic') }]}
         >
-          <Input />
+         <Select>
+            <Option value="genetic 1">Indica</Option>
+            <Option value="genetic 2">Sativa</Option>
+            <Option value="genetic 3">Kush</Option>
+          </Select>
         </Form.Item>
         <Form.Item
           name="seedBank"

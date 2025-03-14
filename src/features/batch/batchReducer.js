@@ -72,7 +72,7 @@ export default function batchReducer(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        batches: state.batches.filter((batch) => batch.id !== action.payload),
+        batches: state.batches.filter((batch) => batch._id !== action.payload),
       }
     case ADD_BATCH_LOG_SUCCESS:
       return {

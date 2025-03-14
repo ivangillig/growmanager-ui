@@ -42,7 +42,7 @@ const BatchModal = ({ visible, onCancel, onAddBatch }) => {
           label={t('Genetic')}
           rules={[{ required: true }]}
         >
-          <Select>
+          <Select placeholder={t('Select a genetic')}>
             {seeds.map((seed) => (
               <Option key={seed._id} value={seed._id}>
                 {`${seed.seedBank} - ${seed.genetic}`}
@@ -55,9 +55,10 @@ const BatchModal = ({ visible, onCancel, onAddBatch }) => {
           label={t('Germination Date')}
           rules={[{ required: true }]}
         >
-          <DatePicker style={{ width: '100%' }} />
+          <DatePicker style={{ width: '100%' }} placeholder={t('Select date')}/>
         </Form.Item>
         <Form.Item
+          layout="horizontal"
           name="is_cutting"
           label={t('Is Cutting')}
           valuePropName="checked"

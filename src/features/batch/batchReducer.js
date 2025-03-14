@@ -75,8 +75,8 @@ export default function batchReducer(state = initialState, action) {
     case ADD_BATCH_LOG_SUCCESS:
       return {
         ...state,
-        success: true,
         loading: false,
+        batchLogs: [...state.batchLogs, action.payload],
       }
     case UPDATE_BATCH_LOG_SUCCESS:
       return {

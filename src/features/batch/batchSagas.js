@@ -81,7 +81,7 @@ function* deleteBatchSaga(action) {
 function* addBatchLogSaga({ payload }) {
   try {
     const data = yield call(addBatchLogApi, payload)
-    yield put(addBatchLogSuccess(data))
+    yield put(addBatchLogSuccess(data.batchLog))
     notification.success({ message: 'Batch log added successfully' })
   } catch (error) {
     yield put(addBatchLogError(error))

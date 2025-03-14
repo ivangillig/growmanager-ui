@@ -42,7 +42,6 @@ const AddRecordDrawer = ({ visible, onClose, batchId }) => {
       batchId,
       interventionDate: dayjs(values.interventionDate).format('YYYY-MM-DD'),
     }
-    console.log('Form values:', formattedValues)
     dispatch(addBatchLog(formattedValues))
     onClose()
   }

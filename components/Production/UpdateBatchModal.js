@@ -22,10 +22,7 @@ const { TabPane } = Tabs
 
 const UpdateBatchModal = ({ visible, onCancel, onUpdateBatch, batch }) => {
   const { t } = useTranslation()
-  const [form1] = Form.useForm()
-  const [form2] = Form.useForm()
-  const [form3] = Form.useForm()
-  const [form4] = Form.useForm()
+  const [form] = Form.useForm()
   const dispatch = useDispatch()
   const seeds = useSelector((state) => state.seed.seeds || [])
   const [selectedSeed, setSelectedSeed] = useState(null)
@@ -55,49 +52,21 @@ const UpdateBatchModal = ({ visible, onCancel, onUpdateBatch, batch }) => {
           ? dayjs(batch.photoperiodChangeDate)
           : null,
         cuttingDate: batch.cuttingDate ? dayjs(batch.cuttingDate) : null,
-        production_end_date: batch.production_end_date
-          ? dayjs(batch.production_end_date)
+        productionDate: batch.productionDate
+          ? dayjs(batch.productionDate)
           : null,
-        seedId: seed ? seed._id : undefined,
+        seedId: seed ? seed?._id : undefined,
       }
-      form1.setFieldsValue(initialValues)
-      form2.setFieldsValue(initialValues)
-      form3.setFieldsValue(initialValues)
-      form4.setFieldsValue(initialValues)
+      form.setFieldsValue(initialValues)
     } else {
-      form1.resetFields()
-      form2.resetFields()
-      form3.resetFields()
-      form4.resetFields()
+      form.resetFields()
       setSelectedSeed(null)
     }
-  }, [batch, form1, form2, form3, form4, seeds])
+  }, [batch, form, seeds])
 
-  const handleForm1Submit = () => {
-    form1.validateFields().then((values) => {
+  const handleSubmit = () => {
+    form.validateFields().then((values) => {
       onUpdateBatch({ ...values, id: batch._id })
-      form1.resetFields()
-    })
-  }
-
-  const handleForm2Submit = () => {
-    form2.validateFields().then((values) => {
-      onUpdateBatch({ ...values, id: batch._id })
-      form2.resetFields()
-    })
-  }
-
-  const handleForm3Submit = () => {
-    form3.validateFields().then((values) => {
-      onUpdateBatch({ ...values, id: batch._id })
-      form3.resetFields()
-    })
-  }
-
-  const handleForm4Submit = () => {
-    form4.validateFields().then((values) => {
-      onUpdateBatch({ ...values, id: batch._id })
-      form4.resetFields()
     })
   }
 
@@ -113,9 +82,9 @@ const UpdateBatchModal = ({ visible, onCancel, onUpdateBatch, batch }) => {
       onCancel={onCancel}
       footer={null}
     >
-      <Tabs defaultActiveKey="1">
-        <TabPane tab={t('Batch Start')} key="1">
-          <Form form={form1} layout="vertical" onFinish={handleForm1Submit}>
+      <Form form={form} layout="vertical" onFinish={handleSubmit}>
+        <Tabs defaultActiveKey="1">
+          <TabPane tab={t('Batch Start')} key="1">
             <Form.Item
               name="seedId"
               label={t('Genetic')}
@@ -146,15 +115,8 @@ const UpdateBatchModal = ({ visible, onCancel, onUpdateBatch, batch }) => {
             >
               <Switch />
             </Form.Item>
-            <Form.Item style={{ textAlign: 'right' }}>
-              <Button type="primary" htmlType="submit">
-                {t('Save changes')}
-              </Button>
-            </Form.Item>
-          </Form>
-        </TabPane>
-        <TabPane tab={t('In Process')} key="2">
-          <Form form={form2} layout="vertical" onFinish={handleForm2Submit}>
+          </TabPane>
+          <TabPane tab={t('In Process')} key="2">
             <Form.Item
               name="firstTransplateDate"
               label={t('First Transplant Date')}
@@ -185,15 +147,8 @@ const UpdateBatchModal = ({ visible, onCancel, onUpdateBatch, batch }) => {
                 placeholder={t('Select date')}
               />
             </Form.Item>
-            <Form.Item style={{ textAlign: 'right' }}>
-              <Button type="primary" htmlType="submit">
-                {t('Save changes')}
-              </Button>
-            </Form.Item>
-          </Form>
-        </TabPane>
-        <TabPane tab={t('Harvest')} key="3">
-          <Form form={form3} layout="vertical" onFinish={handleForm3Submit}>
+          </TabPane>
+          <TabPane tab={t('Harvest')} key="3">
             <Form.Item name="cuttingDate" label={t('Cutting Date')}>
               <DatePicker
                 style={{ width: '100%' }}
@@ -201,30 +156,23 @@ const UpdateBatchModal = ({ visible, onCancel, onUpdateBatch, batch }) => {
                 placeholder={t('Select date')}
               />
             </Form.Item>
-            <Form.Item name="drying_time" label={t('Drying Time (days)')}>
+            <Form.Item name="dryingTime" label={t('Drying Time (days)')}>
               <Input type="number" />
             </Form.Item>
-            <Form.Item style={{ textAlign: 'right' }}>
-              <Button type="primary" htmlType="submit">
-                {t('Save changes')}
-              </Button>
+          </TabPane>
+          <TabPane tab={t('Post Production')} key="4">
+            <Form.Item
+              layout="vertical"
+              name="productionDate"
+              label={t('Production End Date')}
+            >
+              <DatePicker
+                style={{ width: '100%' }}
+                format="DD-MM-YYYY"
+                placeholder={t('Select date')}
+              />
             </Form.Item>
-          </Form>
-        </TabPane>
-        <TabPane tab={t('Post Production')} key="4">
-          <Form.Item
-            layout="vertical"
-            name="production_end_date"
-            label={t('Production End Date')}
-          >
-            <DatePicker
-              style={{ width: '100%' }}
-              format="DD-MM-YYYY"
-              placeholder={t('Select date')}
-            />
-          </Form.Item>
-          <Form form={form4} layout="vertical" onFinish={handleForm4Submit}>
-            <Form.Item name="curing_time" label={t('Curing Time (days)')}>
+            <Form.Item name="curingTime" label={t('Curing Time (days)')}>
               <Input type="number" />
             </Form.Item>
             <Form.Item name="qtyProduction" label={t('Quantity Produced (g)')}>
@@ -247,14 +195,14 @@ const UpdateBatchModal = ({ visible, onCancel, onUpdateBatch, batch }) => {
                 </Form.Item>
               </Col>
             </Row>
-            <Form.Item style={{ textAlign: 'right' }}>
-              <Button type="primary" htmlType="submit">
-                {t('Save changes')}
-              </Button>
-            </Form.Item>
-          </Form>
-        </TabPane>
-      </Tabs>
+          </TabPane>
+        </Tabs>
+        <Form.Item style={{ textAlign: 'right' }}>
+          <Button type="primary" htmlType="submit">
+            {t('Save changes')}
+          </Button>
+        </Form.Item>
+      </Form>
     </Modal>
   )
 }

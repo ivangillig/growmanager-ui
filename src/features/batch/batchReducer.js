@@ -65,7 +65,7 @@ export default function batchReducer(state = initialState, action) {
         ...state,
         loading: false,
         batches: state.batches.map((batch) =>
-          batch.id === action.payload.id ? action.payload : batch
+          batch._id === action.payload._id ? action.payload : batch
         ),
       }
     case DELETE_BATCH_SUCCESS:

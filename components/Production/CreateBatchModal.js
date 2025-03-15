@@ -74,7 +74,7 @@ const BatchModal = ({ visible, onCancel, onAddBatch }) => {
         </Form.Item>
         <Form.Item
           layout="horizontal"
-          name="is_cutting"
+          name="isCutting"
           label={t('Is Cutting')}
           valuePropName="checked"
         >

@@ -91,11 +91,11 @@ export default function ProductionPage() {
     { title: t('Genetic'), dataIndex: ['seedId', 'genetic'], key: 'genetic' },
     { title: t('THC (%)'), dataIndex: 'thc', key: 'thc' },
     { title: t('CBD (%)'), dataIndex: 'cbd', key: 'cbd' },
-    { title: t('Drying Time'), dataIndex: 'drying_time', key: 'drying_time' },
+    { title: t('Drying Time'), dataIndex: 'dryingTime', key: 'dryingTime' },
     {
       title: t('Quantity Produced (g)'),
-      dataIndex: 'quantityProduced',
-      key: 'quantityProduced',
+      dataIndex: 'qtyProduced',
+      key: 'qtyProduced',
     },
     { title: t('RAV'), dataIndex: 'rav', key: 'rav' },
     {

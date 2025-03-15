@@ -1,6 +1,6 @@
 import { Provider } from 'react-redux'
 import { wrapper } from '../src/store'
-import { ConfigProvider } from 'antd'
+import { App, ConfigProvider } from 'antd'
 import { appWithTranslation } from 'next-i18next'
 import MainLayout from './layout/MainLayout'
 import 'antd/dist/reset.css'
@@ -28,14 +28,16 @@ function MyApp({ Component, pageProps, ...rest }) {
   return (
     <Provider store={store}>
       <ConfigProvider theme={{ hashed: false }}>
-        {isLoginPage ? (
-          <Component {...props.pageProps} />
-        ) : (
-          <MainLayout>
+        <App>
+          {isLoginPage ? (
             <Component {...props.pageProps} />
-            <Notifications />
-          </MainLayout>
-        )}
+          ) : (
+            <MainLayout>
+              <Component {...props.pageProps} />
+              <Notifications />
+            </MainLayout>
+          )}
+        </App>
       </ConfigProvider>
     </Provider>
   )

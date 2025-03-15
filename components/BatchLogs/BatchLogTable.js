@@ -140,7 +140,7 @@ const BatchLogTable = ({ batchId, isVisible, onClose }) => {
             </Col>
           </Row>
         }
-        visible={isVisible}
+        open={isVisible}
         onCancel={onClose}
         footer={null}
         width={'90vw'}
@@ -148,7 +148,7 @@ const BatchLogTable = ({ batchId, isVisible, onClose }) => {
         <Table
           columns={columns}
           dataSource={batchLogs}
-          rowKey="id"
+          rowKey="_id"
           scroll={{ x: 800 }}
           pagination={{
             current: pagination.page,

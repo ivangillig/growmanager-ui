@@ -154,7 +154,7 @@ export default function ProductionPage() {
           <Table
             columns={buildColumns()}
             dataSource={batches}
-            rowKey="id"
+            rowKey="_id"
             locale={{
               emptyText: <Empty description={t('No batches found')} />,
             }}
@@ -163,7 +163,7 @@ export default function ProductionPage() {
       </Row>
       {editingBatch ? (
         <UpdateBatchModal
-          visible={isModalVisible}
+        visible={isModalVisible}
           onCancel={() => {
             setIsModalVisible(false)
             setEditingBatch(null)
@@ -173,7 +173,7 @@ export default function ProductionPage() {
         />
       ) : (
         <BatchModal
-          visible={isModalVisible}
+        visible={isModalVisible}
           onCancel={() => setIsModalVisible(false)}
           onAddBatch={handleAddBatch}
         />

@@ -58,8 +58,8 @@ const AddRecordDrawer = ({ visible, onClose, batchId }) => {
       title={t('Add Record to Batch')}
       width={720}
       onClose={onClose}
-      visible={visible}
-      bodyStyle={{ paddingBottom: 80 }}
+      open={visible}
+      styles={{ body: { paddingBottom: 80 } }}
       footer={
         <div
           style={{
@@ -88,7 +88,11 @@ const AddRecordDrawer = ({ visible, onClose, batchId }) => {
                 },
               ]}
             >
-              <DatePicker style={{ width: '100%' }} format={'DD-MM-YYYY'} placeholder={t('Select date')} />
+              <DatePicker
+                style={{ width: '100%' }}
+                format={'DD-MM-YYYY'}
+                placeholder={t('Select date')}
+              />
             </Form.Item>
           </Col>
           <Col span={12}>

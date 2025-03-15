@@ -1,4 +1,5 @@
 {
+  "ERROR_SEED_ID_REQUIRED": "Se requiere el ID de la semilla",
   "home": "Inicio",
   "production": "Producción",
   "addBatch": "Agregar Lote",

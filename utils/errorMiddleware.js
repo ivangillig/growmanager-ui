@@ -1,94 +1,99 @@
-import { showMessage } from "../src/features/notifications/notificationActions";
-import { logout } from "../src/features/auth/authActions";
+import { showMessage } from '../src/features/notifications/notificationActions'
+import { logout } from '../src/features/auth/authActions'
 
 export const handleApiErrors = (error, store) => {
   if (error.response) {
-    const { status, data } = error.response;
-    const message =
-      data && data.message ? data.message : "Error communicating with server";
+    const { status, data } = error.response
+    let message = 'Error communicating with server'
+    
+    if (data && data.message) {
+      message = data.message
+    } else if (data && data.errors && data.errors.length > 0) {
+      message = data.errors[0].msg
+    }
 
     switch (status) {
       case 401:
         // Manejo de error 401 - No autorizado
-        if (!error.response.config.url.includes("/auth/logout")) {
+        if (!error.response.config.url.includes('/auth/logout')) {
           store.dispatch(
             showMessage({
-              type: "error",
-              summary: "Error",
+              type: 'error',
+              summary: 'Error',
               detail: message,
             })
-          );
-          store.dispatch(logout());
+          )
+          store.dispatch(logout())
         }
-        break;
+        break
       case 403:
         // 403 - Forbbiden handler
         store.dispatch(
           showMessage({
-            type: "error",
-            summary: "Error",
-            detail: "You are not authorized to access the resource",
+            type: 'error',
+            summary: 'Error',
+            detail: 'You are not authorized to access the resource',
           })
-        );
-        break;
+        )
+        break
       case 404:
         // 404 - Not found
         store.dispatch(
           showMessage({
-            type: "error",
-            summary: "Error 404",
-            detail: "The required resource was not found",
+            type: 'error',
+            summary: 'Error 404',
+            detail: 'The required resource was not found',
           })
-        );
-        break;
+        )
+        break
       case 409:
         // 409 - Conflict
         store.dispatch(
           showMessage({
-            type: "error",
-            summary: "Error",
+            type: 'error',
+            summary: 'Error',
             detail: message,
           })
-        );
-        break;
+        )
+        break
       case 422:
         // 422 - Validation error
         store.dispatch(
           showMessage({
-            type: "error",
-            summary: "Error",
+            type: 'error',
+            summary: 'Error',
             detail: message,
           })
-        );
-        break;
+        )
+        break
       default:
         // Other errors handling
         store.dispatch(
           showMessage({
-            type: "error",
-            summary: "Error",
-            detail: "Error communicating with server",
+            type: 'error',
+            summary: 'Error',
+            detail: 'Error communicating with server',
           })
-        );
-        break;
+        )
+        break
     }
   } else if (error.request) {
     // No response error handler (network error)
     store.dispatch(
       showMessage({
-        type: "error",
-        summary: "Error",
-        detail: "Network error. Please check your connection.",
+        type: 'error',
+        summary: 'Error',
+        detail: 'Network error. Please check your connection.',
       })
-    );
+    )
   } else {
     // Unexpected error handler
     store.dispatch(
       showMessage({
-        type: "error",
-        summary: "Error",
-        detail: "An unexpected error occurred",
+        type: 'error',
+        summary: 'Error',
+        detail: 'An unexpected error occurred',
       })
-    );
+    )
   }
-};
+}

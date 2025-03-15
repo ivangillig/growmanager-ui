@@ -1,4 +1,5 @@
 {
+  "ERROR_SEED_ID_REQUIRED": "Seed ID is required",
   "home": "Home",
   "production": "Production",
   "addBatch": "Add Batch",

@@ -1,5 +1,6 @@
 {
   "ERROR_SEED_ID_REQUIRED": "Se requiere el ID de la semilla",
+  "ERROR_SESSION_EXPIRED": "Sesión expirada",
   "home": "Inicio",
   "production": "Producción",
   "addBatch": "Agregar Lote",

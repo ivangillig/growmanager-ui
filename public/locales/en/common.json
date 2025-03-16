@@ -1,5 +1,6 @@
 {
   "ERROR_SEED_ID_REQUIRED": "Seed ID is required",
+  "ERROR_SESSION_EXPIRED": "Session expired",
   "home": "Home",
   "production": "Production",
   "addBatch": "Add Batch",

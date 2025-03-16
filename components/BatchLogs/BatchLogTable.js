@@ -74,12 +74,12 @@ const BatchLogTable = ({ batchId, isVisible, onClose }) => {
     ...(batchLogs.some((log) => log.eventType === 'Fertilization')
       ? [
           {
-            title: t('Fertilizer Type'),
+            title: t('Fertilizer type'),
             dataIndex: 'fertilizerType',
             key: 'fertilizerType',
           },
           {
-            title: t('Fertilizer Dose (ml)'),
+            title: t('Fertilizer dose'),
             dataIndex: 'fertilizerDose',
             key: 'fertilizerDose',
             render: (value) => (value ? `${value} ml` : ''),
@@ -90,12 +90,12 @@ const BatchLogTable = ({ batchId, isVisible, onClose }) => {
     ...(batchLogs.some((log) => log.eventType === 'Pesticides')
       ? [
           {
-            title: t('Pesticide Type'),
+            title: t('Pesticide type'),
             dataIndex: 'pesticideType',
             key: 'pesticideType',
           },
           {
-            title: t('Pesticide Dose (ml)'),
+            title: t('Pesticide dose'),
             dataIndex: 'pesticideDose',
             key: 'pesticideDose',
             render: (value) => (value ? `${value} ml` : ''),
@@ -106,7 +106,7 @@ const BatchLogTable = ({ batchId, isVisible, onClose }) => {
     ...(batchLogs.some((log) => log.eventType === 'Pruning')
       ? [
           {
-            title: t('Pruning Type'),
+            title: t('Pruning type'),
             dataIndex: 'pruningType',
             key: 'pruningType',
           },
@@ -115,7 +115,7 @@ const BatchLogTable = ({ batchId, isVisible, onClose }) => {
     ...(batchLogs.some((log) => log.eventType === 'Training')
       ? [
           {
-            title: t('Training Technique'),
+            title: t('Training technique'),
             dataIndex: 'trainingTechnique',
             key: 'trainingTechnique',
           },
@@ -124,28 +124,28 @@ const BatchLogTable = ({ batchId, isVisible, onClose }) => {
     ...(batchLogs.some((log) => log.eventType === 'Data record')
       ? [
           {
-            title: t('Plant Height (cm)'),
+            title: t('Plant height'),
             dataIndex: 'plantHeight',
             key: 'plantHeight',
             render: (value) => (value ? `${value} cm` : ''),
             sorter: true,
           },
           {
-            title: t('Relative Humidity (%)'),
+            title: t('Relative humidity'),
             dataIndex: 'relativeHumidity',
             key: 'relativeHumidity',
             render: (value) => (value ? `${value} %` : ''),
             sorter: true,
           },
           {
-            title: t('Soil Humidity (%)'),
+            title: t('Soil humidity'),
             dataIndex: 'soilHumidity',
             key: 'soilHumidity',
             render: (value) => (value ? `${value} %` : ''),
             sorter: true,
           },
           {
-            title: t('Ambient Temperature (°C)'),
+            title: t('Ambient temperature'),
             dataIndex: 'temperature',
             key: 'temperature',
             render: (value) => (value ? `${value} °C` : ''),
@@ -162,7 +162,7 @@ const BatchLogTable = ({ batchId, isVisible, onClose }) => {
     ...(batchLogs.some((log) => log.eventType === 'Manual watering')
       ? [
           {
-            title: t('Water Amount (ml)'),
+            title: t('Water amount'),
             dataIndex: 'waterAmount',
             key: 'waterAmount',
             render: (value) => (value ? `${value} ml` : ''),
@@ -174,7 +174,7 @@ const BatchLogTable = ({ batchId, isVisible, onClose }) => {
             key: 'waterPh',
           },
           {
-            title: t('Water Temperature (°C)'),
+            title: t('Water temperature'),
             dataIndex: 'waterTemperature',
             key: 'waterTemperature',
             render: (value) => (value ? `${value} °C` : ''),

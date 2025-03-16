@@ -117,7 +117,7 @@ const AddRecordDrawer = ({ visible, onClose, batchId }) => {
             </Form.Item>
           </Col>
         </Row>
-        {eventType === 'pesticides' && (
+        {eventType === 'Pesticides' && (
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item name="pesticideType" label={t('Pesticide type')}>
@@ -134,7 +134,7 @@ const AddRecordDrawer = ({ visible, onClose, batchId }) => {
             </Col>
           </Row>
         )}
-        {eventType === 'fertilization' && (
+        {eventType === 'Fertilization' && (
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item name="fertilizerType" label={t('Fertilizer type')}>
@@ -151,7 +151,7 @@ const AddRecordDrawer = ({ visible, onClose, batchId }) => {
             </Col>
           </Row>
         )}
-        {eventType === 'pruning' && (
+        {eventType === 'Pruning' && (
           <Row gutter={16}>
             <Col span={24}>
               <Form.Item name="pruningType" label={t('Pruning type')}>
@@ -164,7 +164,7 @@ const AddRecordDrawer = ({ visible, onClose, batchId }) => {
             </Col>
           </Row>
         )}
-        {eventType === 'dataRecord' && (
+        {eventType === 'Data record' && (
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item name="relativeHumidity" label={t('Relative humidity')}>
@@ -202,7 +202,7 @@ const AddRecordDrawer = ({ visible, onClose, batchId }) => {
             </Col>
           </Row>
         )}
-        {eventType === 'manualWatering' && (
+        {eventType === 'Manual watering' && (
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item name="waterAmount" label={t('Water amount')}>
@@ -226,7 +226,7 @@ const AddRecordDrawer = ({ visible, onClose, batchId }) => {
             </Col>
           </Row>
         )}
-        {eventType === 'training' && (
+        {eventType === 'Training' && (
           <Row gutter={16}>
             <Col span={24}>
               <Form.Item

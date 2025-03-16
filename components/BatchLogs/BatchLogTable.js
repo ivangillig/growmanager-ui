@@ -30,9 +30,20 @@ const BatchLogTable = ({ batchId, isVisible, onClose }) => {
     }
   }, [batchId, limit, page, dispatch])
 
-  const handleTableChange = (pagination) => {
+  const handleTableChange = (pagination, filters, sorter) => {
     setPage(pagination.current)
-    setLimit(pagination.limit)
+    setLimit(pagination.pageSize)
+    const sortField = sorter.field
+    const sortOrder = sorter.order === 'ascend' ? 'asc' : 'desc'
+    dispatch(
+      fetchBatchLogs({
+        batchId,
+        limit: pagination.pageSize,
+        page: pagination.current,
+        filter: filters,
+        sort: { field: sortField, order: sortOrder },
+      })
+    )
   }
 
   const columns = [
@@ -41,41 +52,58 @@ const BatchLogTable = ({ batchId, isVisible, onClose }) => {
       dataIndex: 'interventionDate',
       key: 'interventionDate',
       render: (date) => dayjs.utc(date).format('DD-MM-YYYY'),
-    },
-    {
-      title: t('Plant Height (cm)'),
-      dataIndex: 'plantHeight',
-      key: 'plantHeight',
-      render: (value) => (value ? `${value} cm` : ''),
-    },
-    {
-      title: t('Relative Humidity (%)'),
-      dataIndex: 'relativeHumidity',
-      key: 'relativeHumidity',
-      render: (value) => (value ? `${value} %` : ''),
-    },
-    {
-      title: t('Soil Humidity (%)'),
-      dataIndex: 'soilHumidity',
-      key: 'soilHumidity',
-      render: (value) => (value ? `${value} %` : ''),
-    },
-    {
-      title: t('Ambient Temperature (°C)'),
-      dataIndex: 'temperature',
-      key: 'temperature',
-      render: (value) => (value ? `${value} °C` : ''),
-    },
-    {
-      title: t('PH'),
-      dataIndex: 'ph',
-      key: 'ph',
+      sorter: true,
     },
     {
       title: t('Event type'),
       dataIndex: 'eventType',
       key: 'eventType',
       render: (value) => t(value),
+      filters: [
+        { text: t('Pesticides/Fungicides'), value: 'Pesticides' },
+        { text: t('Defoliation'), value: 'Defoliation' },
+        { text: t('Fertilization'), value: 'Fertilization' },
+        { text: t('Incident'), value: 'Incident' },
+        { text: t('Pruning'), value: 'Pruning' },
+        { text: t('Data record'), value: 'Data record' },
+        { text: t('Manual watering'), value: 'Manual watering' },
+        { text: t('Training'), value: 'Training' },
+      ],
+      onFilter: (value, record) => record.eventType.includes(value),
+    },
+    {
+      title: t('Plant Height (cm)'),
+      dataIndex: 'plantHeight',
+      key: 'plantHeight',
+      render: (value) => (value ? `${value} cm` : ''),
+      sorter: true,
+    },
+    {
+      title: t('Relative Humidity (%)'),
+      dataIndex: 'relativeHumidity',
+      key: 'relativeHumidity',
+      render: (value) => (value ? `${value} %` : ''),
+      sorter: true,
+    },
+    {
+      title: t('Soil Humidity (%)'),
+      dataIndex: 'soilHumidity',
+      key: 'soilHumidity',
+      render: (value) => (value ? `${value} %` : ''),
+      sorter: true,
+    },
+    {
+      title: t('Ambient Temperature (°C)'),
+      dataIndex: 'temperature',
+      key: 'temperature',
+      render: (value) => (value ? `${value} °C` : ''),
+      sorter: true,
+    },
+    {
+      title: t('PH'),
+      dataIndex: 'ph',
+      key: 'ph',
+      sorter: true,
     },
     {
       title: t('Fertilizer Type'),
@@ -87,6 +115,7 @@ const BatchLogTable = ({ batchId, isVisible, onClose }) => {
       dataIndex: 'fertilizerDose',
       key: 'fertilizerDose',
       render: (value) => (value ? `${value} ml` : ''),
+      sorter: true,
     },
     {
       title: t('Pesticide Type'),
@@ -98,6 +127,7 @@ const BatchLogTable = ({ batchId, isVisible, onClose }) => {
       dataIndex: 'pesticideDose',
       key: 'pesticideDose',
       render: (value) => (value ? `${value} ml` : ''),
+      sorter: true,
     },
     {
       title: t('Pruning Type'),
@@ -148,7 +178,7 @@ const BatchLogTable = ({ batchId, isVisible, onClose }) => {
           scroll={{ x: 800 }}
           pagination={{
             current: pagination.page,
-            limit: pagination.limit,
+            pageSize: pagination.limit,
             total: pagination.total,
           }}
           onChange={handleTableChange}

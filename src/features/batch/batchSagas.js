@@ -150,7 +150,9 @@ function* fetchBatchLogsSaga(action) {
   try {
     const response = yield call(fetchBatchLogsApi, action.payload)
     yield put(fetchBatchLogsSuccess(response))
-  } catch (error) {}
+  } catch (error) {
+    yield put(fetchBatchLogsError(error))
+  }
 }
 
 export function* watchFetchBatchesSaga() {

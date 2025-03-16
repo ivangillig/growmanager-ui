@@ -81,11 +81,14 @@ export const deleteBatchLogApi = async (batchLogId) => {
 }
 
 export const fetchBatchLogsApi = async (payload) => {
-  const { batchId, page, limit } = payload
-  try {
-    const response = await axios.get(`${BASE_URL}/api/batchlog/${batchId}?page=${page}&limit=${limit}`)
-    return response.data
-  } catch (error) {
-    // error handler
-  }
+  const { batchId, page, limit, filter, sort } = payload
+
+  const filterParams = new URLSearchParams(filter).toString()
+  const sortParams = sort
+    ? `&sortField=${sort.field}&sortOrder=${sort.order}`
+    : ''
+  const response = await axios.get(
+    `${BASE_URL}/api/batchlog/${batchId}?page=${page}&limit=${limit}&${filterParams}${sortParams}`
+  )
+  return response.data
 }

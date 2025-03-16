@@ -71,74 +71,123 @@ const BatchLogTable = ({ batchId, isVisible, onClose }) => {
       ],
       onFilter: (value, record) => record.eventType.includes(value),
     },
-    {
-      title: t('Plant Height (cm)'),
-      dataIndex: 'plantHeight',
-      key: 'plantHeight',
-      render: (value) => (value ? `${value} cm` : ''),
-      sorter: true,
-    },
-    {
-      title: t('Relative Humidity (%)'),
-      dataIndex: 'relativeHumidity',
-      key: 'relativeHumidity',
-      render: (value) => (value ? `${value} %` : ''),
-      sorter: true,
-    },
-    {
-      title: t('Soil Humidity (%)'),
-      dataIndex: 'soilHumidity',
-      key: 'soilHumidity',
-      render: (value) => (value ? `${value} %` : ''),
-      sorter: true,
-    },
-    {
-      title: t('Ambient Temperature (°C)'),
-      dataIndex: 'temperature',
-      key: 'temperature',
-      render: (value) => (value ? `${value} °C` : ''),
-      sorter: true,
-    },
-    {
-      title: t('PH'),
-      dataIndex: 'ph',
-      key: 'ph',
-      sorter: true,
-    },
-    {
-      title: t('Fertilizer Type'),
-      dataIndex: 'fertilizerType',
-      key: 'fertilizerType',
-    },
-    {
-      title: t('Fertilizer Dose (ml)'),
-      dataIndex: 'fertilizerDose',
-      key: 'fertilizerDose',
-      render: (value) => (value ? `${value} ml` : ''),
-      sorter: true,
-    },
-    {
-      title: t('Pesticide Type'),
-      dataIndex: 'pesticideType',
-      key: 'pesticideType',
-    },
-    {
-      title: t('Pesticide Dose (ml)'),
-      dataIndex: 'pesticideDose',
-      key: 'pesticideDose',
-      render: (value) => (value ? `${value} ml` : ''),
-      sorter: true,
-    },
-    {
-      title: t('Pruning Type'),
-      dataIndex: 'pruningType',
-      key: 'pruningType',
-    },
-    {
-      title: t('Training Technique'),
-      dataIndex: 'trainingTechnique',
-      key: 'trainingTechnique',
-    },
+    ...(batchLogs.some((log) => log.eventType === 'Fertilization')
+      ? [
+          {
+            title: t('Fertilizer Type'),
+            dataIndex: 'fertilizerType',
+            key: 'fertilizerType',
+          },
+          {
+            title: t('Fertilizer Dose (ml)'),
+            dataIndex: 'fertilizerDose',
+            key: 'fertilizerDose',
+            render: (value) => (value ? `${value} ml` : ''),
+            sorter: true,
+          },
+        ]
+      : []),
+    ...(batchLogs.some((log) => log.eventType === 'Pesticides')
+      ? [
+          {
+            title: t('Pesticide Type'),
+            dataIndex: 'pesticideType',
+            key: 'pesticideType',
+          },
+          {
+            title: t('Pesticide Dose (ml)'),
+            dataIndex: 'pesticideDose',
+            key: 'pesticideDose',
+            render: (value) => (value ? `${value} ml` : ''),
+            sorter: true,
+          },
+        ]
+      : []),
+    ...(batchLogs.some((log) => log.eventType === 'Pruning')
+      ? [
+          {
+            title: t('Pruning Type'),
+            dataIndex: 'pruningType',
+            key: 'pruningType',
+          },
+        ]
+      : []),
+    ...(batchLogs.some((log) => log.eventType === 'Training')
+      ? [
+          {
+            title: t('Training Technique'),
+            dataIndex: 'trainingTechnique',
+            key: 'trainingTechnique',
+          },
+        ]
+      : []),
+    ...(batchLogs.some((log) => log.eventType === 'Data record')
+      ? [
+          {
+            title: t('Plant Height (cm)'),
+            dataIndex: 'plantHeight',
+            key: 'plantHeight',
+            render: (value) => (value ? `${value} cm` : ''),
+            sorter: true,
+          },
+          {
+            title: t('Relative Humidity (%)'),
+            dataIndex: 'relativeHumidity',
+            key: 'relativeHumidity',
+            render: (value) => (value ? `${value} %` : ''),
+            sorter: true,
+          },
+          {
+            title: t('Soil Humidity (%)'),
+            dataIndex: 'soilHumidity',
+            key: 'soilHumidity',
+            render: (value) => (value ? `${value} %` : ''),
+            sorter: true,
+          },
+          {
+            title: t('Ambient Temperature (°C)'),
+            dataIndex: 'temperature',
+            key: 'temperature',
+            render: (value) => (value ? `${value} °C` : ''),
+            sorter: true,
+          },
+          {
+            title: t('PH'),
+            dataIndex: 'ph',
+            key: 'ph',
+            sorter: true,
+          },
+        ]
+      : []),
+    ...(batchLogs.some((log) => log.eventType === 'Manual watering')
+      ? [
+          {
+            title: t('Water Amount (ml)'),
+            dataIndex: 'waterAmount',
+            key: 'waterAmount',
+            render: (value) => (value ? `${value} ml` : ''),
+            sorter: true,
+          },
+          {
+            title: t('Water PH'),
+            dataIndex: 'waterPh',
+            key: 'waterPh',
+          },
+          {
+            title: t('Water Temperature (°C)'),
+            dataIndex: 'waterTemperature',
+            key: 'waterTemperature',
+            render: (value) => (value ? `${value} °C` : ''),
+            sorter: true,
+          },
+          {
+            title: t('Fertilized?'),
+            dataIndex: 'fertilized',
+            key: 'fertilized',
+            render: (value) => (value ? t('Yes') : t('No')),
+          },
+        ]
+      : []),
     {
       title: t('Observations'),
       dataIndex: 'observations',

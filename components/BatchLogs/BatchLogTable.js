@@ -30,10 +30,6 @@ const BatchLogTable = ({ batchId, isVisible, onClose }) => {
     }
   }, [batchId, limit, page, dispatch])
 
-  const translateInterventions = (interventions) => {
-    return interventions.map((intervention) => t(intervention)).join(', ')
-  }
-
   const handleTableChange = (pagination) => {
     setPage(pagination.current)
     setLimit(pagination.limit)
@@ -76,10 +72,10 @@ const BatchLogTable = ({ batchId, isVisible, onClose }) => {
       key: 'ph',
     },
     {
-      title: t('Interventions'),
-      dataIndex: 'interventions',
-      key: 'interventions',
-      render: (interventions) => translateInterventions(interventions),
+      title: t('Event type'),
+      dataIndex: 'eventType',
+      key: 'eventType',
+      render: (value) => t(value),
     },
     {
       title: t('Fertilizer Type'),

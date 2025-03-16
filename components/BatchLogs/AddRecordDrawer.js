@@ -28,6 +28,7 @@ const AddRecordDrawer = ({ visible, onClose, batchId }) => {
     if (visible) {
       form.resetFields()
       setEventType(null)
+      form.setFieldsValue({ eventDate: dayjs() })
     }
   }, [visible, form])
 
@@ -35,7 +36,7 @@ const AddRecordDrawer = ({ visible, onClose, batchId }) => {
     const formattedValues = {
       ...values,
       batchId,
-      eventDate: dayjs(values.eventDate).format('YYYY-MM-DD'),
+      eventDate: dayjs(values.eventDate).format('YYYY-MM-DD HH:mm'),
     }
     dispatch(addBatchLog(formattedValues))
     onClose()
@@ -81,9 +82,11 @@ const AddRecordDrawer = ({ visible, onClose, batchId }) => {
               ]}
             >
               <DatePicker
+                showTime
                 style={{ width: '100%' }}
-                format={'DD-MM-YYYY'}
+                format={'DD-MM-YYYY HH:mm'}
                 placeholder={t('Select date')}
+                defaultValue={dayjs()}
               />
             </Form.Item>
           </Col>
@@ -102,14 +105,14 @@ const AddRecordDrawer = ({ visible, onClose, batchId }) => {
                 placeholder={t('Select event type')}
                 onChange={handleEventTypeChange}
               >
-                <Option value="pesticides">{t('Pesticides/Fungicides')}</Option>
-                <Option value="defoliation">{t('Defoliation')}</Option>
-                <Option value="fertilization">{t('Fertilization')}</Option>
-                <Option value="incident">{t('Incident')}</Option>
-                <Option value="pruning">{t('Pruning')}</Option>
-                <Option value="dataRecord">{t('Data record')}</Option>
-                <Option value="manualWatering">{t('Manual watering')}</Option>
-                <Option value="training">{t('Training')}</Option>
+                <Option value="Pesticides">{t('Pesticides/Fungicides')}</Option>
+                <Option value="Defoliation">{t('Defoliation')}</Option>
+                <Option value="Fertilization">{t('Fertilization')}</Option>
+                <Option value="Incident">{t('Incident')}</Option>
+                <Option value="Pruning">{t('Pruning')}</Option>
+                <Option value="Data record">{t('Data record')}</Option>
+                <Option value="Manual watering">{t('Manual watering')}</Option>
+                <Option value="Training">{t('Training')}</Option>
               </Select>
             </Form.Item>
           </Col>

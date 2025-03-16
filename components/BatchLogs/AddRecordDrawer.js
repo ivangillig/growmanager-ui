@@ -8,6 +8,7 @@ import {
   DatePicker,
   Checkbox,
   Select,
+  InputNumber,
 } from 'antd'
 import { useTranslation } from 'next-i18next'
 import { useState, useEffect } from 'react'
@@ -21,18 +22,12 @@ const AddRecordDrawer = ({ visible, onClose, batchId }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const [form] = Form.useForm()
-  const [showFertilizer, setShowFertilizer] = useState(false)
-  const [showPesticides, setShowPesticides] = useState(false)
-  const [showPruning, setShowPruning] = useState(false)
-  const [showTraining, setShowTraining] = useState(false)
+  const [eventType, setEventType] = useState(null)
 
   useEffect(() => {
     if (visible) {
       form.resetFields()
-      setShowFertilizer(false)
-      setShowPesticides(false)
-      setShowPruning(false)
-      setShowTraining(false)
+      setEventType(null)
     }
   }, [visible, form])
 
@@ -40,23 +35,20 @@ const AddRecordDrawer = ({ visible, onClose, batchId }) => {
     const formattedValues = {
       ...values,
       batchId,
-      interventionDate: dayjs(values.interventionDate).format('YYYY-MM-DD'),
+      eventDate: dayjs(values.eventDate).format('YYYY-MM-DD'),
     }
     dispatch(addBatchLog(formattedValues))
     onClose()
   }
 
-  const handleInterventionsChange = (checkedValues) => {
-    setShowFertilizer(checkedValues.includes('fertilization'))
-    setShowPesticides(checkedValues.includes('pesticides'))
-    setShowPruning(checkedValues.includes('pruning'))
-    setShowTraining(checkedValues.includes('training'))
+  const handleEventTypeChange = (value) => {
+    setEventType(value)
   }
 
   return (
     <Drawer
       title={t('Add Record to Batch')}
-      width={720}
+      width={450}
       onClose={onClose}
       open={visible}
       styles={{ body: { paddingBottom: 80 } }}
@@ -77,14 +69,14 @@ const AddRecordDrawer = ({ visible, onClose, batchId }) => {
     >
       <Form layout="vertical" form={form} onFinish={handleSave}>
         <Row gutter={16}>
-          <Col span={12}>
+          <Col span={24}>
             <Form.Item
-              name="interventionDate"
-              label={t('Intervention Date')}
+              name="eventDate"
+              label={t('Event date')}
               rules={[
                 {
                   required: true,
-                  message: t('Please select the intervention date'),
+                  message: t('Please select the event date'),
                 },
               ]}
             >
@@ -95,106 +87,72 @@ const AddRecordDrawer = ({ visible, onClose, batchId }) => {
               />
             </Form.Item>
           </Col>
-          <Col span={12}>
-            <Form.Item name="plantHeight" label={t('Plant Height (cm)')}>
-              <Input placeholder={t('Plant Height (cm)')} />
-            </Form.Item>
-          </Col>
-        </Row>
-        <Row gutter={16}>
-          <Col span={12}>
-            <Form.Item
-              name="relativeHumidity"
-              label={t('Relative Humidity (%)')}
-            >
-              <Input placeholder={t('Relative Humidity (%)')} />
-            </Form.Item>
-          </Col>
-          <Col span={12}>
-            <Form.Item name="soilHumidity" label={t('Soil Humidity (%)')}>
-              <Input placeholder={t('Soil Humidity (%)')} />
-            </Form.Item>
-          </Col>
-        </Row>
-        <Row gutter={16}>
-          <Col span={12}>
-            <Form.Item name="temperature" label={t('Ambient Temperature (°C)')}>
-              <Input placeholder={t('Ambient Temperature (°C)')} />
-            </Form.Item>
-          </Col>
-          <Col span={12}>
-            <Form.Item name="ph" label={t('PH')}>
-              <Input placeholder={t('PH')} />
-            </Form.Item>
-          </Col>
-        </Row>
-        <Row gutter={16}>
           <Col span={24}>
-            <Form.Item name="interventions" label={t('Interventions')}>
-              <Checkbox.Group onChange={handleInterventionsChange}>
-                <Row>
-                  <Col span={8}>
-                    <Checkbox value="fertilization">
-                      {t('Fertilization')}
-                    </Checkbox>
-                  </Col>
-                  <Col span={8}>
-                    <Checkbox value="pesticides">
-                      {t('Pesticides/Fungicides')}
-                    </Checkbox>
-                  </Col>
-                  <Col span={8}>
-                    <Checkbox value="pruning">{t('Pruning')}</Checkbox>
-                  </Col>
-                  <Col span={8}>
-                    <Checkbox value="defoliation">{t('Defoliation')}</Checkbox>
-                  </Col>
-                  <Col span={8}>
-                    <Checkbox value="training">
-                      {t('Training Techniques')}
-                    </Checkbox>
-                  </Col>
-                </Row>
-              </Checkbox.Group>
+            <Form.Item
+              name="eventType"
+              label={t('Event type')}
+              rules={[
+                {
+                  required: true,
+                  message: t('Please select the event type'),
+                },
+              ]}
+            >
+              <Select
+                placeholder={t('Select event type')}
+                onChange={handleEventTypeChange}
+              >
+                <Option value="pesticides">{t('Pesticides/Fungicides')}</Option>
+                <Option value="defoliation">{t('Defoliation')}</Option>
+                <Option value="fertilization">{t('Fertilization')}</Option>
+                <Option value="incident">{t('Incident')}</Option>
+                <Option value="pruning">{t('Pruning')}</Option>
+                <Option value="dataRecord">{t('Data record')}</Option>
+                <Option value="manualWatering">{t('Manual watering')}</Option>
+                <Option value="training">{t('Training')}</Option>
+              </Select>
             </Form.Item>
           </Col>
         </Row>
-        {showFertilizer && (
+        {eventType === 'pesticides' && (
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item name="fertilizerType" label={t('Fertilizer Type')}>
-                <Input placeholder={t('Fertilizer Type')} />
+              <Form.Item name="pesticideType" label={t('Pesticide type')}>
+                <Input placeholder={t('Pesticide type')} />
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item
-                name="fertilizerDose"
-                label={t('Fertilizer Dose (ml)')}
-              >
-                <Input placeholder={t('Fertilizer Dose (ml)')} />
+              <Form.Item name="pesticideDose" label={t('Pesticide dose')}>
+                <InputNumber
+                  addonAfter="ml"
+                  placeholder={t('Pesticide dose')}
+                />
               </Form.Item>
             </Col>
           </Row>
         )}
-        {showPesticides && (
+        {eventType === 'fertilization' && (
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item name="pesticideType" label={t('Pesticide Type')}>
-                <Input placeholder={t('Pesticide Type')} />
+              <Form.Item name="fertilizerType" label={t('Fertilizer type')}>
+                <Input placeholder={t('Select a fertilizer type')} />
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item name="pesticideDose" label={t('Pesticide Dose (ml)')}>
-                <Input placeholder={t('Pesticide Dose (ml)')} />
+              <Form.Item name="fertilizerDose" label={t('Fertilizer dose')}>
+                <Input
+                  placeholder={t('Input fertilizer dose')}
+                  addonAfter="ml"
+                />
               </Form.Item>
             </Col>
           </Row>
         )}
-        {showPruning && (
+        {eventType === 'pruning' && (
           <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item name="pruningType" label={t('Pruning Type')}>
-                <Select placeholder={t('Select Pruning Type')}>
+            <Col span={24}>
+              <Form.Item name="pruningType" label={t('Pruning type')}>
+                <Select placeholder={t('Select pruning type')}>
                   <Option value="topping">{t('Topping')}</Option>
                   <Option value="fimming">{t('Fimming')}</Option>
                   <Option value="lollipopping">{t('Lollipopping')}</Option>
@@ -203,14 +161,76 @@ const AddRecordDrawer = ({ visible, onClose, batchId }) => {
             </Col>
           </Row>
         )}
-        {showTraining && (
+        {eventType === 'dataRecord' && (
           <Row gutter={16}>
             <Col span={12}>
+              <Form.Item name="relativeHumidity" label={t('Relative humidity')}>
+                <Input placeholder={t('Relative humidity')} addonAfter="%" />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item name="soilHumidity" label={t('Soil humidity')}>
+                <Input
+                  placeholder={t('Input the soil humidity')}
+                  addonAfter="%"
+                />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item name="plantHeight" label={t('Plant height')}>
+                <Input
+                  placeholder={t('Input the plant height')}
+                  addonAfter="cm"
+                />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item name="temperature" label={t('Ambient temperature')}>
+                <Input
+                  placeholder={t('Input ambient temperature')}
+                  addonAfter="°C"
+                />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item name="ph" label={t('PH')}>
+                <Input placeholder={t('PH')} />
+              </Form.Item>
+            </Col>
+          </Row>
+        )}
+        {eventType === 'manualWatering' && (
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item name="waterAmount" label={t('Water amount')}>
+                <Input placeholder={t('Water amount')} addonAfter="ml" />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item name="waterPh" label={t('Water PH')}>
+                <Input placeholder={t('Water PH')} />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item name="waterTemperature" label={t('Water temperature')}>
+                <Input placeholder={t('Water temperature')} addonAfter="°C" />
+              </Form.Item>
+            </Col>
+            <Col span={24}>
+              <Form.Item name="fertilized" valuePropName="checked">
+                <Checkbox>{t('Fertilized?')}</Checkbox>
+              </Form.Item>
+            </Col>
+          </Row>
+        )}
+        {eventType === 'training' && (
+          <Row gutter={16}>
+            <Col span={24}>
               <Form.Item
                 name="trainingTechnique"
-                label={t('Training Technique')}
+                label={t('Training technique')}
               >
-                <Select placeholder={t('Select Training Technique')}>
+                <Select placeholder={t('Select training technique')}>
                   <Option value="lst">{t('LST')}</Option>
                   <Option value="hst">{t('HST')}</Option>
                   <Option value="scrog">{t('SCROG')}</Option>

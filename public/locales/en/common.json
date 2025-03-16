@@ -98,5 +98,21 @@
   "batchLogDeleted": "Batch log deleted successfully",
   "batchLogsFetched": "Batch logs fetched successfully",
   "seedsFetched": "Seeds fetched successfully",
-  "seedAdded": "Seed added successfully"
+  "seedAdded": "Seed added successfully",
+  "Event Date": "Event Date",
+  "Event Type": "Event Type",
+  "Please select the event date": "Please select the event date",
+  "Please select the event type": "Please select the event type",
+  "Select Event Type": "Select Event Type",
+  "Incident": "Incident",
+  "Data Record": "Data Record",
+  "Manual Watering": "Manual Watering",
+  "Water Amount (ml)": "Water Amount (ml)",
+  "Water PH": "Water PH",
+  "Water Temperature (°C)": "Water Temperature (°C)",
+  "Fertilized?": "Fertilized?",
+  "Input fertilizer dose": "Input fertilizer dose",
+  "Input the soil humidity": "Input the soil humidity",
+  "Input the plant height": "Input the plant height",
+  "Input ambient temperature (°C)": "Input ambient temperature (°C)"
 }

@@ -139,6 +139,13 @@
   "Batch added successfully": "Lote agregado exitosamente",
   "Error communicating with server": "Error de comunicación con el servidor",
   "ERROR_FETCHING_BATCH_LOGS": "Error al obtener los registros de lote",
-  "ERROR_BATCH_NOT_FOUND": "Lote no encontrado"
+  "ERROR_BATCH_NOT_FOUND": "Lote no encontrado",
+  "Add Seed Bank": "Agregar Banco de Semillas",
+  "Seed Bank Name": "Nombre del Banco de Semillas",
+  "Please input the seed bank name": "Por favor ingrese el nombre del banco de semillas",
+  "Email": "Correo Electrónico",
+  "Please input a valid email": "Por favor ingrese un correo electrónico válido",
+  "Phone": "Teléfono",
+  "Please input the phone number": "Por favor ingrese el número de teléfono"
 
 }

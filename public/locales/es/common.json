@@ -162,5 +162,12 @@
   "Input the soil humidity": "Ingrese la humedad del suelo",
   "Input the plant height": "Ingrese la altura de la planta",
   "Input ambient temperature": "Ingrese la temperatura ambiental",
-  "Select training technique": "Seleccione la técnica de entrenamiento"
+  "Select training technique": "Seleccione la técnica de entrenamiento",
+  "Add Seed Bank": "Agregar Banco de Semillas",
+  "Seed Bank Name": "Nombre del Banco de Semillas",
+  "Please input the seed bank name": "Por favor ingrese el nombre del banco de semillas",
+  "Email": "Correo Electrónico",
+  "Please input a valid email": "Por favor ingrese un correo electrónico válido",
+  "Phone": "Teléfono",
+  "Please input the phone number": "Por favor ingrese el número de teléfono"
 }

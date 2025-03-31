@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
+import { getSeeds } from '@/src/features/seed/seedActions'
 import { Modal, Form, Input, Select, Upload, Button, Checkbox } from 'antd'
 import { useTranslation } from 'next-i18next'
-import { LuCloudUpload } from 'react-icons/lu'
+import { useDispatch, useSelector } from 'react-redux'
 import { PlusOutlined } from '@ant-design/icons'
-import AddSeedBankModal from './AddSeedBankModal' // Importar el nuevo modal
+import AddSeedBankModal from './AddSeedBankModal'
+import { useRouter } from 'next/router' // Importar useRouter de Next.js
 
 const { Option } = Select
 
@@ -13,6 +15,24 @@ const AddSeedModal = ({ visible, onCancel, onAddSeed }) => {
   const [form] = Form.useForm()
   const [fileList, setFileList] = useState([])
   const [isSeedBankModalVisible, setSeedBankModalVisible] = useState(false)
+  const [selectedSeedBank, setSelectedSeedBank] = useState(null) // Nuevo estado para el seedBank seleccionado
+
+  const dispatch = useDispatch()
+  const seeds = useSelector((state) => state.seed.seeds || [])
+  const router = useRouter() // Inicializar el router
+
+  useEffect(() => {
+    if (seeds.length === 0) {
+      dispatch(getSeeds())
+    }
+  }, [dispatch, seeds])
+
+  const handleSeedBankChange = (value) => {
+    const selectedSeed = seeds.find((seed) => seed._id === value)
+    const seedBankName = selectedSeed ? selectedSeed.seedBank : null
+    setSelectedSeedBank(seedBankName) // Guardar el nombre del seedBank
+    form.setFieldsValue({ seedBank: seedBankName }) // Actualizar el valor del formulario
+  }
 
   const handleOk = () => {
     form.validateFields().then((values) => {
@@ -29,6 +49,8 @@ const AddSeedModal = ({ visible, onCancel, onAddSeed }) => {
       onAddSeed(formData)
       form.resetFields()
       setFileList([])
+      setSelectedSeedBank(null) // Reiniciar el estado del seedBank seleccionado
+      router.push('/production') // Redirigir a la página de semillas
     })
   }
 
@@ -58,9 +80,17 @@ const AddSeedModal = ({ visible, onCancel, onAddSeed }) => {
             rules={[{ required: true, message: t('Please select the seed bank') }]}
           >
             <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-              <Select style={{ flex: 1 }}>
-                <Option value="Bank1">{t('Bank1')}</Option>
-                <Option value="Bank2">{t('Bank2')}</Option>
+              <Select
+                style={{ flex: 1 }}
+                placeholder={t('Select a bank')}
+                onChange={handleSeedBankChange} // Manejar el cambio de selección
+                value={selectedSeedBank} // Establecer el valor del select
+              >
+                {seeds.map((seed) => (
+                  <Option key={seed._id} value={seed._id}>
+                    {seed.seedBank}
+                  </Option>
+                ))}
               </Select>
               <Button
                 icon={<PlusOutlined />}
@@ -120,7 +150,7 @@ const AddSeedModal = ({ visible, onCancel, onAddSeed }) => {
               onChange={handleUploadChange}
               beforeUpload={() => false}
             >
-              <Button icon={<LuCloudUpload />}>{t('Upload')}</Button>
+              <Button>{t('Upload')}</Button>
             </Upload>
           </Form.Item>
         </Form>

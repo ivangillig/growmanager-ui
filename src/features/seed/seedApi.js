@@ -24,3 +24,12 @@ export const addSeedApi = async (seed) => {
     throw new Error('Failed to add seed')
   }
 }
+
+export const fetchSeedBanks = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/api/seeds`)
+    return response.data
+  } catch (error) {
+    throw new Error('Error fetching seed banks:')
+  }
+}

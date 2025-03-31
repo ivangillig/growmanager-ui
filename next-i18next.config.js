@@ -8,4 +8,5 @@ module.exports = {
     locales: ['es', 'en'],
     localeDetection: false,
   },
+  BASE_URL: 'http://localhost:8000',
 }

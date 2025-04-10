@@ -33,3 +33,16 @@ export const fetchSeedBanks = async () => {
     throw new Error('Error fetching seed banks:')
   }
 }
+
+export const addSeedBankApi = async (seedBank) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/api/seedBanks`, seedBank, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    return response.data
+  } catch (error) {
+    throw new Error('Failed to add seed bank')
+  }
+}

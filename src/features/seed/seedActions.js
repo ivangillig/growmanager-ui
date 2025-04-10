@@ -5,6 +5,9 @@ import {
   ADD_SEED_REQUEST,
   ADD_SEED_SUCCESS,
   ADD_SEED_ERROR,
+  ADD_SEED_BANK_REQUEST,
+  ADD_SEED_BANK_SUCCESS,
+  ADD_SEED_BANK_ERROR,
 } from '@/src/constants/ActionsTypes'
 
 export const getSeeds = () => ({
@@ -34,4 +37,19 @@ export const addSeedSuccess = (seed) => ({
 export const addSeedError = (error) => ({
   type: ADD_SEED_ERROR,
   payload: error,
+})
+
+export const addSeedBankRequest = (payload) => ({
+  type: ADD_SEED_BANK_REQUEST,
+  payload,
+})
+
+export const addSeedBankSuccess = (payload) => ({
+  type: ADD_SEED_BANK_SUCCESS,
+  payload,
+})
+
+export const addSeedBankError = (payload) => ({
+  type: ADD_SEED_BANK_ERROR,
+  payload,
 })

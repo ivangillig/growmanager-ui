@@ -4,12 +4,15 @@ import {
   getSeedsError,
   addSeedSuccess,
   addSeedError,
+  addSeedBankSuccess,
+  addSeedBankError,
 } from './seedActions'
 import {
   GET_SEEDS_REQUEST,
   ADD_SEED_REQUEST,
+  ADD_SEED_BANK_REQUEST,
 } from '@/src/constants/ActionsTypes'
-import { getSeedsApi, addSeedApi } from './seedApi'
+import { getSeedsApi, addSeedApi, addSeedBankApi } from './seedApi'
 import { showMessage } from '@/src/features/notifications/notificationActions'
 
 function* getSeedsSaga() {
@@ -19,7 +22,9 @@ function* getSeedsSaga() {
     if (seeds) {
       yield put(getSeedsSuccess(seeds))
     }
-  } catch (error) {}
+  } catch (error) {
+    yield put(getSeedsError(error.message))
+  }
 }
 
 function* addSeedSaga(action) {
@@ -35,7 +40,32 @@ function* addSeedSaga(action) {
         },
       ])
     )
-  } catch (error) {}
+  } catch (error) {
+    yield put(addSeedError(error.message))
+  }
+}
+
+function* addSeedBankSaga(action) {
+  try {
+    // Llamada a la API para agregar el banco de semillas
+    const response = yield call(addSeedBankApi, action.payload)
+    // Despacha la acción de éxito si la API responde correctamente
+    yield put(addSeedBankSuccess(response))
+    // Opcional: Muestra un mensaje de éxito
+    yield put(
+      showMessage([
+        {
+          summary: 'Success',
+          detail: 'Seed bank added successfully',
+          type: 'success',
+        },
+      ])
+    )
+  } catch (error) {
+    // Despacha la acción de error si ocurre un problema
+    yield put(addSeedBankError(error.message))
+    console.error('Error in addSeedBankSaga:', error)
+  }
 }
 
 export function* watchGetSeedsSaga() {
@@ -46,6 +76,10 @@ export function* watchAddSeedSaga() {
   yield takeLatest(ADD_SEED_REQUEST, addSeedSaga)
 }
 
+export function* watchAddSeedBankSaga() {
+  yield takeLatest(ADD_SEED_BANK_REQUEST, addSeedBankSaga)
+}
+
 export default function* rootSaga() {
-  yield all([fork(watchGetSeedsSaga), fork(watchAddSeedSaga)])
+  yield all([fork(watchGetSeedsSaga), fork(watchAddSeedSaga), fork(watchAddSeedBankSaga)])
 }

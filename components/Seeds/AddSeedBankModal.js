@@ -1,16 +1,21 @@
 import React from 'react'
 import { Modal, Form, Input } from 'antd'
 import { useTranslation } from 'next-i18next'
+import { useDispatch } from 'react-redux'
+import { addSeedBankRequest } from '@/src/features/seed/seedActions'
+import { getSeedBanks } from '@/src/features/seedBank/seedBankActions'
 
 const AddSeedBankModal = ({ visible, onCancel }) => {
   const { t } = useTranslation()
   const [form] = Form.useForm()
+  const dispatch = useDispatch()
 
   const handleOk = () => {
     form.validateFields().then((values) => {
-      console.log('Seed Bank Data:', values) // Aquí puedes manejar el envío de datos
+      dispatch(addSeedBankRequest(values)) // Despachar la acción para agregar el seed bank
       form.resetFields()
       onCancel()
+      dispatch(getSeedBanks())
     })
   }
 

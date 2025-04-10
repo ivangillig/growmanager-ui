@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
+import { getSeedBanks } from '@/src/features/seedBank/seedBankActions'
 import { getSeeds } from '@/src/features/seed/seedActions'
 import { Modal, Form, Input, Select, Upload, Button, Checkbox } from 'antd'
 import { useTranslation } from 'next-i18next'
@@ -19,19 +20,23 @@ const AddSeedModal = ({ visible, onCancel, onAddSeed }) => {
 
   const dispatch = useDispatch()
   const seeds = useSelector((state) => state.seed.seeds || [])
+  const seedBanks = useSelector((state) => state.seedBank.seedBanks || [])
   const router = useRouter() // Inicializar el router
 
   useEffect(() => {
     if (seeds.length === 0) {
       dispatch(getSeeds())
     }
-  }, [dispatch, seeds])
+    if (seedBanks.length === 0) {
+      dispatch(getSeedBanks())
+    }
+  }, [dispatch, seeds, seedBanks])
 
   const handleSeedBankChange = (value) => {
     const selectedSeed = seeds.find((seed) => seed._id === value)
     const seedBankName = selectedSeed ? selectedSeed.seedBank : null
-    setSelectedSeedBank(seedBankName) // Guardar el nombre del seedBank
-    form.setFieldsValue({ seedBank: seedBankName }) // Actualizar el valor del formulario
+    setSelectedSeedBank(value) // Guardar el valor seleccionado directamente
+    form.setFieldsValue({ seedBank: value }) // Actualizar el valor del formulario
   }
 
   const handleOk = () => {
@@ -50,7 +55,7 @@ const AddSeedModal = ({ visible, onCancel, onAddSeed }) => {
       form.resetFields()
       setFileList([])
       setSelectedSeedBank(null) // Reiniciar el estado del seedBank seleccionado
-      router.push('/production') // Redirigir a la página de semillas
+      dispatch(getSeeds())
     })
   }
 
@@ -86,9 +91,9 @@ const AddSeedModal = ({ visible, onCancel, onAddSeed }) => {
                 onChange={handleSeedBankChange} // Manejar el cambio de selección
                 value={selectedSeedBank} // Establecer el valor del select
               >
-                {seeds.map((seed) => (
-                  <Option key={seed._id} value={seed._id}>
-                    {seed.seedBank}
+                {seedBanks.map((seedBank) => (
+                  <Option key={seedBank._id} value={seedBank.name}>
+                    {seedBank.name}
                   </Option>
                 ))}
               </Select>

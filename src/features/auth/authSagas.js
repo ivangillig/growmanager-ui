@@ -21,11 +21,13 @@ function* loginSaga(payload) {
 
 function* logoutSaga() {
   try {
-    yield call(signOutRequest)
-    localStorage.removeItem('token')
-    localStorage.removeItem('user')
-    yield put(logoutSuccess())
+    const response = yield call(signOutRequest)
+    if (response) {
+      localStorage.removeItem('token')
+      localStorage.removeItem('user')
+    }
     Router.push('/login')
+    yield put(logoutSuccess())
   } catch (error) {
     // error handler
   }

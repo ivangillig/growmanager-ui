@@ -16,7 +16,7 @@ const reducers = combineReducers({
 
 const rootReducer = (state, action) => {
   if (action.type === LOGOUT_SUCCESS) {
-    state = undefined
+    state.auth = undefined
   }
 
   return reducers(state, action)

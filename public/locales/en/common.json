@@ -114,5 +114,10 @@
   "Input fertilizer dose": "Input fertilizer dose",
   "Input the soil humidity": "Input the soil humidity",
   "Input the plant height": "Input the plant height",
-  "Input ambient temperature (°C)": "Input ambient temperature (°C)"
+  "Input ambient temperature (°C)": "Input ambient temperature (°C)",
+  "New Organization": "New Organization",
+  "Please input the organization name!": "Please input the organization name!",
+  "Organization Name": "Organization Name",
+  "Description (optional)": "Description (optional)",
+  "Create": "Create"
 }

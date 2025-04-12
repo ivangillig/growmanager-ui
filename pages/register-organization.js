@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { registerOrganizationRequest } from '../src/features/organization/organizationActions'
 import { useTranslation } from 'next-i18next'
+import Image from 'next/image'
 
 const { Title } = Typography
 
@@ -28,8 +29,11 @@ const RegisterOrganization = () => {
   return (
     <div className={'container'}>
       <div className={'registerBox'}>
+        <div className={'logo'}>
+          <Image src="/images/logo.png" alt="GrowManager Logo" width={150} height={150} />
+        </div>
         <Title level={2} className={'appTitle'}>
-          {t('Register Organization')}
+          {t('New Organization')}
         </Title>
         <Form
           name="registerOrganization"
@@ -53,7 +57,7 @@ const RegisterOrganization = () => {
           </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit" block>
-              {t('Register')}
+              {t('Create')}
             </Button>
           </Form.Item>
         </Form>

@@ -162,5 +162,10 @@
   "Input the soil humidity": "Ingrese la humedad del suelo",
   "Input the plant height": "Ingrese la altura de la planta",
   "Input ambient temperature": "Ingrese la temperatura ambiental",
-  "Select training technique": "Seleccione la técnica de entrenamiento"
+  "Select training technique": "Seleccione la técnica de entrenamiento",
+  "New Organization": "Nueva Organización",
+  "Please input the organization name!": "¡Por favor ingrese el nombre de la organización!",
+  "Organization Name": "Nombre de la Organización",
+  "Description (optional)": "Descripción (opcional)",
+  "Create": "Crear"
 }

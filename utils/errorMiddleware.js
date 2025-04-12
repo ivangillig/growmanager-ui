@@ -17,7 +17,17 @@ export const handleApiErrors = (error, store) => {
         // Manejo de error 401 - No autorizado
         switch (data?.message) {
           case 'ERROR_ORGANIZATION_REQUIRED':
-            window.location.href = '/register-organization'
+            {
+              (window.location.href = '/register-organization')
+              // store.dispatch(
+              //   showMessage({
+              //     type: 'error',
+              //     summary: 'Organization Required',
+              //     detail:
+              //       'You need to register an organization to access this resource.',
+              //   })
+              // )
+            }
             break
           case 'ERROR_SESSION_EXPIRED':
             store.dispatch(

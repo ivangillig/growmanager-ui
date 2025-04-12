@@ -21,22 +21,16 @@ async function getInitialProps({ Component, ctx }) {
 
 function MyApp({ Component, pageProps, ...rest }) {
   const { store, props } = wrapper.useWrappedStore(rest)
-  const router = useRouter()
 
-  const isLoginPage = router.pathname === '/login'
+  const getLayout =
+    Component.getLayout || ((page) => <MainLayout>{page}</MainLayout>)
 
   return (
     <Provider store={store}>
       <ConfigProvider theme={{ hashed: false }}>
         <App>
-          {isLoginPage ? (
-            <Component {...props.pageProps} />
-          ) : (
-            <MainLayout>
-              <Component {...props.pageProps} />
-              <Notifications />
-            </MainLayout>
-          )}
+          {getLayout(<Component {...props.pageProps} />)}
+          <Notifications />
         </App>
       </ConfigProvider>
     </Provider>

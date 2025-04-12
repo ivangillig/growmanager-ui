@@ -54,7 +54,7 @@ const BatchModal = ({ visible, onCancel, onAddBatch }) => {
             placeholder={t('Select a genetic')}
             onChange={handleSeedChange}
           >
-            {seeds.map((seed) => (
+            {seeds && seeds.map((seed) => (
               <Option key={seed._id} value={seed._id}>
                 {`${seed.seedBank} - ${seed.genetic}`}
               </Option>

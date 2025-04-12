@@ -18,7 +18,7 @@ const Login = (props) => {
 
   useEffect(() => {
     if (loginSuccess) {
-      router.push('/dashboard')
+      router.push('/production') // TODO: this sould be done by middleware
     }
   }, [loginSuccess, router])
 
@@ -83,5 +83,7 @@ const Login = (props) => {
     </div>
   )
 }
+
+Login.getLayout = (page) => <>{page}</>
 
 export default Login

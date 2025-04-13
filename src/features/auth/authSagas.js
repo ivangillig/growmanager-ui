@@ -14,22 +14,33 @@ function* loginSaga(payload) {
     localStorage.setItem('user', JSON.stringify(user))
 
     yield put(loginSuccess({ token, user }))
+
+    const homeRoute = getHomeForRole(user.role, ROLE_TO_HOME_MAPPING)
+    Router.push(homeRoute)
   } catch (error) {
     // error handler
   }
 }
 
 function* logoutSaga() {
-  try {
-    const response = yield call(signOutRequest)
-    if (response) {
-      localStorage.removeItem('token')
-      localStorage.removeItem('user')
+  let response
+  if (
+    window.localStorage.getItem('token') ||
+    Axios.defaults.headers.common['Authorization']
+  ) {
+    window.loggingOut = true //flag to signal the intention, in case request fails
+    try {
+      response = yield call(signOutRequest)
+      if (response) {
+        localStorage.removeItem('token')
+        localStorage.removeItem('user')
+        delete Axios.defaults.headers.common['Authorization']
+      }
+      Router.push('/login')
+      yield put(logoutSuccess())
+    } catch (error) {
+      // silently ignore error, most probably failed due to an expired token
     }
-    Router.push('/login')
-    yield put(logoutSuccess())
-  } catch (error) {
-    // error handler
   }
 }
 
@@ -42,8 +53,5 @@ export function* watchLogoutSaga() {
 }
 
 export default function* rootSaga() {
-  yield all([
-    fork(watchLoginSaga),
-    fork(watchLogoutSaga),
-  ])
+  yield all([fork(watchLoginSaga), fork(watchLogoutSaga)])
 }

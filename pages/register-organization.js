@@ -5,6 +5,8 @@ import { useRouter } from 'next/router'
 import { registerOrganizationRequest } from '../src/features/organization/organizationActions'
 import { useTranslation } from 'next-i18next'
 import Image from 'next/image'
+import redirectByRole from '../src/hoc/redirectByRole'
+import { ROLES } from '../src/constants/Roles'
 
 const { Title } = Typography
 
@@ -30,7 +32,12 @@ const RegisterOrganization = () => {
     <div className={'container'}>
       <div className={'registerBox'}>
         <div className={'logo'}>
-          <Image src="/images/logo.png" alt="GrowManager Logo" width={150} height={150} />
+          <Image
+            src="/images/logo.png"
+            alt="GrowManager Logo"
+            width={150}
+            height={150}
+          />
         </div>
         <Title level={2} className={'appTitle'}>
           {t('New Organization')}
@@ -66,6 +73,9 @@ const RegisterOrganization = () => {
   )
 }
 
-RegisterOrganization.getLayout = (page) => <>{page}</>
-
-export default RegisterOrganization
+export default redirectByRole(RegisterOrganization, [
+  ROLES.ADMIN,
+  ROLES.GROWER,
+  ROLES.SELLER,
+  ROLES.PATIENT,
+])

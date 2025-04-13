@@ -3,23 +3,26 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   LOGOUT_SUCCESS,
-} from "../../constants/ActionsTypes";
+} from '../../constants/ActionsTypes'
 
 const initialState = {
-  user: {
-    id: null,
-    email: null,
-  },
-  token: null,
+  token:
+    typeof window !== 'undefined'
+      ? localStorage.getItem('token') || null
+      : null,
+  user:
+    typeof window !== 'undefined'
+      ? JSON.parse(localStorage.getItem('user') || 'null')
+      : null,
   loading: false,
   error: null,
   loginSuccess: false,
-};
+}
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_REQUEST:
-      return { ...state, loading: true, error: null };
+      return { ...state, loading: true, error: null }
     case LOGIN_SUCCESS:
       return {
         ...state,
@@ -31,14 +34,14 @@ const authReducer = (state = initialState, action) => {
         token: action.payload.token,
         role: action.payload.user.role,
         loginSuccess: true,
-      };
+      }
     case LOGIN_FAILURE:
-      return { ...state, loading: false, error: action.payload };
+      return { ...state, loading: false, error: action.payload }
     case LOGOUT_SUCCESS:
-      return initialState;
+      return initialState
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default authReducer;
+export default authReducer

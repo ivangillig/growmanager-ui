@@ -7,10 +7,12 @@ import { useTranslation } from 'next-i18next'
 import { FaSeedling, FaUser } from 'react-icons/fa'
 import { MdAgriculture, MdDashboard } from 'react-icons/md'
 import { IoSettingsSharp } from 'react-icons/io5'
+import redirectByRole from '../../src/hoc/redirectByRole'
+import { ROLES } from '../../src/constants/Roles'
 
 const { Footer, Sider } = Layout
 
-export default function MainLayout({ children }) {
+function MainLayout({ children }) {
   const { t } = useTranslation()
   const router = useRouter()
   const [collapsed, setCollapsed] = useState(false)
@@ -72,3 +74,10 @@ export default function MainLayout({ children }) {
     </Layout>
   )
 }
+
+export default redirectByRole(MainLayout, [
+  ROLES.ADMIN,
+  ROLES.GROWER,
+  ROLES.SELLER,
+  ROLES.PATIENT,
+])

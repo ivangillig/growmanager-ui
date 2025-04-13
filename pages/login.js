@@ -1,8 +1,6 @@
 import { Form, Input, Button, Typography } from 'antd'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import Image from 'next/image'
-import { useEffect } from 'react'
-import { useRouter } from 'next/router'
 import { loginRequest } from '../src/features/auth/authActions'
 import { useTranslation } from 'next-i18next'
 import { FaRegUserCircle } from 'react-icons/fa'
@@ -13,14 +11,6 @@ const { Title } = Typography
 const Login = (props) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const router = useRouter()
-  const loginSuccess = useSelector((state) => state.auth.loginSuccess)
-
-  useEffect(() => {
-    if (loginSuccess) {
-      router.push('/production') // TODO: this sould be done by middleware
-    }
-  }, [loginSuccess, router])
 
   const handleSubmit = (values) => {
     dispatch(loginRequest(values))

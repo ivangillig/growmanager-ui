@@ -6,8 +6,9 @@ import { getSeeds, addSeed } from '../src/features/seed/seedActions'
 import SeedCard from '../components/Seeds/SeedCard'
 import AddSeedModal from '../components/Seeds/AddSeedModal'
 import { useTranslation } from 'next-i18next'
+import AppRoot from '../src/hoc/AppRoot'
 
-export default function SeedsPage() {
+function SeedsPage() {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const seeds = useSelector((state) => state.seed.seeds || [])
@@ -25,7 +26,7 @@ export default function SeedsPage() {
   const handleSearch = (value) => {}
 
   return (
-    <>
+    <AppRoot>
       <Row className="header" gutter={[16, 16]}>
         <Col xs={24} sm={12}>
           <Breadcrumb>
@@ -68,6 +69,8 @@ export default function SeedsPage() {
         onCancel={() => setIsModalVisible(false)}
         onAddSeed={handleAddSeed}
       />
-    </>
+    </AppRoot>
   )
 }
+
+export default SeedsPage

@@ -1,4 +1,5 @@
 export const ROLES = {
+  UNAUTHENTICATED: '_UNAUTHENTICATED',
   ADMIN: 'admin',
   GROWER: 'grower',
   SELLER: 'seller',

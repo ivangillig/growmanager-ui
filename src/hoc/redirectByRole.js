@@ -34,7 +34,7 @@ function redirectByRole(
     }
 
     render() {
-      const access = isRoleAllowed(this.props.auth, authorizedRoles)
+      const access = isRoleAllowed(this.props.auth.user, authorizedRoles)
       return access ? <WrappedComponent {...this.props} /> : null
     }
   }

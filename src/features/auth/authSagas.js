@@ -36,7 +36,7 @@ function* logoutSaga() {
         localStorage.removeItem('user')
         delete Axios.defaults.headers.common['Authorization']
       }
-      Router.push('/login')
+      Router.push('/')
       yield put(logoutSuccess())
     } catch (error) {
       // silently ignore error, most probably failed due to an expired token

@@ -1,7 +1,8 @@
 import { Layout, Button } from 'antd'
 import Image from 'next/image'
 import { useTranslation } from 'next-i18next'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
 import {
   RiMenuFold3Fill,
   RiMenuFold4Fill,
@@ -14,6 +15,16 @@ const { Header } = Layout
 export default function CustomHeader({ collapsed, setCollapsed }) {
   const { t } = useTranslation()
   const dispatch = useDispatch()
+  const auth = useSelector((state) => state.auth)
+  const [organizationName, setOrganizationName] = useState('')
+
+  useEffect(() => {
+    const orgName =
+      auth?.user?.organization?.name ||
+      localStorage.getItem('organizationName') ||
+      'GrowManager'
+    setOrganizationName(orgName)
+  }, [auth])
 
   const handleLogout = () => {
     dispatch(logout())
@@ -39,7 +50,7 @@ export default function CustomHeader({ collapsed, setCollapsed }) {
             width={40}
             height={40}
           />
-          <span className="logo-text">GrowManager</span>
+          <span className="logo-text">{organizationName}</span>
         </div>
       </div>
       <Button

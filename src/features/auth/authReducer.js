@@ -31,6 +31,7 @@ const authReducer = (state = initialState, action) => {
           id: action.payload.user.id,
           email: action.payload.user.email,
           role: action.payload.user.role,
+          organization: action.payload.user.organization,
         },
         token: action.payload.token,
         loginSuccess: true,

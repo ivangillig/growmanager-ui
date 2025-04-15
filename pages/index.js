@@ -17,7 +17,6 @@ const Login = (props) => {
     dispatch(loginRequest(values))
   }
 
-  console.log('asd')
   return (
     <div className={'container'}>
       <div className={'loginBox'}>

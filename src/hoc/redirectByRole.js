@@ -15,13 +15,10 @@ function redirectByRole(
       const { auth, router } = this.props
       const { user } = auth
 
-      console.log(user, authorizedRoles)
       if (!isRoleAllowed(user, authorizedRoles)) {
         if (!isLoggedIn(auth)) {
-            console.log('push to login')
           router.push('/')
         } else {
-            console.log('asfafaf')
           router.push(getHomeForRole(user.role, roleToHomeMapping))
         }
       }
@@ -34,8 +31,8 @@ function redirectByRole(
     }
 
     render() {
-      const access = isRoleAllowed(this.props.auth.user, authorizedRoles)
-      return access ? <WrappedComponent {...this.props} /> : null
+      const access = isRoleAllowed(this.props.auth, authorizedRoles)
+      return <>{access && <WrappedComponent {...this.props} />}</>
     }
   }
 

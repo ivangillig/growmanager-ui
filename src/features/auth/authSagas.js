@@ -3,6 +3,7 @@ import { LOGIN_REQUEST, LOGOUT_REQUEST } from '../../constants/ActionsTypes'
 import { loginSuccess, logoutSuccess } from './authActions'
 import { signIn, signOutRequest } from './authApi'
 import Router from 'next/router'
+import { getHomeForRole } from '@/lib/AuthUtils'
 
 function* loginSaga(payload) {
   const { credentials } = payload
@@ -15,7 +16,7 @@ function* loginSaga(payload) {
 
     yield put(loginSuccess({ token, user }))
 
-    const homeRoute = getHomeForRole(user.role, ROLE_TO_HOME_MAPPING)
+    const homeRoute = getHomeForRole(user.role)
     Router.push(homeRoute)
   } catch (error) {
     // error handler
@@ -28,7 +29,7 @@ function* logoutSaga() {
     window.localStorage.getItem('token') ||
     Axios.defaults.headers.common['Authorization']
   ) {
-    window.loggingOut = true //flag to signal the intention, in case request fails
+    window.loggingOut = true // flag to signal the intention, in case request fails
     try {
       response = yield call(signOutRequest)
       if (response) {

@@ -1,6 +1,7 @@
 {
   "ERROR_SEED_ID_REQUIRED": "Se requiere el ID de la semilla",
   "ERROR_SESSION_EXPIRED": "Sesión expirada",
+  "ERROR_INVALID_CREDENTIALS": "Nombre de usuario o contraseña inválidos. Por favor intente nuevamente.",
   "home": "Inicio",
   "production": "Producción",
   "addBatch": "Agregar Lote",

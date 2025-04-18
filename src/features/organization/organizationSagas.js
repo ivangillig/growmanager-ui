@@ -1,20 +1,17 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
-import {
-  registerOrganizationRequest,
-  registerOrganizationSuccess,
-  registerOrganizationFailure,
-} from './organizationActions'
+import { REGISTER_ORGANIZATION_REQUEST } from '../../constants/ActionsTypes'
+import { registerOrganizationSuccess } from './organizationActions'
 import { registerOrganizationApi } from './organizationApi'
 
 function* registerOrganizationSaga(action) {
   try {
     const response = yield call(registerOrganizationApi, action.payload)
-    yield put(registerOrganizationSuccess(response.data))
+    yield put(registerOrganizationSuccess(response.organization))
   } catch (error) {
-    yield put(registerOrganizationFailure(error.message))
+    // handled in the middleware
   }
 }
 
 export default function* organizationSagas() {
-  yield takeLatest(registerOrganizationRequest.type, registerOrganizationSaga)
+  yield takeLatest(REGISTER_ORGANIZATION_REQUEST, registerOrganizationSaga)
 }

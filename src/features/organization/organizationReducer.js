@@ -1,9 +1,8 @@
-import { createReducer } from '@reduxjs/toolkit'
 import {
-  registerOrganizationRequest,
-  registerOrganizationSuccess,
-  registerOrganizationFailure,
-} from './organizationActions'
+  REGISTER_ORGANIZATION_REQUEST,
+  REGISTER_ORGANIZATION_SUCCESS,
+  REGISTER_ORGANIZATION_FAILURE,
+} from '../../constants/ActionsTypes'
 
 const initialState = {
   registerSuccess: false,
@@ -11,20 +10,29 @@ const initialState = {
   error: null,
 }
 
-const organizationReducer = createReducer(initialState, (builder) => {
-  builder
-    .addCase(registerOrganizationRequest, (state) => {
-      state.loading = true
-      state.error = null
-    })
-    .addCase(registerOrganizationSuccess, (state) => {
-      state.loading = false
-      state.registerSuccess = true
-    })
-    .addCase(registerOrganizationFailure, (state, action) => {
-      state.loading = false
-      state.error = action.payload
-    })
-})
+const organizationReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case REGISTER_ORGANIZATION_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      }
+    case REGISTER_ORGANIZATION_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        registerSuccess: true,
+      }
+    case REGISTER_ORGANIZATION_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      }
+    default:
+      return state
+  }
+}
 
 export default organizationReducer

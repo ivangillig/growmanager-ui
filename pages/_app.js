@@ -6,7 +6,7 @@ import 'antd/dist/reset.css'
 import '../styles/index.less'
 import '../lib/i18n'
 import Notifications from '@/components/Common/Notifications'
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'
 
 async function getInitialProps({ Component, ctx }) {
   let pageProps = {}
@@ -20,14 +20,14 @@ async function getInitialProps({ Component, ctx }) {
 
 function MyApp({ Component, pageProps, ...rest }) {
   const { store, props } = wrapper.useWrappedStore(rest)
-  const [isMounted, setIsMounted] = useState(false);
+  const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
-    setIsMounted(true);
-  }, []);
+    setIsMounted(true)
+  }, [])
 
   if (!isMounted) {
-    return null;
+    return null
   }
 
   return (

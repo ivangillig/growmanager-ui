@@ -4,6 +4,7 @@ import { loginSuccess, logoutSuccess } from './authActions'
 import { signIn, signOutRequest } from './authApi'
 import Router from 'next/router'
 import { getHomeForRole } from '@/lib/AuthUtils'
+import axios from 'axios'
 
 function* loginSaga(payload) {
   const { credentials } = payload
@@ -27,7 +28,7 @@ function* logoutSaga() {
   let response
   if (
     window.localStorage.getItem('token') ||
-    Axios.defaults.headers.common['Authorization']
+    axios.defaults.headers.common['Authorization']
   ) {
     window.loggingOut = true // flag to signal the intention, in case request fails
     try {
@@ -35,7 +36,7 @@ function* logoutSaga() {
       if (response) {
         localStorage.removeItem('token')
         localStorage.removeItem('user')
-        delete Axios.defaults.headers.common['Authorization']
+        delete axios.defaults.headers.common['Authorization']
       }
       Router.push('/')
       yield put(logoutSuccess())

@@ -15,9 +15,11 @@ function redirectByRole(
       const { auth, router } = this.props
       const { user } = auth
 
-      if (!isRoleAllowed(user, authorizedRoles)) {
+      if (!isRoleAllowed(auth, authorizedRoles)) {
         if (!isLoggedIn(auth)) {
           router.push('/')
+        } else if (user && !user.organziation) {
+          router.push('/register-organization')
         } else {
           router.push(getHomeForRole(user.role, roleToHomeMapping))
         }

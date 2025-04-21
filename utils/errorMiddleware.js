@@ -5,7 +5,7 @@ export const handleApiErrors = (error, store) => {
   if (error.response) {
     const { status, data } = error.response
     let message = 'Error communicating with server'
-    
+
     if (data && data.message) {
       message = data.message
     } else if (data && data.errors && data.errors.length > 0) {
@@ -15,15 +15,42 @@ export const handleApiErrors = (error, store) => {
     switch (status) {
       case 401:
         // Manejo de error 401 - No autorizado
-        if (!error.response.config.url.includes('/auth/logout')) {
-          store.dispatch(
-            showMessage({
-              type: 'error',
-              summary: 'Error',
-              detail: message,
-            })
-          )
-          store.dispatch(logout())
+        switch (data?.message) {
+          case 'ERROR_ORGANIZATION_REQUIRED':
+            {
+              (window.location.href = '/register-organization')
+              // store.dispatch(
+              //   showMessage({
+              //     type: 'error',
+              //     summary: 'Organization Required',
+              //     detail:
+              //       'You need to register an organization to access this resource.',
+              //   })
+              // )
+            }
+            break
+          case 'ERROR_SESSION_EXPIRED':
+            store.dispatch(
+              showMessage({
+                type: 'error',
+                summary: 'Session Expired',
+                detail: 'Your session has expired. Please log in again.',
+              })
+            )
+            store.dispatch(logout())
+            break
+          default:
+            if (!error.response.config.url.includes('/auth/logout')) {
+              store.dispatch(
+                showMessage({
+                  type: 'error',
+                  summary: 'Error',
+                  detail: message,
+                })
+              )
+              store.dispatch(logout())
+            }
+            break
         }
         break
       case 403:
@@ -32,7 +59,7 @@ export const handleApiErrors = (error, store) => {
           showMessage({
             type: 'error',
             summary: 'Error',
-            detail: 'You are not authorized to access the resource',
+            detail: message,
           })
         )
         break

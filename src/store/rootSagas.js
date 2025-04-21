@@ -1,8 +1,9 @@
 import { all } from 'redux-saga/effects'
-import productSagas from '../features/seed/seedSagas'
 import authSagas from '../features/auth/authSagas'
 import batchSagas from '../features/batch/batchSagas'
+import seedSagas from '../features/seed/seedSagas'
+import organizationSagas from '../features/organization/organizationSagas'
 
-export default function* rootSaga() {
-  yield all([authSagas(), productSagas(), batchSagas()])
+export default function* rootSagas() {
+  yield all([authSagas(), batchSagas(), seedSagas(), organizationSagas()])
 }

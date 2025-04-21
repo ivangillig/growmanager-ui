@@ -25,8 +25,9 @@ import BatchModal from '../components/Production/CreateBatchModal'
 import UpdateBatchModal from '../components/Production/UpdateBatchModal'
 import BatchLogTable from '../components/BatchLogs/BatchLogTable'
 import { MdDelete, MdEdit, MdLibraryAdd, MdHistory } from 'react-icons/md'
+import AppRoot from '../src/hoc/AppRoot'
 
-export default function ProductionPage() {
+function ProductionPage() {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const batches = useSelector((state) => state.batch?.batches || [])
@@ -37,7 +38,7 @@ export default function ProductionPage() {
 
   useEffect(() => {
     dispatch(fetchBatches())
-  }, [dispatch, batches.length])
+  }, [dispatch])
 
   const handleAddBatch = (batchData) => {
     const formattedBatchData = {
@@ -131,7 +132,7 @@ export default function ProductionPage() {
   ]
 
   return (
-    <>
+    <AppRoot>
       <Row className="header" gutter={[16, 16]}>
         <Col xs={24} sm={12}>
           <Breadcrumb
@@ -163,7 +164,7 @@ export default function ProductionPage() {
       </Row>
       {editingBatch ? (
         <UpdateBatchModal
-        visible={isModalVisible}
+          visible={isModalVisible}
           onCancel={() => {
             setIsModalVisible(false)
             setEditingBatch(null)
@@ -173,7 +174,7 @@ export default function ProductionPage() {
         />
       ) : (
         <BatchModal
-        visible={isModalVisible}
+          visible={isModalVisible}
           onCancel={() => setIsModalVisible(false)}
           onAddBatch={handleAddBatch}
         />
@@ -183,6 +184,8 @@ export default function ProductionPage() {
         isVisible={isLogModalVisible}
         onClose={() => setIsLogModalVisible(false)}
       />
-    </>
+    </AppRoot>
   )
 }
+
+export default ProductionPage

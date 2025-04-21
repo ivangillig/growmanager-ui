@@ -86,7 +86,7 @@ const UpdateBatchModal = ({ visible, onCancel, onUpdateBatch, batch }) => {
             rules={[{ required: true }]}
           >
             <Select onChange={handleSeedChange}>
-              {seeds.map((seed) => (
+              {seeds && seeds.map((seed) => (
                 <Option key={seed._id} value={seed._id}>
                   {`${seed.seedBank} - ${seed.genetic}`}
                 </Option>

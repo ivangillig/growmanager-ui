@@ -1,0 +1,96 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f7f0;
+}
+
+.registerBox {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.registerBox h1 {
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #333;
+}
+
+.logo {
+  font-size: 48px;
+  color: #2e7d32;
+  margin-bottom: 1rem;
+
+  img {
+    margin: auto;
+  }
+}
+
+.appTitle {
+  color: #2e7d32 !important;
+  font-weight: 600 !important;
+  margin-bottom: 2rem !important;
+  font-size: 1.8rem !important;
+}
+
+.inputGroup {
+  margin-bottom: 1rem;
+}
+
+.inputGroup label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #555;
+}
+
+.inputGroup input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.submitButton:hover {
+  background-color: #1b5e20;
+}
+
+.links {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.links a {
+  color: #2e7d32;
+  text-decoration: none;
+}
+
+.links a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .registerBox {
+    padding: 1.5rem;
+  }
+}

@@ -10,7 +10,7 @@ import { IoSettingsSharp } from 'react-icons/io5'
 
 const { Footer, Sider } = Layout
 
-export default function MainLayout({ children }) {
+function MainLayout({ children }) {
   const { t } = useTranslation()
   const router = useRouter()
   const [collapsed, setCollapsed] = useState(false)
@@ -72,3 +72,5 @@ export default function MainLayout({ children }) {
     </Layout>
   )
 }
+
+export default MainLayout

@@ -15,10 +15,8 @@ const BatchModal = ({ visible, onCancel, onAddBatch }) => {
   const [selectedSeed, setSelectedSeed] = useState(null)
 
   useEffect(() => {
-    if (seeds.length === 0) {
       dispatch(getSeeds())
-    }
-  }, [dispatch, seeds])
+  }, [dispatch])
 
   const handleOk = () => {
     form.validateFields().then((values) => {
@@ -54,7 +52,7 @@ const BatchModal = ({ visible, onCancel, onAddBatch }) => {
             placeholder={t('Select a genetic')}
             onChange={handleSeedChange}
           >
-            {seeds.map((seed) => (
+            {seeds && seeds.map((seed) => (
               <Option key={seed._id} value={seed._id}>
                 {`${seed.seedBank} - ${seed.genetic}`}
               </Option>

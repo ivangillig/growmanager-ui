@@ -38,8 +38,8 @@ const BatchLogTable = ({ batchId, isVisible, onClose }) => {
     dispatch(
       fetchBatchLogs({
         batchId,
-        limit: pagination.pageSize,
-        page: pagination.current,
+        limit: pagination.pageSize || 10,
+        page: pagination.current || 1,
         filter: filters,
         sort: { field: sortField, order: sortOrder },
       })

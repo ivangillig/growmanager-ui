@@ -1,15 +1,14 @@
 // components/Notifications.js
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { notification } from "antd";
-import { useTranslation } from "react-i18next";
-import { clearMessages } from "../../src/features/notifications/notificationActions";
+import { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { notification } from 'antd'
+import { useTranslation } from 'react-i18next'
+import { clearMessages } from '../../src/features/notifications/notificationActions'
 
 const Notifications = () => {
-  const { t } = useTranslation();
-  const messages = useSelector((state) => state.notification || []);
-  const dispatch = useDispatch();
-
+  const { t } = useTranslation()
+  const messages = useSelector((state) => state.notification || [])
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (messages.length > 0) {
@@ -18,15 +17,15 @@ const Notifications = () => {
           notification.open({
             message: t(msg.summary),
             description: t(msg.detail),
-            type: msg.type || "info",
-          });
+            type: msg.type || 'info',
+          })
         }
-      });
-      dispatch(clearMessages());
+      })
+      dispatch(clearMessages())
     }
-  }, [messages, t, dispatch]);
+  }, [messages, t, dispatch])
 
-  return null;
-};
+  return null
+}
 
-export default Notifications;
+export default Notifications

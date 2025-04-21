@@ -1,11 +1,11 @@
 import { Provider } from 'react-redux'
 import { wrapper } from '../src/store'
+import Notifications from '../components/Common/Notifications'
 import { App, ConfigProvider } from 'antd'
 import { appWithTranslation } from 'next-i18next'
 import 'antd/dist/reset.css'
 import '../styles/index.less'
 import '../lib/i18n'
-import Notifications from '../components/Common/Notifications'
 import { useState, useEffect } from 'react'
 
 async function getInitialProps({ Component, ctx }) {

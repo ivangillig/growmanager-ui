@@ -37,17 +37,17 @@ function* logoutSaga() {
     window.loggingOut = true // flag to signal the intention, in case request fails
     try {
       response = yield call(signOutRequest)
-      if (response) {
-        localStorage.removeItem('token')
-        localStorage.removeItem('user')
-        delete axios.defaults.headers.common['Authorization']
-        Router.push('/')
-        yield put(logoutSuccess())
-      }
     } catch (error) {
       // silently ignore error, most probably failed due to an expired token
     }
   }
+
+  // Ensure localStorage is cleared and reducer state is reset
+  localStorage.removeItem('token')
+  localStorage.removeItem('user')
+  delete axios.defaults.headers.common['Authorization']
+  Router.push('/')
+  yield put(logoutSuccess())
 }
 
 function* registerSaga(payload) {

@@ -14,18 +14,18 @@ import { showMessage } from '@/src/features/notifications/notificationActions'
 
 function* getSeedsSaga() {
   try {
-    const seeds = yield call(getSeedsApi)
+    const response = yield call(getSeedsApi)
 
-    if (seeds) {
-      yield put(getSeedsSuccess(seeds))
+    if (response) {
+      yield put(getSeedsSuccess(response.data))
     }
   } catch (error) {}
 }
 
 function* addSeedSaga(action) {
   try {
-    const seed = yield call(addSeedApi, action.payload)
-    yield put(addSeedSuccess(seed))
+    const response = yield call(addSeedApi, action.payload)
+    yield put(addSeedSuccess(response.data))
     yield put(
       showMessage([
         {

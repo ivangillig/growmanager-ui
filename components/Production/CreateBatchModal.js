@@ -15,10 +15,8 @@ const BatchModal = ({ visible, onCancel, onAddBatch }) => {
   const [selectedSeed, setSelectedSeed] = useState(null)
 
   useEffect(() => {
-    if (seeds.length === 0) {
       dispatch(getSeeds())
-    }
-  }, [dispatch, seeds])
+  }, [dispatch])
 
   const handleOk = () => {
     form.validateFields().then((values) => {

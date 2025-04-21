@@ -50,8 +50,8 @@ function* fetchBatchesSaga() {
 
 function* addBatchSaga({ payload }) {
   try {
-    const data = yield call(addBatchApi, payload)
-    yield put(addBatchSuccess(data))
+    const response = yield call(addBatchApi, payload)
+    yield put(addBatchSuccess(response.batch))
     yield put(
       showMessage([
         {

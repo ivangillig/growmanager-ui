@@ -8,7 +8,8 @@ export const ROLES = {
 }
 
 export const ROLE_TO_HOME_MAPPING = {
-  admin: '/dashboard',
+  admin: '/production',
+  // admin: '/dashboard',
   grower: '/production',
   seller: '/sales',
   patient: '/profile',

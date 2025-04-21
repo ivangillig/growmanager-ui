@@ -38,7 +38,7 @@ function ProductionPage() {
 
   useEffect(() => {
     dispatch(fetchBatches())
-  }, [dispatch, batches.length])
+  }, [dispatch])
 
   const handleAddBatch = (batchData) => {
     const formattedBatchData = {

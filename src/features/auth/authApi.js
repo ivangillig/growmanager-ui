@@ -1,19 +1,19 @@
 // app/api/auth.js
-import axios from "axios";
-import getConfig from "next/config";
-const { publicRuntimeConfig } = getConfig();
-const { BASE_URL } = publicRuntimeConfig;
+import axios from 'axios'
+import getConfig from 'next/config'
+const { publicRuntimeConfig } = getConfig()
+const { BASE_URL } = publicRuntimeConfig
 
 export const getUserInfoApi = async () => {
   try {
     const response = await axios.get(`${BASE_URL}/api/auth/getUserInfo`, {
       withCredentials: true,
-    });
-    return response.data;
+    })
+    return response.data
   } catch (error) {
-    throw error;
+    throw error
   }
-};
+}
 
 export const signOutRequest = async () => {
   try {
@@ -21,20 +21,39 @@ export const signOutRequest = async () => {
       `${BASE_URL}/api/auth/logout`,
       {},
       { withCredentials: true }
-    );
-    return response.data;
+    )
+    return response.data
   } catch (error) {
-    throw error;
+    throw error
   }
-};
+}
 
 export const signIn = async (credentials) => {
   try {
-    const response = await axios.post(`${BASE_URL}/api/auth/login`, credentials, {
-      withCredentials: true,
-    });
-    return response.data;
+    const response = await axios.post(
+      `${BASE_URL}/api/auth/login`,
+      credentials,
+      {
+        withCredentials: true,
+      }
+    )
+    return response.data
   } catch (error) {
-    throw error;
+    throw error
   }
-};
+}
+
+export const registerUser = async (credentials) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}/api/auth/register`,
+      credentials,
+      {
+        withCredentials: true,
+      }
+    )
+    return response.data
+  } catch (error) {
+    throw error
+  }
+}

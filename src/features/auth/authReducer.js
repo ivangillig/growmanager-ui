@@ -3,6 +3,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   LOGOUT_SUCCESS,
+  REGISTER_SUCCESS,
   REGISTER_ORGANIZATION_SUCCESS,
 } from '../../constants/ActionsTypes'
 
@@ -25,6 +26,19 @@ const authReducer = (state = initialState, action) => {
     case LOGIN_REQUEST:
       return { ...state, loading: true, error: null }
     case LOGIN_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        user: {
+          id: action.payload.user.id,
+          email: action.payload.user.email,
+          role: action.payload.user.role,
+          organization: action.payload.user.organization,
+        },
+        token: action.payload.token,
+        loginSuccess: true,
+      }
+    case REGISTER_SUCCESS:
       return {
         ...state,
         loading: false,

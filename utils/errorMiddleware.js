@@ -59,7 +59,7 @@ export const handleApiErrors = (error, store) => {
           showMessage({
             type: 'error',
             summary: 'Error',
-            detail: 'You are not authorized to access the resource',
+            detail: message,
           })
         )
         break

@@ -1,6 +1,6 @@
 import { Provider } from 'react-redux'
 import { wrapper } from '../src/store'
-import Notifications from '../components/Common/Notifications.js'
+import Notifications from './../components/Common/Notifications'
 import { App, ConfigProvider } from 'antd'
 import { appWithTranslation } from 'next-i18next'
 import 'antd/dist/reset.css'

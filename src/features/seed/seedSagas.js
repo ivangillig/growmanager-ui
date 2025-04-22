@@ -25,7 +25,7 @@ function* getSeedsSaga() {
 function* addSeedSaga(action) {
   try {
     const response = yield call(addSeedApi, action.payload)
-    yield put(addSeedSuccess(response.data))
+    yield put(addSeedSuccess(response.seed))
     yield put(
       showMessage([
         {

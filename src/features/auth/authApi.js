@@ -1,12 +1,9 @@
 // app/api/auth.js
 import axios from 'axios'
-import getConfig from 'next/config'
-const { publicRuntimeConfig } = getConfig()
-const { BASE_URL } = publicRuntimeConfig
 
 export const getUserInfoApi = async () => {
   try {
-    const response = await axios.get(`${BASE_URL}/api/auth/getUserInfo`, {
+    const response = await axios.get(`/api/auth/getUserInfo`, {
       withCredentials: true,
     })
     return response.data
@@ -18,7 +15,7 @@ export const getUserInfoApi = async () => {
 export const signOutRequest = async () => {
   try {
     const response = await axios.post(
-      `${BASE_URL}/api/auth/logout`,
+      `/api/auth/logout`,
       {},
       { withCredentials: true }
     )
@@ -31,7 +28,7 @@ export const signOutRequest = async () => {
 export const signIn = async (credentials) => {
   try {
     const response = await axios.post(
-      `${BASE_URL}/api/auth/login`,
+      `/api/auth/login`,
       credentials,
       {
         withCredentials: true,
@@ -46,7 +43,7 @@ export const signIn = async (credentials) => {
 export const registerUser = async (credentials) => {
   try {
     const response = await axios.post(
-      `${BASE_URL}/api/auth/register`,
+      `/api/auth/register`,
       credentials,
       {
         withCredentials: true,

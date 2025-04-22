@@ -4,7 +4,7 @@ import Notifications from '@/components/Common/toastMessages'
 import { App, ConfigProvider } from 'antd'
 import { appWithTranslation } from 'next-i18next'
 import 'antd/dist/reset.css'
-import '../styles/index.less'
+import '../src/styles/index.less'
 import '../lib/i18n'
 import { useState, useEffect } from 'react'
 

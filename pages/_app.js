@@ -1,6 +1,6 @@
 import { Provider } from 'react-redux'
 import { wrapper } from '../src/store'
-import toastNotifications from '@/components/Common/Notifications'
+import Notifications from '@/components/Common/toastMessages'
 import { App, ConfigProvider } from 'antd'
 import { appWithTranslation } from 'next-i18next'
 import 'antd/dist/reset.css'
@@ -35,7 +35,7 @@ function MyApp({ Component, pageProps, ...rest }) {
       <ConfigProvider theme={{ hashed: false }} store={store}>
         <App>
           <Component {...props.pageProps} />
-          <toastNotifications />
+          <Notifications />
         </App>
       </ConfigProvider>
     </Provider>

@@ -5,7 +5,7 @@ import { notification } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { clearMessages } from '../../src/features/notifications/notificationActions'
 
-const toastNotifications = () => {
+const toastMessages = () => {
   const { t } = useTranslation()
   const messages = useSelector((state) => state.notification || [])
   const dispatch = useDispatch()
@@ -28,4 +28,4 @@ const toastNotifications = () => {
   return null
 }
 
-export default toastNotifications
+export default toastMessages

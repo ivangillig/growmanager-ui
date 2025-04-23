@@ -66,4 +66,12 @@ export default function configureAxios(store) {
       return Promise.reject(error)
     }
   )
+
+  // Set initial token from store when loading a direct URL
+  if (typeof window !== 'undefined') {
+    const token = window.localStorage.getItem('token');
+    if (token) {
+      Axios.defaults.headers.common['Authorization'] = `${token}`;
+    }
+  }
 }

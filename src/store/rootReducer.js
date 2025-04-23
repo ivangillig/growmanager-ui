@@ -4,7 +4,7 @@ import seedReducer from '../features/seed/seedReducer'
 import batchReducer from '../features/batch/batchReducer'
 import notificationReducer from '../features/notifications/notificationReducer'
 import organizationReducer from '../features/organization/organizationReducer'
-import { LOGOUT_SUCCESS } from '../constants/ActionsTypes'
+import { LOGIN_REQUEST } from '../constants/ActionsTypes'
 
 const reducers = combineReducers({
   auth: authReducer,
@@ -15,7 +15,7 @@ const reducers = combineReducers({
 })
 
 const rootReducer = (state, action) => {
-  if (action.type === LOGOUT_SUCCESS) {
+  if (action.type === LOGIN_REQUEST) {
     state.auth = undefined
   }
 

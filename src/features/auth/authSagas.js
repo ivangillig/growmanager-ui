@@ -1,4 +1,4 @@
-import { takeLatest, put, call, all, fork } from 'redux-saga/effects'
+import { takeLatest, put, call, all, fork, takeEvery } from 'redux-saga/effects'
 import {
   LOGIN_REQUEST,
   LOGOUT_REQUEST,
@@ -12,39 +12,41 @@ import axios from 'axios'
 
 function* loginSaga(payload) {
   const { credentials } = payload
+  cleanupStorage()
   try {
     const response = yield call(signIn, credentials)
     const { token, user } = response
 
-    localStorage.setItem('token', token)
-    localStorage.setItem('user', JSON.stringify(user))
+    if (token) {
+      localStorage.setItem('token', token)
+      localStorage.setItem('user', JSON.stringify(user))
 
-    yield put(loginSuccess({ token, user }))
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+      yield put(loginSuccess({ token, user }))
+    }
 
     const homeRoute = getHomeForRole(user.role)
     Router.push(homeRoute)
-  } catch (error) {
+  } catch (err) {
     // error handler
   }
 }
 
 function* logoutSaga() {
-  let response
   if (
     window.localStorage.getItem('token') ||
     axios.defaults.headers.common['Authorization']
   ) {
     window.loggingOut = true // flag to signal the intention, in case request fails
     try {
-      response = yield call(signOutRequest)
+      yield call(signOutRequest)
     } catch (error) {
       // silently ignore error, most probably failed due to an expired token
     }
   }
 
   // Ensure localStorage is cleared and reducer state is reset
-  localStorage.removeItem('token')
-  localStorage.removeItem('user')
+  cleanupStorage()
   delete axios.defaults.headers.common['Authorization']
   Router.push('/')
   yield put(logoutSuccess())
@@ -69,7 +71,7 @@ function* registerSaga(payload) {
 }
 
 export function* watchLoginSaga() {
-  yield takeLatest(LOGIN_REQUEST, loginSaga)
+  yield takeEvery(LOGIN_REQUEST, loginSaga)
 }
 
 export function* watchLogoutSaga() {
@@ -86,4 +88,9 @@ export default function* rootSaga() {
     fork(watchLogoutSaga),
     fork(watchRegisterSaga),
   ])
+}
+
+export function cleanupStorage() {
+  localStorage.removeItem('token')
+  localStorage.removeItem('user')
 }

@@ -10,12 +10,12 @@ import {
 const initialState = {
   token:
     typeof window !== 'undefined'
-      ? localStorage.getItem('token') || null
-      : null,
+      ? localStorage.getItem('token') || undefined
+      : undefined,
   user:
     typeof window !== 'undefined'
-      ? JSON.parse(localStorage.getItem('user') || 'null')
-      : null,
+      ? JSON.parse(localStorage.getItem('user')) || undefined
+      : undefined,
   loading: false,
   error: null,
   loginSuccess: false,

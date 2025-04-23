@@ -40,20 +40,20 @@ const UpdateBatchModal = ({ visible, onCancel, onUpdateBatch, batch }) => {
         ...batch,
         germinationDate: batch.germinationDate
           ? dayjs(batch.germinationDate)
-          : null,
+          : undefined,
         firstTransplateDate: batch.firstTransplateDate
           ? dayjs(batch.firstTransplateDate)
-          : null,
+          : undefined,
         secondTransplateDate: batch.secondTransplateDate
           ? dayjs(batch.secondTransplateDate)
-          : null,
+          : undefined,
         photoperiodChangeDate: batch.photoperiodChangeDate
           ? dayjs(batch.photoperiodChangeDate)
-          : null,
-        cuttingDate: batch.cuttingDate ? dayjs(batch.cuttingDate) : null,
+          : undefined,
+        cuttingDate: batch.cuttingDate ? dayjs(batch.cuttingDate) : undefined,
         productionDate: batch.productionDate
           ? dayjs(batch.productionDate)
-          : null,
+          : undefined,
         seedId: seed ? seed?._id : undefined,
       }
       form.setFieldsValue(initialValues)
@@ -188,7 +188,7 @@ const UpdateBatchModal = ({ visible, onCancel, onUpdateBatch, batch }) => {
           <Form.Item name="curingTime" label={t('Curing Time (days)')}>
             <Input type="number" />
           </Form.Item>
-          <Form.Item name="qtyProduction" label={t('Quantity Produced (g)')}>
+          <Form.Item name="qtyProduced" label={t('Quantity Produced (g)')}>
             <Input type="number" />
           </Form.Item>
           <Row gutter={16}>

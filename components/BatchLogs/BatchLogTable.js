@@ -1,4 +1,4 @@
-import { Table, Modal, Button, Space, Tooltip, Row, Col } from 'antd'
+import { Table, Modal, Button, Tooltip, Row, Col, Empty } from 'antd'
 import { useTranslation } from 'next-i18next'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
@@ -14,7 +14,7 @@ const BatchLogTable = ({ batchId, isVisible, onClose }) => {
   const [isDrawerVisible, setIsDrawerVisible] = useState(false)
   const dispatch = useDispatch()
   const addBatchSuccess = useSelector((state) => state.batch.addBatchSuccess)
-  const { batchLogs, pagination } = useSelector((state) => state.batch)
+  const { batchLogs, pagination, loading } = useSelector((state) => state.batch)
   const [page, setPage] = useState(1)
   const [limit, setLimit] = useState(10)
 
@@ -231,6 +231,10 @@ const BatchLogTable = ({ batchId, isVisible, onClose }) => {
             total: pagination.total,
           }}
           onChange={handleTableChange}
+          loading={loading}
+          locale={{
+            emptyText: <Empty description={t('No registers found')} />,
+          }}
         />
       </Modal>
       <AddRecordDrawer

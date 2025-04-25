@@ -19,7 +19,6 @@ import {
   addBatch,
   deleteBatch,
   updateBatch,
-  fetchBatchLogs,
 } from '../src/features/batch/batchActions'
 import BatchModal from '../components/Production/CreateBatchModal'
 import UpdateBatchModal from '../components/Production/UpdateBatchModal'
@@ -76,7 +75,6 @@ function ProductionPage() {
   const handleViewHistoryClick = (batchId) => {
     if (batchId) {
       setSelectedBatchId(batchId)
-      dispatch(fetchBatchLogs({ batchId }))
       setIsLogModalVisible(true)
     }
   }

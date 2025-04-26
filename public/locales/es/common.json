@@ -190,5 +190,6 @@
   "ERROR_USER_ALREADY_EXISTS": "Ya existe un usuario con ese nombre o correo electrónico",
   "ERROR_UNAUTHORIZED": "No tienes permiso para acceder a este recurso",
   "ERROR_INVALID_TOKEN": "No tienes permiso para acceder a este recurso",
-  "SESSION_EXPIRED": "La sesión ha expirado. Por favor inicie sesión nuevamente"
+  "SESSION_EXPIRED": "La sesión ha expirado. Por favor inicie sesión nuevamente",
+  "ERROR_USER_ALREADY_HAS_ORGANIZATION": "El usuario ya tiene una organización asociada"
 }

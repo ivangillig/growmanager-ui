@@ -39,9 +39,9 @@ import {
 } from './batchApi'
 import { showMessage } from '../notifications/notificationActions'
 
-function* fetchBatchesSaga() {
+function* fetchBatchesSaga({payload} ) {
   try {
-    const batches = yield call(fetchBatchesApi)
+    const batches = yield call(fetchBatchesApi, payload)
     yield put(fetchBatchesSuccess(batches))
   } catch (error) {
     yield put(fetchBatchesError(error))

@@ -18,7 +18,7 @@ function redirectByRole(
       if (!isRoleAllowed(auth, authorizedRoles)) {
         if (!isLoggedIn(auth)) {
           router.push('/')
-        } else if (user && !user.organziation) {
+        } else if (user && !user.organization) {
           router.push('/register-organization')
         } else {
           router.push(getHomeForRole(user.role, roleToHomeMapping))

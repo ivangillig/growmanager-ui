@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useRouter } from 'next/router'
 import {
   Breadcrumb,
   Button,
@@ -29,15 +30,24 @@ import AppRoot from '../src/hoc/AppRoot'
 function ProductionPage() {
   const { t } = useTranslation()
   const dispatch = useDispatch()
+  const router = useRouter()
+  const { query } = router
   const batches = useSelector((state) => state.batch?.batches || [])
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [isLogModalVisible, setIsLogModalVisible] = useState(false)
   const [editingBatch, setEditingBatch] = useState(null)
   const [selectedBatchId, setSelectedBatchId] = useState(null)
+  const [searchTerm, setSearchTerm] = useState(query.search || '')
 
   useEffect(() => {
-    dispatch(fetchBatches())
-  }, [dispatch])
+    const params = {
+      page: query.page || 1,
+      limit: query.limit || 10,
+      search: query.search || undefined,
+    }
+    
+    dispatch(fetchBatches(params))
+  }, [dispatch, query])
 
   const handleAddBatch = (batchData) => {
     const formattedBatchData = {
@@ -77,6 +87,21 @@ function ProductionPage() {
       setSelectedBatchId(batchId)
       setIsLogModalVisible(true)
     }
+  }
+
+  const handleSearch = (value) => {
+    const updatedQuery = { ...query, search: value, page: 1 }
+    console.log(updatedQuery)
+    router.push({ pathname: '/production', query: updatedQuery })
+  }
+
+  const handleTableChange = (pagination) => {
+    const updatedQuery = {
+      ...query,
+      page: pagination.current,
+      limit: pagination.pageSize,
+    }
+    router.push({ pathname: '/production', query: updatedQuery })
   }
 
   const buildColumns = () => [
@@ -138,7 +163,12 @@ function ProductionPage() {
           />
         </Col>
         <Col xs={24} sm={12} className="actions">
-          <Input.Search placeholder={t('searchBatches')} />
+          <Input.Search
+            placeholder={t('searchBatches')}
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onSearch={handleSearch}
+          />
           <Button
             type="primary"
             icon={<MdLibraryAdd />}
@@ -157,6 +187,12 @@ function ProductionPage() {
             locale={{
               emptyText: <Empty description={t('No batches found')} />,
             }}
+            pagination={{
+              current: Number(query.page) || 1,
+              pageSize: Number(query.limit) || 10,
+              total: batches.total || 0,
+            }}
+            onChange={handleTableChange}
           />
         </Col>
       </Row>

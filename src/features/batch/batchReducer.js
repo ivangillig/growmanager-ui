@@ -52,7 +52,8 @@ export default function batchReducer(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        batches: action.payload,
+        batches: action.payload.batches,
+        pagination: action.payload.pagination || {},
       }
     case ADD_BATCH_SUCCESS:
       return {

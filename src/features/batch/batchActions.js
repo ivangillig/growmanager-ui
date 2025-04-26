@@ -25,8 +25,9 @@ import {
   FETCH_BATCH_LOGS_ERROR,
 } from '@/src/constants/ActionsTypes'
 
-export const fetchBatches = () => ({
+export const fetchBatches = (params) => ({
   type: FETCH_BATCHES_REQUEST,
+  payload: params,
 })
 
 export const fetchBatchesSuccess = (batches) => ({

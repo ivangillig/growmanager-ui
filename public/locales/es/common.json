@@ -200,5 +200,8 @@
   "ERROR_USER_ALREADY_HAS_ORGANIZATION": "El usuario ya tiene una organización asociada",
   "PASSWORD_UPDATED_SUCCESSFULLY": "Contraseña actualizada exitosamente",
   "ERROR_USER_NOT_FOUND": "Usuario no encontrado",
-  "SUCCESS_USER_UPDATED": "Usuario actualizado exitosamente"
+  "SUCCESS_USER_UPDATED": "Usuario actualizado exitosamente",
+  "Change Password": "Cambiar Contraseña",
+  "Please enter your first name": "Por favor ingrese su nombre",
+  "Please enter your last name": "Por favor ingrese su apellido"
 }

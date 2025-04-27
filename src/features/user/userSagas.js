@@ -28,13 +28,13 @@ function* updateUserSaga({ payload }) {
 
 function* updatePasswordSaga({ payload }) {
   try {
-    yield call(updatePasswordApi, payload)
-    yield put(updatePasswordSuccess())
+    const response = yield call(updatePasswordApi, payload)
+    yield put(updatePasswordSuccess(response.data))
     yield put(
       showMessage([
         {
           summary: 'Success',
-          detail: 'Password updated successfully',
+          detail: response.message,
           type: 'success',
         },
       ])

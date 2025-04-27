@@ -3,23 +3,38 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Breadcrumb, Button, Input, Row, Col, Form } from 'antd'
 import { useTranslation } from 'next-i18next'
 import AppRoot from '../src/hoc/AppRoot'
+import { updateUser } from '@/src/features/user/userActions'
+import PasswordChangeModal from '@/components/Common/PasswordChangeModal'
 
 function ProfilePage() {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const user = useSelector((state) => state.auth.user || {})
   const [form] = Form.useForm()
+  const [isPasswordChangeModalVisible, setPasswordChangeModalVisible] =
+    useState(false)
 
   useEffect(() => {
     form.setFieldsValue({
-      name: user.name,
+      username: user.username,
+      firstName: user.firstName,
+      lastName: user.lastName,
       email: user.email,
     })
   }, [user, form])
 
   const handleSaveChanges = (values) => {
-    console.log('Saved values:', values)
-    // Dispatch an action to save changes (to be implemented later)
+    dispatch(
+      updateUser({ firstName: values.firstName, lastName: values.lastName })
+    )
+  }
+
+  const handleOpenPasswordChangeModal = () => {
+    setPasswordChangeModalVisible(true)
+  }
+
+  const handleClosePasswordChangeModal = () => {
+    setPasswordChangeModalVisible(false)
   }
 
   return (
@@ -35,21 +50,34 @@ function ProfilePage() {
       <Row className="content" gutter={[16, 16]}>
         <Col span={8}>
           <Form form={form} layout="vertical" onFinish={handleSaveChanges}>
+            <Form.Item label={t('username')} name="username">
+              <Input disabled />
+            </Form.Item>
+            <Form.Item label={t('Email')} name="email">
+              <Input type="email" disabled />
+            </Form.Item>
             <Form.Item
-              label={t('Name')}
-              name="name"
-              rules={[{ required: true, message: t('Please enter your name') }]}
+              label={t('firstName')}
+              name="firstName"
+              rules={[
+                { required: true, message: t('Please enter your first name') },
+              ]}
             >
               <Input />
             </Form.Item>
             <Form.Item
-              label={t('Email')}
-              name="email"
+              label={t('lastName')}
+              name="lastName"
               rules={[
-                { required: true, message: t('Please enter your email') },
+                { required: true, message: t('Please enter your last name') },
               ]}
             >
-              <Input type="email" />
+              <Input />
+            </Form.Item>
+            <Form.Item>
+              <Button onClick={handleOpenPasswordChangeModal}>
+                {t('Change Password')}
+              </Button>
             </Form.Item>
             <Form.Item>
               <Button type="primary" htmlType="submit">
@@ -59,6 +87,10 @@ function ProfilePage() {
           </Form>
         </Col>
       </Row>
+      <PasswordChangeModal
+        visible={isPasswordChangeModalVisible}
+        onCancel={handleClosePasswordChangeModal}
+      />
     </AppRoot>
   )
 }

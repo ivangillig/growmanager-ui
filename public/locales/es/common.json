@@ -5,6 +5,11 @@
   "home": "Inicio",
   "Home": "Inicio",
   "Name": "Nombre",
+  "username": "Nombre de usuario",
+  "firstName": "Nombre",
+  "lastName": "Apellido",
+  "currentPassword": "Contraseña actual",
+  "newPassword": "Nueva contraseña",
   "Save Changes": "Guardar Cambios",
   "Email": "Correo electrónico",
   "production": "Producción",
@@ -184,6 +189,7 @@
   "Already have an account? Sign In": "¿Ya tienes una cuenta? Inicia sesión",
   "Please input your email!": "¡Por favor ingrese su correo electrónico!",
   "Please enter a valid email!": "¡Por favor ingrese un correo electrónico válido!",
+  "The required resource was not found": "No se encontró el recurso solicitado",
   "ERROR_PASSWORDS_DO_NOT_MATCH": "Las contraseñas no coinciden",
   "ERROR_INVALID_PASSWORD_FORMAT": "La contraseña debe tener al menos 8 caracteres, incluir una letra mayúscula, una letra minúscula, un número y un carácter especial",
   "ERROR_CREATING_USER": "Error al crear el usuario",
@@ -191,5 +197,8 @@
   "ERROR_UNAUTHORIZED": "No tienes permiso para acceder a este recurso",
   "ERROR_INVALID_TOKEN": "No tienes permiso para acceder a este recurso",
   "SESSION_EXPIRED": "La sesión ha expirado. Por favor inicie sesión nuevamente",
-  "ERROR_USER_ALREADY_HAS_ORGANIZATION": "El usuario ya tiene una organización asociada"
+  "ERROR_USER_ALREADY_HAS_ORGANIZATION": "El usuario ya tiene una organización asociada",
+  "PASSWORD_UPDATED_SUCCESSFULLY": "Contraseña actualizada exitosamente",
+  "ERROR_USER_NOT_FOUND": "Usuario no encontrado",
+  "SUCCESS_USER_UPDATED": "Usuario actualizado exitosamente"
 }

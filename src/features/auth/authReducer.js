@@ -3,6 +3,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   LOGOUT_SUCCESS,
+  UPDATE_USER_SUCCESS,
   REGISTER_SUCCESS,
   REGISTER_ORGANIZATION_SUCCESS,
 } from '../../constants/ActionsTypes'
@@ -29,12 +30,7 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        user: {
-          id: action.payload.user.id,
-          email: action.payload.user.email,
-          role: action.payload.user.role,
-          organization: action.payload.user.organization,
-        },
+        user: action.payload.user,
         token: action.payload.token,
         loginSuccess: true,
       }
@@ -42,12 +38,7 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        user: {
-          id: action.payload.user.id,
-          email: action.payload.user.email,
-          role: action.payload.user.role,
-          organization: action.payload.user.organization,
-        },
+        user: action.payload.user,
         token: action.payload.token,
         loginSuccess: true,
       }
@@ -62,6 +53,16 @@ const authReducer = (state = initialState, action) => {
           ...state.user,
           organization: action.payload,
         },
+      }
+    case UPDATE_USER_SUCCESS:
+      const updatedUser = { ...state.user, ...action.payload }
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('user', JSON.stringify(updatedUser))
+      }
+      return {
+        ...state,
+        loading: false,
+        user: updatedUser,
       }
     default:
       return state

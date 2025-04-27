@@ -113,7 +113,7 @@ const Register = (props) => {
           </Form.Item>
         </Form>
         <div className={'links'}>
-          <Button type="link" href="/login">
+          <Button type="link" href="/">
             {t('Already have an account? Sign In')}
           </Button>
         </div>

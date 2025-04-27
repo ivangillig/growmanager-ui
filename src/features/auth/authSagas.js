@@ -40,13 +40,13 @@ function* logoutSaga() {
     window.loggingOut = true // flag to signal the intention, in case request fails
     try {
       yield call(signOutRequest)
+      // Ensure localStorage is cleared and reducer state is reset
+      cleanupStorage()
     } catch (error) {
       // silently ignore error, most probably failed due to an expired token
     }
   }
 
-  // Ensure localStorage is cleared and reducer state is reset
-  cleanupStorage()
   delete axios.defaults.headers.common['Authorization']
   Router.push('/')
   yield put(logoutSuccess())

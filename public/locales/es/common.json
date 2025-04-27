@@ -9,7 +9,7 @@
   "Email": "Correo electrónico",
   "production": "Producción",
   "addBatch": "Agregar Lote",
-  "searchBatches": "Buscar lotes",
+  "searchBatches": "Buscar lotes por código",
   "batchAdded": "Lote agregado exitosamente",
   "batchDeleted": "Lote eliminado exitosamente",
   "confirmDelete": "¿Estás seguro de que deseas eliminar este lote?",

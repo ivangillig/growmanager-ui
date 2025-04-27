@@ -45,7 +45,7 @@ function ProductionPage() {
       limit: query.limit || 10,
       search: query.search || undefined,
     }
-    
+
     dispatch(fetchBatches(params))
   }, [dispatch, query])
 
@@ -95,24 +95,50 @@ function ProductionPage() {
     router.push({ pathname: '/production', query: updatedQuery })
   }
 
-  const handleTableChange = (pagination) => {
+  const handleTableChange = (pagination, filters) => {
     const updatedQuery = {
       ...query,
       page: pagination.current,
       limit: pagination.pageSize,
+      batchCode: filters.batchCode?.[0],
+      germinationDate: filters.germinationDate?.[0],
+      genetic: filters.genetic?.[0],
     }
     router.push({ pathname: '/production', query: updatedQuery })
   }
 
   const buildColumns = () => [
-    { title: t('BatchCode'), dataIndex: 'batchCode', key: 'batchCode' },
+    {
+      title: t('BatchCode'),
+      dataIndex: 'batchCode',
+      key: 'batchCode',
+      filters: [...new Set(batches.map((batch) => batch.batchCode))].map((batchCode) => ({
+        text: batchCode,
+        value: batchCode,
+      })),
+      onFilter: (value, record) => record.batchCode === value,
+    },
     {
       title: t('Germination Date'),
       dataIndex: 'germinationDate',
       key: 'germinationDate',
+      filters: [...new Set(batches.map((batch) => batch.germinationDate))].map((germinationDate) => ({
+        text: dayjs(germinationDate).format('DD-MM-YYYY'),
+        value: germinationDate,
+      })),
+      onFilter: (value, record) => record.germinationDate === value,
       render: (date) => dayjs(date).format('DD-MM-YYYY'),
     },
-    { title: t('Genetic'), dataIndex: ['seedId', 'genetic'], key: 'genetic' },
+    {
+      title: t('Genetic'),
+      dataIndex: ['seedId', 'genetic'],
+      key: 'genetic',
+      filters: [...new Set(batches.map((batch) => batch.seedId?.genetic))].map((genetic) => ({
+        text: genetic,
+        value: genetic,
+      })),
+      onFilter: (value, record) => record.seedId?.genetic === value,
+    },
     { title: t('THC (%)'), dataIndex: 'thc', key: 'thc' },
     { title: t('CBD (%)'), dataIndex: 'cbd', key: 'cbd' },
     { title: t('Drying Time'), dataIndex: 'dryingTime', key: 'dryingTime' },

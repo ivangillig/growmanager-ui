@@ -4,16 +4,10 @@ const { publicRuntimeConfig } = getConfig()
 const { BASE_URL } = publicRuntimeConfig
 
 export const fetchBatchesApi = async (payload) => {
-  const { page = 1, limit = 10, batchCode, germinationDate, genetic } = payload
-  const filterParams = new URLSearchParams({
-    ...(batchCode && { batchCode }),
-    ...(germinationDate && { germinationDate }),
-    ...(genetic && { genetic }),
-  }).toString()
-
+  const { page = 1, limit = 10, search } = payload
   try {
     const response = await axios.get(
-      `${BASE_URL}/api/batch?page=${page}&limit=${limit}&${filterParams}`
+      `${BASE_URL}/api/batch?page=${page}&limit=${limit}${search ? `&search=${search}` : ''}`
     )
     return response.data.data
   } catch (error) {

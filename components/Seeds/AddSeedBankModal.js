@@ -12,7 +12,7 @@ const AddSeedBankModal = ({ visible, onCancel }) => {
 
   const handleOk = () => {
     form.validateFields().then((values) => {
-      dispatch(addSeedBankRequest(values)) // Despachar la acción para agregar el seed bank
+      dispatch(addSeedBankRequest(values)) 
       form.resetFields()
       onCancel()
       dispatch(getSeedBanks())
@@ -46,9 +46,10 @@ const AddSeedBankModal = ({ visible, onCancel }) => {
         <Form.Item
           name="phone"
           label={t('Phone')}
-          rules={[{ required: true, message: t('Please input the phone number') }]}
+          rules={[{ required: true, message: t('Please input the phone number'), pattern: /^\d+$/ }]}
         >
-          <Input />
+          {/* <Input onKeyPress={(e) => { if (!/\d/.test(e.key)) e.preventDefault(); }} /> */}
+          <Input type='number' min={0} />
         </Form.Item>
       </Form>
     </Modal>

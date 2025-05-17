@@ -9,7 +9,7 @@ import { LOGOUT_SUCCESS } from '../constants/ActionsTypes'
 const reducers = combineReducers({
   auth: authReducer,
   seed: seedReducer,
-  seedBank: seedBankReducer, // Agregar el reducer de seedBank
+  seedBank: seedBankReducer,
   batch: batchReducer,
   notification: notificationReducer,
 })

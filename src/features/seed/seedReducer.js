@@ -11,8 +11,8 @@ import {
 } from '../../constants/ActionsTypes'
 
 const initialState = {
-  seeds: [], // Agregamos seedBanks al estado inicial
-  seedBanks: [], // Agregamos seedBanks al estado inicial
+  seeds: [], 
+  seedBanks: [], 
   loading: false,
   error: null,
 }
@@ -42,7 +42,7 @@ export default function seedReducer(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        seedBanks: [...state.seedBanks, action.payload], // Agregamos el nuevo seedBank
+        seedBanks: [...state.seedBanks, action.payload], 
       }
     case GET_SEEDS_ERROR:
     case ADD_SEED_ERROR:

@@ -47,11 +47,8 @@ function* addSeedSaga(action) {
 
 function* addSeedBankSaga(action) {
   try {
-    // Llamada a la API para agregar el banco de semillas
     const response = yield call(addSeedBankApi, action.payload)
-    // Despacha la acción de éxito si la API responde correctamente
     yield put(addSeedBankSuccess(response))
-    // Opcional: Muestra un mensaje de éxito
     yield put(
       showMessage([
         {
@@ -62,7 +59,6 @@ function* addSeedBankSaga(action) {
       ])
     )
   } catch (error) {
-    // Despacha la acción de error si ocurre un problema
     yield put(addSeedBankError(error.message))
     console.error('Error in addSeedBankSaga:', error)
   }

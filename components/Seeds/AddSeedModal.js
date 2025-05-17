@@ -7,7 +7,7 @@ import { useTranslation } from 'next-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { PlusOutlined } from '@ant-design/icons'
 import AddSeedBankModal from './AddSeedBankModal'
-import { useRouter } from 'next/router' // Importar useRouter de Next.js
+import { useRouter } from 'next/router' 
 
 const { Option } = Select
 
@@ -16,12 +16,12 @@ const AddSeedModal = ({ visible, onCancel, onAddSeed }) => {
   const [form] = Form.useForm()
   const [fileList, setFileList] = useState([])
   const [isSeedBankModalVisible, setSeedBankModalVisible] = useState(false)
-  const [selectedSeedBank, setSelectedSeedBank] = useState(null) // Nuevo estado para el seedBank seleccionado
+  const [selectedSeedBank, setSelectedSeedBank] = useState(null) 
 
   const dispatch = useDispatch()
   const seeds = useSelector((state) => state.seed.seeds || [])
   const seedBanks = useSelector((state) => state.seedBank.seedBanks || [])
-  const router = useRouter() // Inicializar el router
+  const router = useRouter() 
 
   useEffect(() => {
     if (seeds.length === 0) {
@@ -35,8 +35,8 @@ const AddSeedModal = ({ visible, onCancel, onAddSeed }) => {
   const handleSeedBankChange = (value) => {
     const selectedSeed = seeds.find((seed) => seed._id === value)
     const seedBankName = selectedSeed ? selectedSeed.seedBank : null
-    setSelectedSeedBank(value) // Guardar el valor seleccionado directamente
-    form.setFieldsValue({ seedBank: value }) // Actualizar el valor del formulario
+    setSelectedSeedBank(value) 
+    form.setFieldsValue({ seedBank: value }) 
   }
 
   const handleOk = () => {
@@ -54,7 +54,7 @@ const AddSeedModal = ({ visible, onCancel, onAddSeed }) => {
       onAddSeed(formData)
       form.resetFields()
       setFileList([])
-      setSelectedSeedBank(null) // Reiniciar el estado del seedBank seleccionado
+      setSelectedSeedBank(null) 
       dispatch(getSeeds())
     })
   }
@@ -88,8 +88,8 @@ const AddSeedModal = ({ visible, onCancel, onAddSeed }) => {
               <Select
                 style={{ flex: 1 }}
                 placeholder={t('Select a bank')}
-                onChange={handleSeedBankChange} // Manejar el cambio de selección
-                value={selectedSeedBank} // Establecer el valor del select
+                onChange={handleSeedBankChange} 
+                value={selectedSeedBank} 
               >
                 {seedBanks.map((seedBank) => (
                   <Option key={seedBank._id} value={seedBank.name}>

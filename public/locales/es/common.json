@@ -203,5 +203,11 @@
   "SUCCESS_USER_UPDATED": "Usuario actualizado exitosamente",
   "Change Password": "Cambiar Contraseña",
   "Please enter your first name": "Por favor ingrese su nombre",
-  "Please enter your last name": "Por favor ingrese su apellido"
+  "Please enter your last name": "Por favor ingrese su apellido",
+  "Add Seed Bank": "Agregar Banco de Semillas",
+  "Seed Bank Name": "Nombre del Banco de Semillas",
+  "Please input the seed bank name": "Por favor ingrese el nombre del banco de semillas",
+  "Please input a valid email": "Por favor ingrese un correo electrónico válido",
+  "Phone": "Teléfono",
+  "Please input the phone number": "Por favor ingrese el número de teléfono"
 }

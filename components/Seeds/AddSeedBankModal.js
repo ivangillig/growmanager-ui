@@ -48,7 +48,6 @@ const AddSeedBankModal = ({ visible, onCancel }) => {
           label={t('Phone')}
           rules={[{ required: true, message: t('Please input the phone number'), pattern: /^\d+$/ }]}
         >
-          {/* <Input onKeyPress={(e) => { if (!/\d/.test(e.key)) e.preventDefault(); }} /> */}
           <Input type='number' min={0} />
         </Form.Item>
       </Form>

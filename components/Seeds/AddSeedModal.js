@@ -128,7 +128,7 @@ const AddSeedModal = ({ visible, onCancel, onAddSeed }) => {
             label={t('Ratio')}
             rules={[{ required: true, message: t('Please input the ratio') }]}
           >
-            <Input />
+            <Input maxLength={10} />
           </Form.Item>
           <Form.Item
             name="cannabinoids"

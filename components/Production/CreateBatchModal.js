@@ -58,6 +58,7 @@ const BatchModal = ({ visible, onCancel, onAddBatch }) => {
               </Option>
             ))}
           </Select>
+          
         </Form.Item>
         {selectedSeed && <BasicSeedCard seed={selectedSeed} />}
         <Form.Item

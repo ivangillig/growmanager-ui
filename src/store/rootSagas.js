@@ -4,6 +4,7 @@ import batchSagas from '../features/batch/batchSagas'
 import seedSagas from '../features/seed/seedSagas'
 import organizationSagas from '../features/organization/organizationSagas'
 import userSagas from '../features/user/userSagas'
+import seedBankSagas from '../features/seedBank/seedBankSagas'
 
 export default function* rootSagas() {
   yield all([
@@ -11,6 +12,7 @@ export default function* rootSagas() {
     batchSagas(),
     seedSagas(),
     organizationSagas(),
+    seedBankSagas(),
     userSagas(),
   ])
 }

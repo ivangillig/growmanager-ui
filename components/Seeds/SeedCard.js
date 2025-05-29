@@ -7,6 +7,7 @@ import { FaEye, FaEdit, FaTrash } from 'react-icons/fa'
 const { Meta } = Card
 const SeedCard = ({ seed, onViewDetails, onEdit, onDelete }) => {
   const { t } = useTranslation()
+
   const imageUrl = seed.imageUrl
     ? getFullImageUrl(seed.imageUrl)
     : '/images/image_not_found.png'
@@ -37,11 +38,12 @@ const SeedCard = ({ seed, onViewDetails, onEdit, onDelete }) => {
               {t('Chemo Type')}: {seed.chemoType}
             </p>
             <Flex gap="4px 0" wrap>
-              {seed.cannabinoids.map((cannabinoid, index) => (
-                <Tag bordered={false} color={'green'} key={index}>
-                  {cannabinoid}
-                </Tag>
-              ))}
+              {Array.isArray(seed.cannabinoids) &&
+                seed.cannabinoids.map((cannabinoid, index) => (
+                  <Tag bordered={false} color={'green'} key={index}>
+                    {cannabinoid}
+                  </Tag>
+                ))}
             </Flex>
           </>
         }

@@ -3,10 +3,10 @@ import { wrapper } from '../src/store'
 import Notifications from '@/components/Common/toastMessages'
 import { App, ConfigProvider } from 'antd'
 import { appWithTranslation } from 'next-i18next'
+import { useState, useEffect } from 'react'
 import 'antd/dist/reset.css'
 import '../src/styles/index.less'
 import '../lib/i18n'
-import { useState, useEffect } from 'react'
 
 async function getInitialProps({ Component, ctx }) {
   let pageProps = {}

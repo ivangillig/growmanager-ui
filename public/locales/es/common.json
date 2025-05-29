@@ -211,5 +211,11 @@
   "Drying Time Trends": "Tendencias de Tiempo de Secado",
   "Average Drying Time": "Tiempo de Secado Promedio",
   "days": "días",
-  "Unknown": "Desconocido"
+  "Unknown": "Desconocido",
+  "Add Seed Bank": "Agregar Banco de Semillas",
+  "Seed Bank Name": "Nombre del Banco de Semillas",
+  "Please input the seed bank name": "Por favor ingrese el nombre del banco de semillas",
+  "Please input a valid email": "Por favor ingrese un correo electrónico válido",
+  "Phone": "Teléfono",
+  "Please input the phone number": "Por favor ingrese el número de teléfono"
 }

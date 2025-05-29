@@ -4,12 +4,15 @@ import {
   getSeedsError,
   addSeedSuccess,
   addSeedError,
+  addSeedBankSuccess,
+  addSeedBankError,
 } from './seedActions'
 import {
   GET_SEEDS_REQUEST,
   ADD_SEED_REQUEST,
+  ADD_SEED_BANK_REQUEST,
 } from '@/src/constants/ActionsTypes'
-import { getSeedsApi, addSeedApi } from './seedApi'
+import { getSeedsApi, addSeedApi, addSeedBankApi } from './seedApi'
 import { showMessage } from '@/src/features/notifications/notificationActions'
 
 function* getSeedsSaga() {
@@ -19,7 +22,9 @@ function* getSeedsSaga() {
     if (response) {
       yield put(getSeedsSuccess(response.data))
     }
-  } catch (error) {}
+  } catch (error) {
+    yield put(getSeedsError(error.message))
+  }
 }
 
 function* addSeedSaga(action) {
@@ -35,7 +40,28 @@ function* addSeedSaga(action) {
         },
       ])
     )
-  } catch (error) {}
+  } catch (error) {
+    yield put(addSeedError(error.message))
+  }
+}
+
+function* addSeedBankSaga(action) {
+  try {
+    const response = yield call(addSeedBankApi, action.payload)
+    yield put(addSeedBankSuccess(response))
+    yield put(
+      showMessage([
+        {
+          summary: 'Success',
+          detail: 'Seed bank added successfully',
+          type: 'success',
+        },
+      ])
+    )
+  } catch (error) {
+    yield put(addSeedBankError(error.message))
+    console.error('Error in addSeedBankSaga:', error)
+  }
 }
 
 export function* watchGetSeedsSaga() {
@@ -46,6 +72,10 @@ export function* watchAddSeedSaga() {
   yield takeLatest(ADD_SEED_REQUEST, addSeedSaga)
 }
 
+export function* watchAddSeedBankSaga() {
+  yield takeLatest(ADD_SEED_BANK_REQUEST, addSeedBankSaga)
+}
+
 export default function* rootSaga() {
-  yield all([fork(watchGetSeedsSaga), fork(watchAddSeedSaga)])
+  yield all([fork(watchGetSeedsSaga), fork(watchAddSeedSaga), fork(watchAddSeedBankSaga)])
 }

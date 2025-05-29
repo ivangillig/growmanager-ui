@@ -12,7 +12,8 @@ function DashboardPage() {
 
   // Calculate statistics
   const totalBatches = batches.length
-  const totalProductionKg = batches.reduce((sum, batch) => sum + batch.qtyProduced, 0) / 1000
+  const totalProductionKg =
+    batches.reduce((sum, batch) => sum + batch.qtyProduced, 0) / 1000
   const geneticsCount = batches.reduce((acc, batch) => {
     const genetic = batch.seedId?.genetic || t('Unknown')
     acc[genetic] = (acc[genetic] || 0) + 1
@@ -49,7 +50,10 @@ function DashboardPage() {
         </Col>
         <Col span={8}>
           <Card title={t('Drying Time Trends')} bordered>
-            {t('Average Drying Time')}: {batches.reduce((sum, batch) => sum + batch.dryingTime, 0) / totalBatches || 0} {t('days')}
+            {t('Average Drying Time')}:{' '}
+            {batches.reduce((sum, batch) => sum + batch.dryingTime, 0) /
+              totalBatches || 0}{' '}
+            {t('days')}
           </Card>
         </Col>
       </Row>

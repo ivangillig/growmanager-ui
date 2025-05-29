@@ -203,5 +203,13 @@
   "SUCCESS_USER_UPDATED": "Usuario actualizado exitosamente",
   "Change Password": "Cambiar Contraseña",
   "Please enter your first name": "Por favor ingrese su nombre",
-  "Please enter your last name": "Por favor ingrese su apellido"
+  "Please enter your last name": "Por favor ingrese su apellido",
+  "Total Batches": "Total de Lotes",
+  "Total Production (kg)": "Producción Total (kg)",
+  "Batches by Genetic": "Lotes por Genética",
+  "Production by Batch (kg)": "Producción por Lote (kg)",
+  "Drying Time Trends": "Tendencias de Tiempo de Secado",
+  "Average Drying Time": "Tiempo de Secado Promedio",
+  "days": "días",
+  "Unknown": "Desconocido"
 }

@@ -215,7 +215,7 @@ const UpdateBatchModal = ({ visible, onCancel, onUpdateBatch, batch }) => {
 
   return (
     <Modal
-      title={t('Update Batch')}
+      title={`${t('Update Batch')} - ${batch.batchCode}`}
       open={visible}
       onCancel={onCancel}
       footer={null}

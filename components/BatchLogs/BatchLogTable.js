@@ -19,12 +19,6 @@ const BatchLogTable = ({ batchId, isVisible, onClose }) => {
   const [limit, setLimit] = useState(10)
 
   useEffect(() => {
-    if (addBatchSuccess && batchId) {
-      dispatch(fetchBatchLogs(batchId, limit, page))
-    }
-  }, [addBatchSuccess, dispatch, batchId, limit, page])
-
-  useEffect(() => {
     if (batchId) {
       dispatch(fetchBatchLogs({ batchId, limit, page }))
     }
